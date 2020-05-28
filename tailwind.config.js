@@ -18,6 +18,7 @@ module.exports = {
         colors: {
           'theme': '#963c61',
           'bordercol': '#cccccc',
+          'primary': '#525252',
           'secondary': '#808080',
           'uinput': '#ededed',
           'divide': '#e6e6e6'

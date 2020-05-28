@@ -10,6 +10,7 @@ const mongoose = require('mongoose')
 const renewAccessRoute = require('./services/RenewAccess')
 const authRoute = require('./routes/api/auth')
 const spotRoute = require('./routes/api/spot')
+const coreRoute = require('./routes/api/core')
 
 const dotenv = require('dotenv')
 dotenv.config()
@@ -60,6 +61,7 @@ async function start () {
   app.use('/api/renewAccess', renewAccessRoute)
   app.use('/api/auth', authRoute)
   app.use('/api/spot', spotRoute)
+  app.use('/api/core', coreRoute)
 
   /////////////////////////////////////////////////////////////
 

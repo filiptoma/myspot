@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Spot = require('../../models/Spot')
 const User = require('../../models/User')
+const Core = require('../../models/Core')
 const ObjectId = require('mongodb').ObjectId
 const VerifyAccess = require('../../services/VerifyAccess')
 

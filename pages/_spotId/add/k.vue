@@ -10,6 +10,46 @@
                 </div>
             </div>
 
+            <div class="my-5 pb-10">
+                <h1 class="font-semibold text-lg">What kind of spot it is?</h1>
+                <h1 class="text-sm text-secondary mb-5">Choose as many categories as you wish, as long as they fit this spot</h1>
+
+                <div class="flex text-sm text-primary border-b border-divide my-1 py-1">
+                    <div class="w-full">
+                        <h1 class="font-semibold">Drink spot</h1>
+                    </div>
+                    <div class="w-full flex flex-wrap">
+                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Coffee point</h1>
+                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Tea point</h1>
+                        <h1 class="rounded-full bg-theme px-3 mb-1 mr-1 text-white font-semibold">Beer point</h1>
+                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Wine point</h1>
+                        <h1 class="rounded-full bg-theme px-3 mb-1 mr-1 text-white font-semibold">Alcohol point</h1>
+                    </div>
+                </div>
+                <div class="flex text-sm text-primary border-b border-divide my-1 py-1">
+                    <div class="w-full">
+                        <h1 class="font-semibold">Food spot</h1>
+                    </div>
+                    <div class="w-full flex flex-wrap">
+                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Patisserie point</h1>
+                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Icecream point</h1>
+                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Streetfood point</h1>
+                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Baking point</h1>
+                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Salad point</h1>
+                    </div>
+                </div>
+                <div class="flex text-sm text-primary my-1 py-1">
+                    <div class="w-full">
+                        <h1 class="font-semibold">Chill spot</h1>
+                    </div>
+                    <div class="w-full flex flex-wrap">
+                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Reading point</h1>
+                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Smoking point</h1>
+                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Gaming point</h1>
+                    </div>
+                </div>
+            </div>
+
             <Footer />
         </div>
 
@@ -104,14 +144,27 @@ export default {
             email: '',
             password: '',
             regError: '',
-            logError: ''
+            logError: '',
+            categories: {
+                drink: [],
+                food: [],
+                chill: [],
+                shop: [],
+                music: []
+            }
         }
     },
-    mounted() {
+    async mounted() {
         const usrExists = (document.cookie.match(/^(?:.*;)?\s*usr\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1]
         if (!usrExists) {
             document.getElementById('auth-index-popup').style.display = 'block'
             document.getElementById('popdown').style.display = 'none'
+        }
+        try {
+            const response = await axios.get('/api/core')
+            this.categories = response.data.core[0]
+        } catch (error) {
+            console.log(error)
         }
     },
     methods: {

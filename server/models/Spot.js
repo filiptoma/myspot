@@ -10,7 +10,21 @@ const spotSchema = new mongoose.Schema({
         default: ''
     },
     categories: {
-        type: Array
+        drink: {
+            type: Array
+        },
+        food: {
+            type: Array
+        },
+        chill: {
+            type: Array
+        },
+        shop: {
+            type: Array
+        },
+        music: {
+            type: Array
+        }
     },
     tags: {
         type: Array
