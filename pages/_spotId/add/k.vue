@@ -18,34 +18,41 @@
                     <div class="w-full">
                         <h1 class="font-semibold">Drink spot</h1>
                     </div>
-                    <div class="w-full flex flex-wrap">
-                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Coffee point</h1>
-                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Tea point</h1>
-                        <h1 class="rounded-full bg-theme px-3 mb-1 mr-1 text-white font-semibold">Beer point</h1>
-                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Wine point</h1>
-                        <h1 class="rounded-full bg-theme px-3 mb-1 mr-1 text-white font-semibold">Alcohol point</h1>
+                    <div class="w-full flex justify-end">
+                        <!-- <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Coffee point</h1> -->
+                        <h1 class="material-icons">expand_more</h1>
+                        <div class="flex flex-wrap">
+                            <!-- <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Tea point</h1>
+                            <h1 class="rounded-full bg-theme px-3 mb-1 mr-1 text-white font-semibold">Beer point</h1>
+                            <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Wine point</h1>
+                            <h1 class="rounded-full bg-theme px-3 mb-1 mr-1 text-white font-semibold">Alcohol point</h1> -->
+                        </div>
                     </div>
                 </div>
                 <div class="flex text-sm text-primary border-b border-divide my-1 py-1">
                     <div class="w-full">
                         <h1 class="font-semibold">Food spot</h1>
                     </div>
-                    <div class="w-full flex flex-wrap">
-                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Patisserie point</h1>
-                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Icecream point</h1>
-                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Streetfood point</h1>
-                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Baking point</h1>
-                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Salad point</h1>
+                    <div class="w-full flex justify-end">
+                        <!-- <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Coffee point</h1> -->
+                        <h1 class="material-icons">expand_more</h1>
+                        <!-- <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Tea point</h1>
+                        <h1 class="rounded-full bg-theme px-3 mb-1 mr-1 text-white font-semibold">Beer point</h1>
+                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Wine point</h1>
+                        <h1 class="rounded-full bg-theme px-3 mb-1 mr-1 text-white font-semibold">Alcohol point</h1> -->
                     </div>
                 </div>
                 <div class="flex text-sm text-primary my-1 py-1">
                     <div class="w-full">
                         <h1 class="font-semibold">Chill spot</h1>
                     </div>
-                    <div class="w-full flex flex-wrap">
-                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Reading point</h1>
-                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Smoking point</h1>
-                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Gaming point</h1>
+                    <div class="w-full flex justify-end">
+                        <!-- <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Coffee point</h1> -->
+                        <h1 class="material-icons">expand_more</h1>
+                        <!-- <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Tea point</h1>
+                        <h1 class="rounded-full bg-theme px-3 mb-1 mr-1 text-white font-semibold">Beer point</h1>
+                        <h1 class="rounded-full bg-uinput px-3 mb-1 mr-1">Wine point</h1>
+                        <h1 class="rounded-full bg-theme px-3 mb-1 mr-1 text-white font-semibold">Alcohol point</h1> -->
                     </div>
                 </div>
             </div>
