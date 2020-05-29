@@ -95,25 +95,26 @@ export default {
         }
     },
     async created() {
+        
+        
+        
+    },
+    async mounted() {
+        document.getElementById('beforeLoading').style.display = 'none'
         this.$nextTick(() => {
             this.$nuxt.$loading.start()
+            setTimeout(() => this.$nuxt.$loading.finish(), 3000)
         })
+        const usrExists = (document.cookie.match(/^(?:.*;)?\s*usr\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1]
+        if (!usrExists) {
+            document.getElementById('auth-popup').style.display = 'block'
+            document.getElementById('popdown').style.display = 'none'
+        }
         try {
             const response = await axios.get('/api/core')
             this.core.categories = response.data.core[0].categories
         } catch (error) {
             console.log(error)
-        }
-        this.$nextTick(() => {
-            this.$nuxt.$loading.finish()
-        })
-    },
-    mounted() {
-        document.getElementById('beforeLoading').style.display = 'none'
-        const usrExists = (document.cookie.match(/^(?:.*;)?\s*usr\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1]
-        if (!usrExists) {
-            document.getElementById('auth-popup').style.display = 'block'
-            document.getElementById('popdown').style.display = 'none'
         }
         document.getElementById('afterLoading').style.display = 'block'
     },

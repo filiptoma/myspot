@@ -24,7 +24,7 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#000' },
+  loading: '~/components/loading.vue',
   /*
   ** Global CSS
   */
@@ -71,5 +71,5 @@ module.exports = {
   },
   env: {
     gmapsApiKey: process.env.GMAPS_API_KEY,
-  }
+  },
 }
