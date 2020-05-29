@@ -95,12 +95,18 @@ export default {
         }
     },
     async created() {
+        this.$nextTick(() => {
+            this.$nuxt.$loading.start()
+        })
         try {
             const response = await axios.get('/api/core')
             this.core.categories = response.data.core[0].categories
         } catch (error) {
             console.log(error)
         }
+        this.$nextTick(() => {
+            this.$nuxt.$loading.finish()
+        })
     },
     mounted() {
         document.getElementById('beforeLoading').style.display = 'none'
