@@ -46,9 +46,6 @@ export default {
     },
     mounted() {
         document.getElementById('beforeLoading').style.display = 'none'
-        this.$nextTick(() => {
-            this.$nuxt.$loading.start()
-        })
         if (window.google) {
             window.google = {}
         }
@@ -57,17 +54,11 @@ export default {
             document.getElementById('auth-popup').style.display = 'block'
             document.getElementById('popdown').style.display = 'none'
         }
-        this.$nextTick(() => {
-            this.$nuxt.$loading.finish()
-        })
         document.getElementById('afterLoading').style.display = 'block'
     },
     methods: {
         async nextDetail() {
             document.getElementById('map').style.display = 'none'
-            this.$nextTick(() => {
-                this.$nuxt.$loading.start()
-            })
             try {
                 await axios.post('/api/spot/edit', {
                     address: this.address,
@@ -98,9 +89,6 @@ export default {
                     }
                 }
             }
-            this.$nextTick(() => {
-                this.$nuxt.$loading.finish()
-            })
         },
         async showMap() {
             if (window.google) {

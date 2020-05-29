@@ -53,24 +53,15 @@ export default {
     },
     mounted() {
         document.getElementById('beforeLoading').style.display = 'none'
-        this.$nextTick(() => {
-            this.$nuxt.$loading.start()
-        })
         const usrExists = (document.cookie.match(/^(?:.*;)?\s*usr\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1]
         if (!usrExists) {
             document.getElementById('auth-popup').style.display = 'block'
             document.getElementById('popdown').style.display = 'none'
         }
-        this.$nextTick(() => {
-            this.$nuxt.$loading.finish()
-        })
         document.getElementById('afterLoading').style.display = 'block'
     },
     methods: {
         async nextDetail() {
-            this.$nextTick(() => {
-                this.$nuxt.$loading.start()
-            })
             try {
                 const response = await axios.post('/api/spot/new', {
                     name: this.name
@@ -106,14 +97,8 @@ export default {
                     this.error = error.response.data.errorMsg
                 }
             }
-            this.$nextTick(() => {
-                this.$nuxt.$loading.finish()
-            })
         },
         async saveToConcepts() {
-            this.$nextTick(() => {
-                this.$nuxt.$loading.start()
-            })
             try {
                 await axios.post('/api/spot/new', {
                     name: this.name
@@ -147,9 +132,6 @@ export default {
                     this.error = error.response.data.errorMsg
                 }
             }
-            this.$nextTick(() => {
-                this.$nuxt.$loading.finish()
-            })
         },
         close() {
             this.$router.push('/')

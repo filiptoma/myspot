@@ -94,32 +94,25 @@ export default {
             spotsArr: ['drink', 'food', 'chill', 'shop', 'music'],
         }
     },
-    async mounted() {
-        document.getElementById('beforeLoading').style.display = 'none'
-        this.$nextTick(() => {
-            this.$nuxt.$loading.start()
-        })
-        const usrExists = (document.cookie.match(/^(?:.*;)?\s*usr\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1]
-        if (!usrExists) {
-            document.getElementById('auth-popup').style.display = 'block'
-            document.getElementById('popdown').style.display = 'none'
-        }
+    async created() {
         try {
             const response = await axios.get('/api/core')
             this.core.categories = response.data.core[0].categories
         } catch (error) {
             console.log(error)
         }
-        this.$nextTick(() => {
-            this.$nuxt.$loading.finish()
-        })
+    },
+    mounted() {
+        document.getElementById('beforeLoading').style.display = 'none'
+        const usrExists = (document.cookie.match(/^(?:.*;)?\s*usr\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1]
+        if (!usrExists) {
+            document.getElementById('auth-popup').style.display = 'block'
+            document.getElementById('popdown').style.display = 'none'
+        }
         document.getElementById('afterLoading').style.display = 'block'
     },
     methods: {
         async nextDetail() {
-            this.$nextTick(() => {
-                this.$nuxt.$loading.start()
-            })
             for (var i = 0; i < this.spotsArr.length; i++) {
                 const selectedCateg = document.querySelectorAll('input[name='+ this.spotsArr[i] +'-cb]:checked')
                 for (var j = 0; j < selectedCateg.length; j++) {
@@ -156,9 +149,6 @@ export default {
                     }
                 }
             }
-            this.$nextTick(() => {
-                this.$nuxt.$loading.finish()
-            })
         },
         close() {
             this.$router.push('/')
