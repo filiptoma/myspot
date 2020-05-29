@@ -1,4 +1,6 @@
 
+require('dotenv').config()
+
 module.exports = {
   mode: 'universal',
   /*
@@ -22,7 +24,7 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#0c8f0a' },
+  loading: '~/components/loading.vue',
   /*
   ** Global CSS
   */
@@ -66,5 +68,8 @@ module.exports = {
     */
     extend (config, ctx) {
     }
+  },
+  env: {
+    gmapsApiKey: process.env.GMAPS_API_KEY,
   }
 }
