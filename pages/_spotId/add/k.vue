@@ -30,7 +30,7 @@
                                 :key="point">
                                     <input type="checkbox" :id="point" :name="spot + '-cb'" class="hidden">
                                     <div class="mb-1 mr-1 category-container">
-                                        <label :for="point" class="category rounded-full bg-uinput border border-uinput px-3">
+                                        <label :for="point" class="category rounded-full bg-uinput border-2 border-uinput px-3">
                                         {{ point.charAt(0).toUpperCase() + point.slice(1) }} point</label>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
                                 :key="point">
                                     <input type="checkbox" :id="point" :name="spot + '-cb'" class="hidden">
                                     <div class="mb-1 mr-1 category-container">
-                                        <label :for="point" class="category rounded-full bg-uinput border border-uinput px-3">
+                                        <label :for="point" class="category rounded-full bg-uinput border-2 border-uinput px-3">
                                         {{ point.charAt(0).toUpperCase() + point.slice(1) }} point</label>
                                     </div>
                                 </div>
@@ -95,26 +95,19 @@ export default {
         }
     },
     async created() {
-        
-        
-        
-    },
-    async mounted() {
-        document.getElementById('beforeLoading').style.display = 'none'
-        this.$nextTick(() => {
-            this.$nuxt.$loading.start()
-            setTimeout(() => this.$nuxt.$loading.finish(), 3000)
-        })
-        const usrExists = (document.cookie.match(/^(?:.*;)?\s*usr\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1]
-        if (!usrExists) {
-            document.getElementById('auth-popup').style.display = 'block'
-            document.getElementById('popdown').style.display = 'none'
-        }
         try {
             const response = await axios.get('/api/core')
             this.core.categories = response.data.core[0].categories
         } catch (error) {
             console.log(error)
+        }
+    },
+    mounted() {
+        document.getElementById('beforeLoading').style.display = 'none'
+        const usrExists = (document.cookie.match(/^(?:.*;)?\s*usr\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1]
+        if (!usrExists) {
+            document.getElementById('auth-popup').style.display = 'block'
+            document.getElementById('popdown').style.display = 'none'
         }
         document.getElementById('afterLoading').style.display = 'block'
     },
@@ -173,6 +166,8 @@ export default {
 }
 .categories input[type=checkbox]:checked + .category-container > .category {
     border-color: #38a169;
-    font-weight: 600;
+}
+.category {
+    transition: 200ms;
 }
 </style>

@@ -56,6 +56,18 @@ router.post('/edit', VerifyAccess, async (req, res) => {
             res.status(400).send(error)
         }
     }
+
+    if (req.body.tags) {
+        try {
+            await Spot.updateOne(
+                { _id: new ObjectId(req.body.spotId) },
+                { $set: {tags: req.body.tags} }
+            )
+            res.status(200).end()
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    }
     res.status(200).end()
 })
 

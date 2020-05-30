@@ -27,7 +27,39 @@ const spotSchema = new mongoose.Schema({
         }
     },
     tags: {
-        type: Array
+        price: {
+            type: Array
+        },
+        services: {
+            type: Array
+        },
+        atmosphere: {
+            type: Array
+        },
+        environment: {
+            type: Array
+        },
+        size: {
+            type: Array
+        },
+        smoking: {
+            type: Array
+        },
+        food: {
+            type: Array
+        },
+        beverages: {
+            type: Array
+        },
+        events: {
+            type: Array
+        },
+        entertainment: {
+            type: Array
+        },
+        stock: {
+            type: Array
+        },
     },
     rating: {
         sum: {
