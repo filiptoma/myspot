@@ -44,7 +44,7 @@
             <div class="my-3">
                 <input type="text" placeholder="Username" v-model="username"
                 class="border border-bordercol text-sm w-full rounded-md p-2 focus:outline-none focus:border-theme my-1">
-                <input type="text" placeholder="Email" v-model="email"
+                <input type="email" placeholder="Email" v-model="email"
                 class="border border-bordercol text-sm w-full rounded-md p-2 focus:outline-none focus:border-theme my-1">
                 <input type="password" placeholder="Password" v-model="password"
                 class="border border-bordercol text-sm w-full rounded-md p-2 focus:outline-none focus:border-theme my-1">

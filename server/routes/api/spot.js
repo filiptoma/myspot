@@ -68,6 +68,150 @@ router.post('/edit', VerifyAccess, async (req, res) => {
             res.status(400).send(error)
         }
     }
+
+    if (req.body.rating) {
+        const ratingData = await Spot.findOne({ _id: new ObjectId(req.body.spotId) })
+        const sum = ratingData.rating.sum + req.body.rating
+        const count = ratingData.rating.count + 1
+        const rawAvg = sum/count
+        const avg = Math.round(rawAvg * 10) / 10
+        try {
+            await Spot.updateOne(
+                { _id: new ObjectId(req.body.spotId) },
+                [
+                    { $set: {rating: {sum: sum}} },
+                    { $set: {rating: {count: count}} },
+                    { $set: {rating: {avg: avg}} }
+                ]
+            )
+            await User.updateOne(
+                { username: req.body.user.username },
+                { $push: {rated: req.body.spotId} }
+            )
+            res.status(200).end()
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    }
+
+    if (req.body.firstComment) {
+        try {
+            await Spot.updateOne(
+                { _id: new ObjectId(req.body.spotId) },
+                { $push: {
+                    comments: {
+                        text: req.body.firstComment,
+                        date: new Date(Date.now()),
+                        author: req.body.user.username,
+                        likes: 0,
+                        _id: new ObjectId()
+                    }
+                }}
+            )
+            res.status(200).end()
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    }
+
+    if (req.body.picture) {
+        const picture = req.body.picture
+        if (picture.split(',')[1]) {
+            const pictureBuffer = Buffer.from(picture.split(',')[1], 'base64')
+            try {
+                await Spot.updateOne(
+                    { _id: new ObjectId(req.body.spotId) },
+                    { $set: {picture: pictureBuffer} }
+                )
+                res.status(200).end()
+            } catch (error) {
+                res.status(400).send(error)
+            }
+        } else {
+            const pictureBuffer = Buffer.from(picture, 'base64')
+            try {
+                await Spot.updateOne(
+                    { _id: new ObjectId(req.body.spotId) },
+                    { $set: {picture: pictureBuffer} }
+                )
+                res.status(200).end()
+            } catch (error) {
+                res.status(400).send(error)
+            }
+        }
+    }
+
+    if (req.body.openingHrs) {
+        try {
+            await Spot.updateOne(
+                { _id: new ObjectId(req.body.spotId) },
+                { $set: {openingHrs: req.body.openingHrs} }
+            )
+            res.status(200).end()
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    }
+
+    if (req.body.about) {
+        try {
+            await Spot.updateOne(
+                { _id: new ObjectId(req.body.spotId) },
+                { $set: {about: req.body.about} }
+            )
+            res.status(200).end()
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    }
+
+    if (req.body.phone) {
+        try {
+            await Spot.updateOne(
+                { _id: new ObjectId(req.body.spotId) },
+                { $set: {phone: req.body.phone} }
+            )
+            res.status(200).end()
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    }
+
+    if (req.body.web) {
+        try {
+            await Spot.updateOne(
+                { _id: new ObjectId(req.body.spotId) },
+                { $set: {web: req.body.web} }
+            )
+            res.status(200).end()
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    }
+
+    if (req.body.instagram) {
+        try {
+            await Spot.updateOne(
+                { _id: new ObjectId(req.body.spotId) },
+                { $set: {instagram: req.body.instagram} }
+            )
+            res.status(200).end()
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    }
+
+    if (req.body.facebook) {
+        try {
+            await Spot.updateOne(
+                { _id: new ObjectId(req.body.spotId) },
+                { $set: {facebook: req.body.facebook} }
+            )
+            res.status(200).end()
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    }
     res.status(200).end()
 })
 

@@ -157,7 +157,7 @@ export default {
         setFixedHeader() {
             var hideCloseBtn = document.getElementById('hideCloseBtn')
             var emphasizeNextBtn = document.getElementById('emphasizeNextBtn')
-            if (window.scrollY !== 0) {
+            if (window.scrollY > 0) {
                 hideCloseBtn.style.opacity = 0
                 emphasizeNextBtn.style.boxShadow = '0 0 10px #bfbfbf'
                 emphasizeNextBtnText.style.color = '#4299e1'
@@ -179,6 +179,7 @@ export default {
 #auth-popup {
     display: none;
 }
+
 #hideCloseBtn {
     transition: 200ms;
 }
@@ -188,6 +189,7 @@ export default {
 #emphasizeNextBtn {
     transition: 100ms;
 }
+
 .tags input[type=checkbox]:checked + .tag-container > .tag {
     border-color: #38a169;
 }

@@ -38,6 +38,9 @@ html {
 /* Rules for using icons as black on a light background. */
 .material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
 .material-icons.md-uicolor { color: rgb(85, 85, 85) }
+.material-icons.md-icon-inactive { color: rgb(129, 129, 129) }
+.material-icons.md-star { color: rgb(201, 183, 21) }
+.material-icons.md-imageUploaded { color: rgb(32, 131, 37) }
 .material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
 
 /* Rules for using icons as white on a dark background. */
@@ -111,6 +114,25 @@ input[type="password"]:-ms-input-placeholder {
 input[type="password"]::placeholder {
   color: #808080;
 }
+input[type="email"]::-webkit-input-placeholder {
+  color: #808080;
+}
+
+input[type="email"]:-moz-placeholder { /* Firefox 18- */
+  color: #808080; 
+}
+
+input[type="email"]::-moz-placeholder {  /* Firefox 19+ */
+  color: #808080; 
+}
+
+input[type="email"]:-ms-input-placeholder {
+  color: #808080; 
+}
+
+input[type="email"]::placeholder {
+  color: #808080;
+}
 textarea,
 input:matches(
   [type="email"],
@@ -119,7 +141,8 @@ input:matches(
   [type="search"],
   [type="tel"],
   [type="text"],
-  [type="url"]
+  [type="url"],
+  [type="time"]
 ) {
   -webkit-appearance: none;
   -moz-appearance: none;
