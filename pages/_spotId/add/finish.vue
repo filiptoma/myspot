@@ -7,11 +7,10 @@
                     <h1 class="text-sm text-secondary my-3">Spread the word about MySpot, so that others can visit your spot!</h1>
                     <nuxt-link to="/" class="rounded-full bg-uinput px-3 py-1 font-semibold text-secondary text-sm focus:outline-none">To homepage</nuxt-link>
                 </div>
-
-                <Footer />
             </div>
             <AuthPopup id="auth-popup" />
         </div>
+        <Footer />
         <BeforeLoading id="beforeLoading" />
     </div>
 </template>

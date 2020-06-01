@@ -1,6 +1,6 @@
 <template>
     <div>
-        <footer class="flex justify-between w-screen items-center border-t z-30">
+        <footer class="flex justify-between w-screen items-center border-t z-40 h-12">
             <nuxt-link to="/" class="material-icons px-5 py-2 md-30 md-uicolor">home</nuxt-link>
             <nuxt-link to="/search" class="material-icons px-5 py-2 md-30 md-uicolor">search</nuxt-link>
             <nuxt-link v-if="usr" :to="{ name: 'u-usr', params: { usr: usr } }"

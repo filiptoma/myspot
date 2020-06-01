@@ -28,10 +28,11 @@
                     <button @click="saveToConcepts"
                     class="rounded-full bg-uinput px-3 py-1 font-semibold text-secondary text-sm focus:outline-none">Save to concepts</button>
                 </div>
-                <Footer />
             </div>
             <AuthPopup id="auth-popup" />
+            <div class="container h-12 z-30"></div>
         </div>
+        <Footer />
         <BeforeLoading id="beforeLoading" />
     </div>
 </template>

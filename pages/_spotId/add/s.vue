@@ -29,11 +29,10 @@
                         <button class="material-icons md-18 pl-2 focus:outline-none" id="clearCommentInput" @click="clearCommentInput">close</button>
                     </div>
                 </div>
-
-                <Footer />
             </div>
             <AuthPopup id="auth-popup" />
         </div>
+        <Footer />
         <BeforeLoading id="beforeLoading" />
     </div>
 </template>

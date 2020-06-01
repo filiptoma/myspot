@@ -99,20 +99,44 @@ export default {
         indexToReg() {
             document.getElementById('auth-index-popup').style.display = 'none'
             document.getElementById('auth-reg-popup').style.display = 'block'
+            this.username = ''
+            this.email = ''
+            this.password = ''
+            this.logError = ''
+            this.regError = ''
         },
         indexToLog() {
             document.getElementById('auth-index-popup').style.display = 'none'
             document.getElementById('auth-log-popup').style.display = 'block'
+            this.username = ''
+            this.email = ''
+            this.password = ''
+            this.logError = ''
+            this.regError = ''
         },
         regToIndex() {
             document.getElementById('auth-reg-popup').style.display = 'none'
             document.getElementById('auth-index-popup').style.display = 'block'
+            this.username = ''
+            this.email = ''
+            this.password = ''
+            this.logError = ''
+            this.regError = ''
         },
         logToIndex() {
             document.getElementById('auth-log-popup').style.display = 'none'
             document.getElementById('auth-index-popup').style.display = 'block'
+            this.username = ''
+            this.email = ''
+            this.password = ''
+            this.logError = ''
+            this.regError = ''
         },
         async registerUser() {
+            document.getElementById('auth-reg-popup').style.display = 'none'
+            this.$nextTick(() => {
+                this.$nuxt.$loading.start()
+            })
             try {
                 await AuthService.registerUser({
                     username: this.username,
@@ -125,6 +149,10 @@ export default {
                 })
                 location.reload()
             } catch (error) {
+                this.$nextTick(() => {
+                    this.$nuxt.$loading.finish()
+                })
+                document.getElementById('auth-reg-popup').style.display = 'block'
                 if (error.response.data.errorMsg === '"username" is not allowed to be empty') {
                     this.regError = 'Invalid username.'
                 } else if (error.response.data.errorMsg === '"password" is not allowed to be empty') {
@@ -145,6 +173,10 @@ export default {
             }
         },
         async loginUser() {
+            document.getElementById('auth-log-popup').style.display = 'none'
+            this.$nextTick(() => {
+                this.$nuxt.$loading.start()
+            })
             try {
                 await AuthService.loginUser({
                     username: this.username,
@@ -152,6 +184,10 @@ export default {
                 })
                 location.reload()
             } catch (error) {
+                this.$nextTick(() => {
+                    this.$nuxt.$loading.finish()
+                })
+                document.getElementById('auth-log-popup').style.display = 'block'
                 if (error.response.data.errorMsg === '"username" is not allowed to be empty') {
                     this.logError = 'Invalid username.'
                 } else if (error.response.data.errorMsg === '"password" is not allowed to be empty') {

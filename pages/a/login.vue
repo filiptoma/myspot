@@ -1,5 +1,5 @@
 <template>
-    <div class="w-11/12 mx-auto">
+    <div class="w-11/12 mx-auto" id="hideAtLoading">
         <div class="flex justify-between my-3">
             <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
                 <button class="material-icons text-secondary focus:outline-none" @click="goBack">arrow_back</button>
@@ -43,6 +43,10 @@ export default {
             history.go(-2)
         },
         async loginUser() {
+            document.getElementById('hideAtLoading').style.display = 'none'
+            this.$nextTick(() => {
+                this.$nuxt.$loading.start()
+            })
             try {
                 await AuthService.loginUser({
                     username: this.username,
@@ -50,15 +54,19 @@ export default {
                 })
                 this.$router.push('/')
             } catch (error) {
-                if (error.response.data.errorMsg === '"meno" is not allowed to be empty') {
+                this.$nextTick(() => {
+                    this.$nuxt.$loading.finish()
+                })
+                document.getElementById('hideAtLoading').style.display = 'block'
+                if (error.response.data.errorMsg === '"username" is not allowed to be empty') {
                     this.error = 'Invalid username.'
-                } else if (error.response.data.errorMsg === '"heslo" is not allowed to be empty') {
+                } else if (error.response.data.errorMsg === '"password" is not allowed to be empty') {
                     this.error = 'Invalid password.'
-                } else if (error.response.data.errorMsg === '"meno" length must be at least 3 characters long') {
+                } else if (error.response.data.errorMsg === '"username" length must be at least 3 characters long') {
                     this.error = 'Username length must be 3-15 characters.'
-                } else if (error.response.data.errorMsg === '"heslo" length must be at least 6 characters long') {
+                } else if (error.response.data.errorMsg === '"password" length must be at least 6 characters long') {
                     this.error = 'Password length must be at least 6 characters.'
-                } else if (error.response.data.errorMsg === '"meno" length must be less than or equal to 15 characters long') {
+                } else if (error.response.data.errorMsg === '"username" length must be less than or equal to 15 characters long') {
                     this.error = 'Username length must be 3-15 characters.'
                 } else {
                     this.error = error.response.data.errorMsg

@@ -153,11 +153,10 @@
                     </table>
 
                 </div>
-
-                <Footer />
             </div>
             <AuthPopup id="auth-popup" />
         </div>
+        <Footer />
         <BeforeLoading id="beforeLoading" />
     </div>
 </template>

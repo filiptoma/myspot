@@ -18,11 +18,10 @@
                     class="controls border border-bordercol text-sm w-full rounded-md p-2 focus:outline-none focus:border-theme my-5">
                     <div id="map"></div>
                 </div>
-
-                <Footer />
             </div>
             <AuthPopup id="auth-popup" />
         </div>
+        <Footer />
         <BeforeLoading id="beforeLoading" />
     </div>
 </template>

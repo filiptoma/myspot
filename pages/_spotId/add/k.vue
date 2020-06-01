@@ -54,11 +54,10 @@
                         </div>
                     </div>
                 </div>
-
-                <Footer />
             </div>
             <AuthPopup id="auth-popup" />
         </div>
+        <Footer />
         <BeforeLoading id="beforeLoading" />
     </div>
 </template>
@@ -94,21 +93,26 @@ export default {
             spotsArr: ['drink', 'food', 'chill', 'shop', 'music'],
         }
     },
-    async created() {
-        try {
-            const response = await axios.get('/api/core')
-            this.core.categories = response.data.core[0].categories
-        } catch (error) {
-            console.log(error)
-        }
-    },
-    mounted() {
+    async mounted() {
         document.getElementById('beforeLoading').style.display = 'none'
+        this.$nextTick(() => {
+            this.$nuxt.$loading.start()
+        })
         const usrExists = (document.cookie.match(/^(?:.*;)?\s*usr\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1]
         if (!usrExists) {
             document.getElementById('auth-popup').style.display = 'block'
             document.getElementById('popdown').style.display = 'none'
+        } else {
+            try {
+                const response = await axios.get('/api/core')
+                this.core.categories = response.data.core[0].categories
+            } catch (error) {
+                console.log(error)
+            }
         }
+        this.$nextTick(() => {
+            this.$nuxt.$loading.finish()
+        })
         document.getElementById('afterLoading').style.display = 'block'
     },
     methods: {

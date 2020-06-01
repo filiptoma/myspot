@@ -18,10 +18,11 @@ module.exports = {
         colors: {
           'theme': '#963c61',
           'bordercol': '#cccccc',
-          'primary': '#525252',
+          'primary': '#3d3d3d',
           'secondary': '#808080',
           'uinput': '#ededed',
-          'divide': '#e6e6e6'
+          'divide': '#e6e6e6',
+          'tileDivide': '#fafafa'
         }
       }
     },
