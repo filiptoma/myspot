@@ -11,7 +11,7 @@
                     </div>
                 </div>
 
-                <div class="my-5 pb-12">
+                <div class="my-5">
                     <h1 class="font-semibold text-lg">What kind of spot it is?</h1>
                     <h1 class="text-sm text-secondary mb-5">Choose as many categories as you wish, as long as they fit this spot</h1>
 
@@ -21,32 +21,32 @@
                     :index="index"
                     :key="spot">
                         <div class="flex text-sm text-primary border-b border-divide my-1 py-1" v-if="index < spotsArr.length-1">
-                            <div class="w-full">
-                                <h1 class="font-semibold">{{ spot.charAt(0).toUpperCase() + spot.slice(1) }} spot</h1>
+                            <div class="w-1/3">
+                                <h1 class="font-semibold ml-2">{{ spot.charAt(0).toUpperCase() + spot.slice(1) }} spot</h1>
                             </div>
-                            <div class="w-full flex flex-wrap">
+                            <div class="w-2/3 flex flex-wrap ml-2">
                                 <div
                                 v-for="point in core.categories[spot]"
                                 :key="point">
                                     <input type="checkbox" :id="point" :name="spot + '-cb'" class="hidden">
                                     <div class="mb-1 mr-1 category-container">
-                                        <label :for="point" class="category rounded-full bg-uinput border-2 border-uinput px-3">
+                                        <label :for="point" class="category rounded-full bg-uinput border-2 border-uinput px-2 text-xs font-semibold">
                                         {{ point.charAt(0).toUpperCase() + point.slice(1) }} point</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="flex text-sm text-primary my-1 py-1" v-else>
-                            <div class="w-full">
-                                <h1 class="font-semibold">{{ spot.charAt(0).toUpperCase() + spot.slice(1) }} spot</h1>
+                            <div class="w-1/3">
+                                <h1 class="font-semibold ml-2">{{ spot.charAt(0).toUpperCase() + spot.slice(1) }} spot</h1>
                             </div>
-                            <div class="w-full flex flex-wrap">
+                            <div class="w-2/3 flex flex-wrap ml-2">
                                 <div
                                 v-for="point in core.categories[spot]"
                                 :key="point">
                                     <input type="checkbox" :id="point" :name="spot + '-cb'" class="hidden">
                                     <div class="mb-1 mr-1 category-container">
-                                        <label :for="point" class="category rounded-full bg-uinput border-2 border-uinput px-3">
+                                        <label :for="point" class="category rounded-full bg-uinput border-2 border-uinput px-2 text-xs font-semibold">
                                         {{ point.charAt(0).toUpperCase() + point.slice(1) }} point</label>
                                     </div>
                                 </div>
@@ -57,7 +57,6 @@
             </div>
             <AuthPopup id="auth-popup" />
         </div>
-        <Footer />
         <BeforeLoading id="beforeLoading" />
     </div>
 </template>
@@ -66,10 +65,9 @@
 import axios from 'axios'
 import BeforeLoading from '~/components/BeforeLoading'
 import AuthPopup from '~/components/popups/AuthPopup'
-import Footer from '~/components/nav/Footer'
 export default {
     components: {
-        BeforeLoading, AuthPopup, Footer
+        BeforeLoading, AuthPopup
     },
     data() {
         return {

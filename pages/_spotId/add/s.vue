@@ -11,7 +11,7 @@
                     </div>
                 </div>
 
-                <div class="my-5 pb-12 text-sm">
+                <div class="my-5 text-sm">
                     <h1 class="font-semibold text-lg">What is your experience with this spot?</h1>
                     <h1 class="text-secondary">With your personal opinion, you can help others to build up their expectations</h1>
                     <div class="flex items-center mt-8 mb-4 justify-center">
@@ -32,7 +32,6 @@
             </div>
             <AuthPopup id="auth-popup" />
         </div>
-        <Footer />
         <BeforeLoading id="beforeLoading" />
     </div>
 </template>
@@ -188,6 +187,7 @@ export default {
     background: transparent;
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
+    transition: none;
 }
 #clearCommentInput {
     padding-top: 0.7rem;

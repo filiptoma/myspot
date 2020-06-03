@@ -34,10 +34,7 @@
                     <h1 class="text-primary font-semibold">{{ spot.name }}</h1>
                     <div class="text-secondary text-sm">
                         <h1 v-if="spot.address" class="">{{ spot.address.split(',').slice(0, spot.address.split(',').length-1).toString() }}</h1>
-                        <div v-else class="flex">
-                            <i class="material-icons md-18 pr-2 md-warning">warning</i>
-                            <h1 class="">Address not yet added</h1>
-                        </div>
+                        <h1 v-else class="italic">Address not yet added</h1>
                     </div>
                 </div>
             </div>
@@ -88,7 +85,7 @@ export default {
     background-color: rgba(0, 0, 0, 0.5);
 }
 .rating {
-    margin-bottom: -1.75rem;
+    margin-bottom: -1.25rem;
     border-width: 3px;
 }
 </style>

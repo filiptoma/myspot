@@ -10,7 +10,6 @@
             </div>
             <AuthPopup id="auth-popup" />
         </div>
-        <Footer />
         <BeforeLoading id="beforeLoading" />
     </div>
 </template>
@@ -19,10 +18,9 @@
 import axios from 'axios'
 import BeforeLoading from '~/components/BeforeLoading'
 import AuthPopup from '~/components/popups/AuthPopup'
-import Footer from '~/components/nav/Footer'
 export default {
     components: {
-        BeforeLoading, AuthPopup, Footer
+        BeforeLoading, AuthPopup
     },
     mounted() {
         document.getElementById('beforeLoading').style.display = 'none'

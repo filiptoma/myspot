@@ -10,6 +10,13 @@ import Footer from '~/components/nav/Footer'
 export default {
     components: {
         Footer
+    },
+    mounted() {
+        document.getElementById('searchpage').classList.remove('md-footer')
+        document.getElementById('searchpage').classList.add('md-theme')
+    },
+    destroyed() {
+        document.getElementById('searchpage').classList.add('md-footer')
     }
 }
 </script>

@@ -6,10 +6,9 @@
         <h1 class="w-full text-sm text-center font-semibold text-white">Featured Spots</h1>
         <nuxt-link to="/add" class="material-icons w-20 md-30 md-light text-right pr-3">add</nuxt-link> 
       </header>
-      <div class="container h-12 z-50"></div>
+      <div class="container h-12 z-30"></div>
 
       <FeaturedSpots />
-      <div class="container h-12 z-30"></div>
     </div>
     <Footer />
     <BeforeLoading id="beforeLoading" />
@@ -24,15 +23,14 @@ export default {
   components: {
     BeforeLoading, FeaturedSpots, Footer
   },
-  data() {
-    return {
-      lol: null
-    }
-  },
   mounted() {
+    document.getElementById('homepage').classList.remove('md-footer')
+    document.getElementById('homepage').classList.add('md-theme')
     document.getElementById('beforeLoading').style.display = 'none'
   },
-  methods: {}
+  destroyed() {
+    document.getElementById('homepage').classList.add('md-footer')
+  }
 }
 </script>
 

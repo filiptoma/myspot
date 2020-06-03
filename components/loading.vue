@@ -24,11 +24,6 @@ export default {
       throttle: 50
     }
   },
-  watch: {
-    show: function(newValue) {
-      console.log('show', newValue)
-    }
-  },
   beforeDestroy() {
     this.clear()
   },

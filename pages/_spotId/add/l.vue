@@ -21,7 +21,6 @@
             </div>
             <AuthPopup id="auth-popup" />
         </div>
-        <Footer />
         <BeforeLoading id="beforeLoading" />
     </div>
 </template>
@@ -30,11 +29,10 @@
 import axios from 'axios'
 import BeforeLoading from '~/components/BeforeLoading'
 import AuthPopup from '~/components/popups/AuthPopup'
-import Footer from '~/components/nav/Footer'
 import { Loader } from 'google-maps'
 export default {
     components: {
-        BeforeLoading, AuthPopup, Footer
+        BeforeLoading, AuthPopup
     },
     data() {
         return {  
@@ -95,7 +93,7 @@ export default {
             }
             var self = this
             var mapContainer = document.getElementById('map')
-            mapContainer.style.height = '15rem'
+            mapContainer.style.height = '21rem'
             const loader = new Loader(self.gmapsApiKey, {libraries: ['places']})
             const google = await loader.load()
             var map = new google.maps.Map(document.getElementById('map'), {

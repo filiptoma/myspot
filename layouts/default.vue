@@ -29,21 +29,20 @@ html {
 }
 
 /* Rules for sizing the icon. */
+.material-icons.md-15 { font-size: 15px; }
 .material-icons.md-18 { font-size: 18px; }
-.material-icons.md-3dots { font-size: 0.875rem; }
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-30 { font-size: 30px; }
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
 
 /* Rules for using icons as black on a light background. */
-.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
-.material-icons.md-uicolor { color: rgb(85, 85, 85) }
-.material-icons.md-icon-inactive { color: rgb(129, 129, 129) }
+.material-icons.md-footer { color: rgb(85, 85, 85) }
+.material-icons.md-uicolor { color: rgb(179, 179, 179) }
+.material-icons.md-icon-inactive { color: rgb(163, 163, 163) }
 .material-icons.md-star { color: rgb(201, 183, 21) }
-.material-icons.md-warning { color: rgb(216, 198, 34) }
+.material-icons.md-theme { color: #963c61 }
 .material-icons.md-imageUploaded { color: rgb(32, 131, 37) }
-.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
 
 /* Rules for using icons as white on a dark background. */
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }

@@ -11,7 +11,7 @@
                     </div>
                 </div>
 
-                <div class="mb-5 mt-1 bg-orange-100 border-t-4 border-orange-500 rounded-b-md text-orange-800 shadow-md px-2 py-1">
+                <div class="mt-1 bg-orange-100 border-t-4 border-orange-500 rounded-b-md text-orange-800 shadow-md px-2 py-1">
                     <div class="flex">
                         <i class="material-icons py-1">error_outline</i>
                         <div class="px-2">
@@ -21,8 +21,8 @@
                     </div>
                 </div>
 
-                <div class="pb-20">
-                    <h1 class="text-sm text-primary font-semibold mt-10">About</h1>
+                <div class="pb-5">
+                    <h1 class="text-sm text-primary font-semibold mt-8">About</h1>
                     <div class="flex items-start w-full rounded-md border border-bordercol px-2 my-1 mb-3" id="aboutContainer">
                         <textarea name="about" id="aboutInput" v-model="about" placeholder="Write spot's about text..."
                         @input="aboutInput" @focus="aboutFocus" @blur="aboutBlur"
@@ -39,6 +39,12 @@
                     <div class="my-3">
                         <h1 class="text-sm text-primary font-semibold">Website</h1>
                         <input type="text" placeholder="yourspotpage.sk" v-model="web"
+                        class="border border-bordercol text-sm w-full rounded-md p-2 focus:outline-none focus:border-theme my-1 infoInput">
+                    </div>
+
+                    <div class="my-3">
+                        <h1 class="text-sm text-primary font-semibold">Email</h1>
+                        <input type="text" placeholder="name@domain.com" v-model="email"
                         class="border border-bordercol text-sm w-full rounded-md p-2 focus:outline-none focus:border-theme my-1 infoInput">
                     </div>
 
@@ -64,7 +70,7 @@
                         <label v-else for="addImage" class="material-icons pr-3 pl-8 md-imageUploaded">add_a_photo</label>
                     </div>
 
-                    <div class="my-1">
+                    <div class="my-3">
                         <h1 class="text-primary font-semibold text-sm">Opening hours</h1>
                         <h1 class="text-secondary text-sm">Choose two initial values and press 
                             <button class="font-semibold text-primary focus:outline-none" @click="fillOut">FILL OUT</button>
@@ -156,7 +162,6 @@
             </div>
             <AuthPopup id="auth-popup" />
         </div>
-        <Footer />
         <BeforeLoading id="beforeLoading" />
     </div>
 </template>
@@ -165,10 +170,9 @@
 import axios from 'axios'
 import BeforeLoading from '~/components/BeforeLoading'
 import AuthPopup from '~/components/popups/AuthPopup'
-import Footer from '~/components/nav/Footer'
 export default {
     components: {
-        BeforeLoading, AuthPopup, Footer
+        BeforeLoading, AuthPopup
     },
     data() {
         return {
@@ -178,6 +182,7 @@ export default {
             web: '',
             instagram: '',
             facebook: '',
+            email: '',
             picture: '',
             openingHrs: {
                 monday: {
@@ -244,6 +249,7 @@ export default {
                     web: this.web,
                     instagram: this.instagram,
                     facebook: this.facebook,
+                    email: this.email,
                     spotId: this.spotId
                 })
                 this.$router.push({ name: 'spotId-add-finish', params: {spotId: this.spotId} })
@@ -259,6 +265,7 @@ export default {
                             web: this.web,
                             instagram: this.instagram,
                             facebook: this.facebook,
+                            email: this.email,
                             spotId: this.spotId
                         })
                         this.$router.push({ name: 'spotId-add-finish', params: {spotId: this.spotId} })
@@ -398,6 +405,7 @@ export default {
     background: transparent;
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
+    transition: none;
 }
 #clearAboutInput {
     padding-top: 0.7rem;

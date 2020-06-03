@@ -37,6 +37,22 @@ router.get('/featured', async (req, res) => {
     }
 })
 
+router.get('/profile', async (req, res) => {
+    try {
+        const spot = await Spot.findOne(
+            { _id: new ObjectId(req.query.spotId) }
+        )
+        if (spot.picture) {
+            const picture = Buffer.from(spot.picture).toString('base64')
+            res.status(200).json({ spot: spot, picture: picture })
+        } else {
+            res.status(200).json({ spot: spot })
+        }
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
 router.post('/edit', VerifyAccess, async (req, res) => {
     if (req.body.name) {
         try {
@@ -199,6 +215,18 @@ router.post('/edit', VerifyAccess, async (req, res) => {
             await Spot.updateOne(
                 { _id: new ObjectId(req.body.spotId) },
                 { $set: {web: req.body.web} }
+            )
+            res.status(200).end()
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    }
+
+    if (req.body.email) {
+        try {
+            await Spot.updateOne(
+                { _id: new ObjectId(req.body.spotId) },
+                { $set: {email: req.body.email} }
             )
             res.status(200).end()
         } catch (error) {

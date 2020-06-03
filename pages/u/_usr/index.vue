@@ -17,6 +17,15 @@ export default {
     components: {
         Footer
     },
+    mounted() {
+        this.$nextTick(() => {
+            document.getElementById('accountpage').classList.remove('md-footer')
+            document.getElementById('accountpage').classList.add('md-theme')
+        })
+    },
+    destroyed() {
+        document.getElementById('accountpage').classList.add('md-footer')
+    },
     methods: {
         async logoutUser() {
             try {

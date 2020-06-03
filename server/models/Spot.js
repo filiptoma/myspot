@@ -172,6 +172,10 @@ const spotSchema = new mongoose.Schema({
     instagram: {
         type: String,
         default: ''
+    },
+    email: {
+        type: String,
+        default: ''
     }
 })
 

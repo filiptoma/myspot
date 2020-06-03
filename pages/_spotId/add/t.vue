@@ -11,13 +11,13 @@
                     </div>
                 </div>
 
-                <div class="my-2 pb-12">
+                <div class="my-2">
                     <h1 class="font-semibold text-lg">What are it's characteristics?</h1>
                     <h1 class="text-sm text-secondary mb-5">Again, choose as many tags as you wish, since the more tags you give, the more personalized your spot is</h1>
                     <div class="tags"
                     v-for="tagCateg in tagsArr"
                     :key="tagCateg">
-                        <div class="text-sm text-primary my-8">
+                        <div class="text-sm text-primary my-5">
                             <div class="flex justify-between px-3 py-1 border-b border-divide">
                                 <h1 class="font-semibold text-base">
                                     {{ tagCateg.charAt(0).toUpperCase() + tagCateg.slice(1) }}
@@ -30,7 +30,7 @@
                                 :key="tag">
                                     <input type="checkbox" :id="tag" :name="tagCateg + '-cb'" class="hidden">
                                     <div class="mb-2 mr-1 tag-container">
-                                        <label :for="tag" class="tag rounded-full bg-uinput border-2 border-uinput px-3">
+                                        <label :for="tag" class="tag rounded-full bg-uinput border-2 border-uinput px-2 text-xs font-semibold">
                                             {{ tag }}
                                         </label>
                                     </div>
@@ -42,7 +42,6 @@
             </div>
             <AuthPopup id="auth-popup" />
         </div>
-        <Footer />
         <BeforeLoading id="beforeLoading" />
     </div>
 </template>
@@ -51,10 +50,9 @@
 import axios from 'axios'
 import BeforeLoading from '~/components/BeforeLoading'
 import AuthPopup from '~/components/popups/AuthPopup'
-import Footer from '~/components/nav/Footer'
 export default {
     components: {
-        BeforeLoading, AuthPopup, Footer
+        BeforeLoading, AuthPopup
     },
     data() {
         return {
