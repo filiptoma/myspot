@@ -5,8 +5,8 @@
         </div>
         <div v-else>
             <div class="text-center text-primary text-xl my-10 font-semibold">
-                <h1 v-if="opened == true" class="">This spot is now <span class="text-green-700">open</span></h1>
-                <h1 v-if="opened == false" class="">This spot is now <span class="text-red-700">closed</span></h1>
+                <h1 v-if="opened == true" class="">This spot is now <span class="text-green-600">open</span></h1>
+                <h1 v-if="opened == false" class="">This spot is now <span class="text-red-600">closed</span></h1>
             </div>
             <div class="text-primary"
             v-for="(data, day) in openingHrs"

@@ -26,12 +26,12 @@
                     </div>
                     <div v-if="spot.rating.avg" class="absolute bottom-0 right-0 font-semibold text-white p-2">
                         <div class="rating h-10 w-10 bg-theme rounded-full flex justify-center items-center border-white">
-                            <h1 class="">{{ spot.rating.avg }}</h1>
+                            <h1 class="font-bold">{{ spot.rating.avg }}</h1>
                         </div>
                     </div>
                 </div>
                 <div class="py-3 tile-header px-2">
-                    <h1 class="text-primary font-semibold">{{ spot.name }}</h1>
+                    <h1 class="text-primary text-lg font-semibold">{{ spot.name }}</h1>
                     <div class="text-secondary text-sm">
                         <h1 v-if="spot.address" class="">{{ spot.address.split(',').slice(0, spot.address.split(',').length-1).toString() }}</h1>
                         <h1 v-else class="italic">Address not yet added</h1>

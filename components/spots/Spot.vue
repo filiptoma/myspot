@@ -14,9 +14,9 @@
                 </div>
             </div>
             <div class="p-2">
-                <div class="flex justify-between">
+                <div class="flex justify-between mb-3">
                     <div>
-                        <h1 class=" pl-1 text-lg text-primary font-semibold">{{ spot.name }}</h1>
+                        <h1 class=" pl-1 text-xl text-black font-semibold">{{ spot.name }}</h1>
                         <nuxt-link :to="{ name: 'spotId-about', params: { spotId: this.spotId } }"
                         class="flex flex-wrap font-semibold text-secondary">
                             <div class="mb-1"
@@ -37,9 +37,9 @@
                     <div class="border-b border-divide py-2">
                         <nuxt-link :to="{ name: 'spotId-opening-hrs', params: { spotId: this.spotId } }" v-if="!openedError" class="flex items-center">
                             <i class="material-icons md-18 md-uicolor">schedule</i>
-                            <h1 v-if="opened == true" class="text-sm text-green-700 font-semibold pl-2">Open</h1>
-                            <h1 v-if="opened == false" class="text-sm text-red-700 font-semibold pl-2">Closed</h1>
-                            <h1 class="text-sm text-primary px-1">
+                            <h1 v-if="opened == true" class="text-green-600 font-semibold pl-2">Open</h1>
+                            <h1 v-if="opened == false" class="text-red-600 font-semibold pl-2">Closed</h1>
+                            <h1 class="text-primary px-1">
                                 {{ '(' + todayFrom + ' - ' + todayTo + ')' }}
                             </h1>
                         </nuxt-link>
@@ -54,20 +54,20 @@
                                 <div class="flex items-start">
                                     <i class="material-icons md-18 md-uicolor address-icon">place</i>
                                     <div class="address text-primary">
-                                        <h1 class="text-sm pl-2">
+                                        <h1 class="font-semibold pl-2">
                                             {{ spot.address.split(',').slice(0, spot.address.split(',').length-2).toString() }}
                                         </h1>
-                                        <h1 class="text-sm pl-2">
+                                        <h1 class="pt-1 text-sm pl-2">
                                             {{ spot.address.split(',').slice(spot.address.split(',').length-2, spot.address.split(',').length-1).toString() }}
                                         </h1>
                                     </div>
                                 </div>
                                 <div class="flex items-center px-2">
                                     <nuxt-link :to="{ name: 'spotId-map', params: { spotId: this.spotId } }"
-                                    class="text-xs text-blue-700 font-semibold px-1">MAP</nuxt-link>
-                                    <h1 class="text-xs text-blue-700 font-semibold px-1">|</h1>
+                                    class="text-sm text-blue-700 font-semibold px-1">MAP</nuxt-link>
+                                    <h1 class="text-sm text-blue-700 font-semibold px-1">|</h1>
                                     <a :href="'https://www.google.com/maps/dir/?api=1&destination=' + spot.address" target='_blank'
-                                    class="text-xs text-blue-700 font-semibold px-1">NAVIGATE</a>
+                                    class="text-sm text-blue-700 font-semibold px-1">NAVIGATE</a>
                                     <!-- <h1 class="text-xs text-blue-700 font-semibold px-1">NAVIGATE</h1> -->
                                 </div>
                             </div>
@@ -78,14 +78,15 @@
                         </div>
                     </div>
                     <div class="py-2">
-                        <div v-if="spot.rating.avg" class="flex items-center">
+                        <nuxt-link :to="{ name: 'spotId-comments', params: { spotId: this.spotId } }" v-if="spot.rating.avg"
+                        class="flex items-center">
                             <i class="material-icons md-18 md-uicolor mr-2">star_outline</i>
-                            <div class="text-sm flex items-center">
-                                <h1 class="text-primary font-semibold mr-1">{{ spot.rating.avg }}</h1>
+                            <div class="flex items-center">
+                                <h1 class="text-primary font-semibold mr-1 font-bold">{{ spot.rating.avg }}</h1>
                                 <h1 v-if="spot.rating.count > 1" class="text-primary">{{ 'out of ' + spot.rating.count + ' ratings' }}</h1>
                                 <h1 v-if="spot.rating.count == 1" class="text-primary">{{ 'out of ' + spot.rating.count + ' rating' }}</h1>
                             </div>
-                        </div>
+                        </nuxt-link>
                         <div v-else class="flex items-center">
                             <i class="material-icons md-18 md-uicolor">star_outline</i>
                             <h1 class="text-sm text-secondary ml-2 italic">Not yet rated</h1>
@@ -96,15 +97,15 @@
         </div>
 
         <div class="relative border-b border-t border-uinput shadow-md px-2 mb-3">
-            <nuxt-link :to="{ name: 'spotId-about', params: { spotId: this.spotId } }" class="flex justify-between text-primary my-2 mx-1">
-                <h1 class="font-semibold">About this spot</h1>
+            <nuxt-link :to="{ name: 'spotId-about', params: { spotId: this.spotId } }" class="flex justify-between text-black my-2 mx-1">
+                <h1 class="text-lg font-semibold">About this spot</h1>
                 <i class="material-icons">navigate_next</i>
             </nuxt-link>
             <div class="text-sm text-primary my-2 mx-1">
                 <h1 v-if="spot.about" class="w-full pr-1" id="about-text">{{ spot.about }}</h1>
                 <h1 v-else class="w-full text-secondary italic">About text not yet added</h1>
             </div>
-            <div class="text-primary text-sm py-2">
+            <div class="text-primary py-2">
                 <div class="flex border-b border-divide items-center py-1">
                     <i class="material-icons md-18 md-uicolor">language</i>
                     <h1 v-if="spot.web" class="ml-2 font-semibold">{{ spot.web }}</h1>
@@ -121,12 +122,12 @@
                     <h1 v-else class="text-secondary italic ml-2">Email address not yet added</h1>
                 </div>
                 <div class="flex border-b border-divide items-center py-1">
-                    <i class="material-icons md-18 md-uicolor">person</i>
+                    <i class="material-icons md-18 md-uicolor">person_outline</i>
                     <h1 v-if="spot.instagram" class="ml-2 font-semibold">Instagram profile</h1>
                     <h1 v-else class="text-secondary italic ml-2">Instagram profile not yet added</h1>
                 </div>
                 <div class="flex items-center py-1">
-                    <i class="material-icons md-18 md-uicolor">person</i>
+                    <i class="material-icons md-18 md-uicolor">person_outline</i>
                     <h1 v-if="spot.facebook" class="ml-2 font-semibold">Facebook profile</h1>
                     <h1 v-else class="text-secondary italic ml-2">Facebook profile not yet added</h1>
                 </div>

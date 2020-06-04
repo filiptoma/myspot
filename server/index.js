@@ -12,6 +12,7 @@ const authRoute = require('./routes/api/auth')
 const spotRoute = require('./routes/api/spot')
 const spotAdditionalRoute = require('./routes/api/spot-additional')
 const coreRoute = require('./routes/api/core')
+const commentsRoute = require('./routes/api/comments')
 
 const dotenv = require('dotenv')
 dotenv.config()
@@ -64,6 +65,7 @@ async function start () {
   app.use('/api/spot', spotRoute)
   app.use('/api/spot-additional', spotAdditionalRoute)
   app.use('/api/core', coreRoute)
+  app.use('/api/comments', commentsRoute)
 
   /////////////////////////////////////////////////////////////
 
