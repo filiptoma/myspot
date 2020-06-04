@@ -124,9 +124,11 @@ export default {
 .comment-container-div {
     position: fixed;
     bottom: 0%;
+    background-color: rgb(250, 250, 250);
 }
 .comment-div {
     border-radius: 1.2rem;
+    background-color: white;
 }
 .comment-text-div {
     resize: none;
