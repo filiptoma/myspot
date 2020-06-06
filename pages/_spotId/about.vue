@@ -92,7 +92,6 @@ export default {
         } catch (error) {
             console.log(error)
         }
-        console.log(this.about, this.tags)
         this.$nextTick(() => {
             this.$nuxt.$loading.finish()
         })

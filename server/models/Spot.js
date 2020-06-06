@@ -90,6 +90,10 @@ const spotSchema = new mongoose.Schema({
             to: {
                 type: String,
                 default: ''
+            },
+            closed: {
+                type: Boolean,
+                default: false
             }
         },
         tuesday: {
@@ -100,6 +104,10 @@ const spotSchema = new mongoose.Schema({
             to: {
                 type: String,
                 default: ''
+            },
+            closed: {
+                type: Boolean,
+                default: false
             }
         },
         wednesday: {
@@ -110,6 +118,10 @@ const spotSchema = new mongoose.Schema({
             to: {
                 type: String,
                 default: ''
+            },
+            closed: {
+                type: Boolean,
+                default: false
             }
         },
         thursday: {
@@ -120,6 +132,10 @@ const spotSchema = new mongoose.Schema({
             to: {
                 type: String,
                 default: ''
+            },
+            closed: {
+                type: Boolean,
+                default: false
             }
         },
         friday: {
@@ -130,6 +146,10 @@ const spotSchema = new mongoose.Schema({
             to: {
                 type: String,
                 default: ''
+            },
+            closed: {
+                type: Boolean,
+                default: false
             }
         },
         saturday: {
@@ -140,6 +160,10 @@ const spotSchema = new mongoose.Schema({
             to: {
                 type: String,
                 default: ''
+            },
+            closed: {
+                type: Boolean,
+                default: false
             }
         },
         sunday: {
@@ -150,6 +174,10 @@ const spotSchema = new mongoose.Schema({
             to: {
                 type: String,
                 default: ''
+            },
+            closed: {
+                type: Boolean,
+                default: false
             }
         }
     },

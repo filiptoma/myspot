@@ -5,19 +5,21 @@
         </div>
         <div v-else>
             <div class="text-center text-primary text-xl my-10 font-semibold">
-                <h1 v-if="opened == true" class="">This spot is now <span class="text-green-600">open</span></h1>
-                <h1 v-if="opened == false" class="">This spot is now <span class="text-red-600">closed</span></h1>
+                <h1 v-if="opened == true && openingHrs[today].closed == false" class="">This spot is now <span class="text-green-600">open</span></h1>
+                <h1 v-else class="">This spot is now <span class="text-red-600">closed</span></h1>
             </div>
             <div class="text-primary"
             v-for="(data, day) in openingHrs"
             :key="day">
                 <div v-if="day == today" class="flex justify-between px-3 border-b border-divide py-2 text-black">
                     <h1 class="font-semibold">{{ day.charAt(0).toUpperCase() + day.slice(1) }}</h1>
-                    <h1 class="font-semibold">{{ data.from + ' - ' + data.to }}</h1>
+                    <h1 v-if="data.closed == false" class="font-semibold">{{ data.from + ' - ' + data.to }}</h1>
+                    <h1 v-if="data.closed == true" class="font-semibold">Closed</h1>
                 </div>
-                <div v-else class="flex justify-between px-3 border-b border-divide py-2">
+                <div v-if="day != today" class="flex justify-between px-3 border-b border-divide py-2">
                     <h1 class="">{{ day.charAt(0).toUpperCase() + day.slice(1) }}</h1>
-                    <h1 class="font-semibold">{{ data.from + ' - ' + data.to }}</h1>
+                    <h1 v-if="data.closed == false" class="font-semibold">{{ data.from + ' - ' + data.to }}</h1>
+                    <h1 v-if="data.closed == true" class="font-semibold">Closed</h1>
                 </div>
             </div>
         </div>
@@ -35,31 +37,38 @@ export default {
             openingHrs: {
                 monday: {
                     from: '',
-                    to: ''
+                    to: '',
+                    closed: Boolean
                 },
                 tuesday: {
                     from: '',
-                    to: ''
+                    to: '',
+                    closed: Boolean
                 },
                 wednesday: {
                     from: '',
-                    to: ''
+                    to: '',
+                    closed: Boolean
                 },
                 thursday: {
                     from: '',
-                    to: ''
+                    to: '',
+                    closed: Boolean
                 },
                 friday: {
                     from: '',
-                    to: ''
+                    to: '',
+                    closed: Boolean
                 },
                 saturday: {
                     from: '',
-                    to: ''
+                    to: '',
+                    closed: Boolean
                 },
                 sunday: {
                     from: '',
-                    to: ''
+                    to: '',
+                    closed: Boolean
                 }
             },
             opened: Boolean,

@@ -78,81 +78,109 @@
                     </div>
                     <table class="table-auto text-sm rounded-md">
                         <tbody class="text-secondary">
-                            <tr>
-                                <td class="pr-4 py-1 text-primary">Monday</td>
+                            <tr id="div-0" class="closedDay-transition">
+                                <td class="pl-1 pr-4 py-1 text-primary">Monday</td>
                                 <td class="pr-3">
                                     <input type="time" id="firstValue" name="from" v-model="openingHrs.monday.from"
-                                    class="rounded-md border border-bordercol h-6 w-20 focus:outline-none pl-1">
+                                    class="rounded-md border border-bordercol h-6 w-16 focus:outline-none pl-1 bg-white">
                                 </td>
                                 <td class="pr-3">
                                     <input type="time" id="secondValue" name="to" v-model="openingHrs.monday.to"
-                                    class="rounded-md border border-bordercol h-6 w-20 focus:outline-none pl-1">
+                                    class="rounded-md border border-bordercol h-6 w-16 focus:outline-none pl-1 bg-white">
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="closedStateController" @click="changeClosedState($event)" id="0" class="hidden">
+                                    <label for="0" class="text-xs font-semibold pr-1 py-1">Closed</label>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="pr-4 py-1 text-primary">Tuesday</td>
+                            <tr id="div-1" class="closedDay-transition">
+                                <td class="pl-1 pr-4 py-1 text-primary">Tuesday</td>
                                 <td class="pr-3">
                                     <input type="time" name="from" v-model="openingHrs.tuesday.from"
-                                    class="rounded-md border border-bordercol h-6 w-20 focus:outline-none pl-1">
+                                    class="rounded-md border border-bordercol h-6 w-16 focus:outline-none pl-1 bg-white">
                                 </td>
                                 <td class="pr-3">
                                     <input type="time" name="to" v-model="openingHrs.tuesday.to"
-                                    class="rounded-md border border-bordercol h-6 w-20 focus:outline-none pl-1">
+                                    class="rounded-md border border-bordercol h-6 w-16 focus:outline-none pl-1 bg-white">
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="closedStateController" @click="changeClosedState($event)" id="1" class="hidden">
+                                    <label for="1" class="text-xs font-semibold pr-1 py-1">Closed</label>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="pr-4 py-1 text-primary">Wednesday</td>
+                            <tr id="div-2" class="closedDay-transition">
+                                <td class="pl-1 pr-4 py-1 text-primary">Wednesday</td>
                                 <td class="pr-3">
                                     <input type="time" name="from" v-model="openingHrs.wednesday.from"
-                                    class="rounded-md border border-bordercol h-6 w-20 focus:outline-none pl-1">
+                                    class="rounded-md border border-bordercol h-6 w-16 focus:outline-none pl-1 bg-white">
                                 </td>
                                 <td class="pr-3">
                                     <input type="time" name="to" v-model="openingHrs.wednesday.to"
-                                    class="rounded-md border border-bordercol h-6 w-20 focus:outline-none pl-1">
+                                    class="rounded-md border border-bordercol h-6 w-16 focus:outline-none pl-1 bg-white">
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="closedStateController" @click="changeClosedState($event)" id="2" class="hidden">
+                                    <label for="2" class="text-xs font-semibold pr-1 py-1">Closed</label>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="pr-4 py-1 text-primary">Thursday</td>
+                            <tr id="div-3" class="closedDay-transition">
+                                <td class="pl-1 pr-4 py-1 text-primary">Thursday</td>
                                 <td class="pr-3">
                                     <input type="time" name="from" v-model="openingHrs.thursday.from"
-                                    class="rounded-md border border-bordercol h-6 w-20 focus:outline-none pl-1">
+                                    class="rounded-md border border-bordercol h-6 w-16 focus:outline-none pl-1 bg-white">
                                 </td>
                                 <td class="pr-3">
                                     <input type="time" name="to" v-model="openingHrs.thursday.to"
-                                    class="rounded-md border border-bordercol h-6 w-20 focus:outline-none pl-1">
+                                    class="rounded-md border border-bordercol h-6 w-16 focus:outline-none pl-1 bg-white">
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="closedStateController" @click="changeClosedState($event)" id="3" class="hidden">
+                                    <label for="3" class="text-xs font-semibold pr-1 py-1">Closed</label>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="pr-4 py-1 text-primary">Friday</td>
+                            <tr id="div-4" class="closedDay-transition">
+                                <td class="pl-1 pr-4 py-1 text-primary">Friday</td>
                                 <td class="pr-3">
                                     <input type="time" name="from" v-model="openingHrs.friday.from"
-                                    class="rounded-md border border-bordercol h-6 w-20 focus:outline-none pl-1">
+                                    class="rounded-md border border-bordercol h-6 w-16 focus:outline-none pl-1 bg-white">
                                 </td>
                                 <td class="pr-3">
                                     <input type="time" name="to" v-model="openingHrs.friday.to"
-                                    class="rounded-md border border-bordercol h-6 w-20 focus:outline-none pl-1">
+                                    class="rounded-md border border-bordercol h-6 w-16 focus:outline-none pl-1 bg-white">
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="closedStateController" @click="changeClosedState($event)" id="4" class="hidden">
+                                    <label for="4" class="text-xs font-semibold pr-1 py-1">Closed</label>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="pr-4 py-1 text-primary">Saturday</td>
+                            <tr id="div-5" class="closedDay-transition">
+                                <td class="pl-1 pr-4 py-1 text-primary">Saturday</td>
                                 <td class="pr-3">
                                     <input type="time" name="from" v-model="openingHrs.saturday.from"
-                                    class="rounded-md border border-bordercol h-6 w-20 focus:outline-none pl-1">
+                                    class="rounded-md border border-bordercol h-6 w-16 focus:outline-none pl-1 bg-white">
                                 </td>
                                 <td class="pr-3">
                                     <input type="time" name="to" v-model="openingHrs.saturday.to"
-                                    class="rounded-md border border-bordercol h-6 w-20 focus:outline-none pl-1">
+                                    class="rounded-md border border-bordercol h-6 w-16 focus:outline-none pl-1 bg-white">
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="closedStateController" @click="changeClosedState($event)" id="5" class="hidden">
+                                    <label for="5" class="text-xs font-semibold pr-1 py-1">Closed</label>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="pr-4 py-1 text-primary">Sunday</td>
+                            <tr id="div-6" class="closedDay-transition">
+                                <td class="pl-1 pr-4 py-1 text-primary">Sunday</td>
                                 <td class="pr-3">
                                     <input type="time" name="from" v-model="openingHrs.sunday.from"
-                                    class="rounded-md border border-bordercol h-6 w-20 focus:outline-none pl-1">
+                                    class="rounded-md border border-bordercol h-6 w-16 focus:outline-none pl-1 bg-white">
                                 </td>
                                 <td class="pr-3">
                                     <input type="time" name="to" v-model="openingHrs.sunday.to"
-                                    class="rounded-md border border-bordercol h-6 w-20 focus:outline-none pl-1">
+                                    class="rounded-md border border-bordercol h-6 w-16 focus:outline-none pl-1 bg-white">
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="closedStateController" @click="changeClosedState($event)" id="6" class="hidden">
+                                    <label for="6" class="text-xs font-semibold pr-1 py-1">Closed</label>
                                 </td>
                             </tr>
                         </tbody>
@@ -187,31 +215,38 @@ export default {
             openingHrs: {
                 monday: {
                     from: '',
-                    to: ''
+                    to: '',
+                    closed: false
                 },
                 tuesday: {
                     from: '',
-                    to: ''
+                    to: '',
+                    closed: false
                 },
                 wednesday: {
                     from: '',
-                    to: ''
+                    to: '',
+                    closed: false
                 },
                 thursday: {
                     from: '',
-                    to: ''
+                    to: '',
+                    closed: false
                 },
                 friday: {
                     from: '',
-                    to: ''
+                    to: '',
+                    closed: false
                 },
                 saturday: {
                     from: '',
-                    to: ''
+                    to: '',
+                    closed: false
                 },
                 sunday: {
                     from: '',
-                    to: ''
+                    to: '',
+                    closed: false
                 }
             }
         }
@@ -387,6 +422,59 @@ export default {
                 this.picture = event.target.result
             }
             reader.readAsDataURL(fileObject)
+        },
+        changeClosedState(event) {
+            if (event.target.checked) {
+                if (event.target.id == 0) {
+                    this.openingHrs.monday.closed = true
+                }
+                if (event.target.id == 1) {
+                    this.openingHrs.tuesday.closed = true
+                }
+                if (event.target.id == 2) {
+                    this.openingHrs.wednesday.closed = true
+                }
+                if (event.target.id == 3) {
+                    this.openingHrs.thursday.closed = true
+                }
+                if (event.target.id == 4) {
+                    this.openingHrs.friday.closed = true
+                }
+                if (event.target.id == 5) {
+                    this.openingHrs.saturday.closed = true
+                }
+                if (event.target.id == 6) {
+                    this.openingHrs.sunday.closed = true
+                }
+                document.getElementById('div-' + event.target.id).classList.add('bg-red-200')
+                var timeInputsFrom = document.querySelectorAll('input[name=from]')
+                timeInputsFrom[event.target.id].value = ''
+                var timeInputsTo = document.querySelectorAll('input[name=to]')
+                timeInputsTo[event.target.id].value = ''
+            } else {
+                if (event.target.id == 0) {
+                    this.openingHrs.monday.closed = false
+                }
+                if (event.target.id == 1) {
+                    this.openingHrs.tuesday.closed = false
+                }
+                if (event.target.id == 2) {
+                    this.openingHrs.wednesday.closed = false
+                }
+                if (event.target.id == 3) {
+                    this.openingHrs.thursday.closed = false
+                }
+                if (event.target.id == 4) {
+                    this.openingHrs.friday.closed = false
+                }
+                if (event.target.id == 5) {
+                    this.openingHrs.saturday.closed = false
+                }
+                if (event.target.id == 6) {
+                    this.openingHrs.sunday.closed = false
+                }
+                document.getElementById('div-' + event.target.id).classList.remove('bg-red-200')
+            }
         }
     }
 }
@@ -427,6 +515,9 @@ export default {
 }
 
 .infoInput {
+    transition: 200ms;
+}
+.closedDay-transition {
     transition: 200ms;
 }
 </style>

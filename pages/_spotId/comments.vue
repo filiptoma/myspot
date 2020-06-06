@@ -16,6 +16,9 @@
                     <button class="comment-post-btn text-blue-500 font-semibold mr-3 focus:outline-none" id="comment-post-btn" @click="postComment">Post</button>
                 </div>
             </div>
+            <div v-else class="flex w-screen comment-container-div text-sm mx-auto items-end p-2 relative border-t border-divide justify-center h-12 items-center">
+                <nuxt-link to="/a" class="text-red-600 font-semibold">If you wish to comment, please sign in.</nuxt-link>
+            </div>
         </div>
         <BeforeLoading id="beforeLoading" />
     </div>

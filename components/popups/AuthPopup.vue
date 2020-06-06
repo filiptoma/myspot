@@ -152,6 +152,11 @@ export default {
                 this.$nextTick(() => {
                     this.$nuxt.$loading.finish()
                 })
+                this.username = ''
+                this.email = ''
+                this.password = ''
+                this.logError = ''
+                this.regError = ''
                 document.getElementById('auth-reg-popup').style.display = 'block'
                 if (error.response.data.errorMsg === '"username" is not allowed to be empty') {
                     this.regError = 'Invalid username.'
@@ -187,6 +192,11 @@ export default {
                 this.$nextTick(() => {
                     this.$nuxt.$loading.finish()
                 })
+                this.username = ''
+                this.email = ''
+                this.password = ''
+                this.logError = ''
+                this.regError = ''
                 document.getElementById('auth-log-popup').style.display = 'block'
                 if (error.response.data.errorMsg === '"username" is not allowed to be empty') {
                     this.logError = 'Invalid username.'

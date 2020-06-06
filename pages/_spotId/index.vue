@@ -18,11 +18,11 @@ export default {
     },
     mounted() {
         document.getElementById('beforeLoading').style.display = 'none'
-        document.getElementById('searchpage').classList.remove('md-footer')
-        document.getElementById('searchpage').classList.add('md-theme')
+        document.getElementById('homepage').classList.remove('md-footer')
+        document.getElementById('homepage').classList.add('md-theme')
     },
     destroyed() {
-        document.getElementById('searchpage').classList.add('md-footer')
+        document.getElementById('homepage').classList.add('md-footer')
     }
 }
 </script>

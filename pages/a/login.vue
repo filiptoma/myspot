@@ -57,6 +57,9 @@ export default {
                 this.$nextTick(() => {
                     this.$nuxt.$loading.finish()
                 })
+                this.username = ''
+                this.password = ''
+                this.error = ''
                 document.getElementById('hideAtLoading').style.display = 'block'
                 if (error.response.data.errorMsg === '"username" is not allowed to be empty') {
                     this.error = 'Invalid username.'
