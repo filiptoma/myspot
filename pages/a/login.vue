@@ -2,10 +2,20 @@
     <div class="w-11/12 mx-auto" id="hideAtLoading">
         <div class="flex justify-between my-3">
             <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
-                <button class="material-icons text-secondary focus:outline-none" @click="goBack">arrow_back</button>
+                <!-- <button class="material-icons text-secondary focus:outline-none" @click="goBack">arrow_back</button> -->
+                <client-only>
+                    <button class="text-secondary focus:outline-none center-icon" @click="goBack">
+                        <unicon name="arrow-left" fill="grey" />
+                    </button>
+                </client-only>
             </div>
             <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
-                <button class="material-icons text-secondary focus:outline-none" @click="goBack2">close</button>
+                <!-- <button class="material-icons text-secondary focus:outline-none" @click="goBack2">close</button> -->
+                <client-only>
+                    <button class="text-secondary focus:outline-none center-icon" @click="goBack">
+                        <unicon name="times" fill="grey" />
+                    </button>
+                </client-only>
             </div>
         </div>
         <div class="my-2">

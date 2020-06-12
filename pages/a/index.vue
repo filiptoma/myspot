@@ -2,7 +2,12 @@
     <div class="text-center w-11/12 mx-auto">
         <div class="flex justify-end my-3">
             <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
-                <button class="material-icons text-secondary font-light focus:outline-none" @click="goBack">close</button>
+                <!-- <button class="material-icons text-secondary font-light focus:outline-none" @click="goBack">close</button> -->
+                <client-only>
+                    <button class="text-secondary focus:outline-none center-icon" @click="goBack">
+                        <unicon name="times" fill="grey" />
+                    </button>
+                </client-only>
             </div>
         </div>
         <div class="flex justify-center items-center my-2">

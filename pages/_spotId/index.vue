@@ -17,12 +17,13 @@ export default {
         BeforeLoading, Spot, Footer
     },
     mounted() {
-        document.getElementById('beforeLoading').style.display = 'none'
-        document.getElementById('homepage').classList.remove('md-footer')
-        document.getElementById('homepage').classList.add('md-theme')
+        this.$nextTick(() => {
+            document.getElementById('beforeLoading').style.display = 'none'
+            document.getElementById('homepage').style.fill = '#963c61'
+        })
     },
     destroyed() {
-        document.getElementById('homepage').classList.add('md-footer')
+        document.getElementById('homepage').style.fill = 'grey'
     }
 }
 </script>

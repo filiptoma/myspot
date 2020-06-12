@@ -4,10 +4,20 @@
             <div id="popdown">
                 <div class="flex justify-between my-3">
                     <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
-                        <button class="material-icons text-secondary font-light focus:outline-none" @click="close">close</button>
+                        <!-- <button class="material-icons text-secondary font-light focus:outline-none" @click="close">close</button> -->
+                        <client-only>
+                            <button class="text-secondary focus:outline-none center-icon" @click="close">
+                                <unicon name="times" fill="grey" />
+                            </button>
+                        </client-only>
                     </div>
                     <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
-                        <button class="material-icons text-secondary font-light focus:outline-none" @click="nextDetail">arrow_forward</button>
+                        <!-- <button class="material-icons text-secondary font-light focus:outline-none" @click="nextDetail">arrow_forward</button> -->
+                        <client-only>
+                            <button class="text-secondary focus:outline-none center-icon" @click="nextDetail">
+                                <unicon name="arrow-right" fill="grey" />
+                            </button>
+                        </client-only>
                     </div>
                 </div>
 
@@ -25,8 +35,15 @@
                     <h1 class="text-sm font-semibold">Don't have time to fill everything?</h1>
                     <h1 class="text-sm text-secondary border-divide pb-1">Save the spot to concepts
                     and add remaining details whenever you want!</h1>
-                    <button @click="saveToConcepts"
-                    class="rounded-full bg-uinput px-3 py-1 font-semibold text-secondary text-sm focus:outline-none">Save to concepts</button>
+                    <div class="flex justify-center">
+                        <button @click="saveToConcepts" class="rounded-full bg-uinput px-3 py-1 font-semibold text-secondary text-sm
+                        focus:outline-none flex items-center">
+                            <client-only>
+                                <unicon class="pr-2" name="cloud-upload" fill="grey" />
+                            </client-only>
+                            Save to concepts
+                        </button>
+                    </div>
                 </div>
             </div>
             <AuthPopup id="auth-popup" />

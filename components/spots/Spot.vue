@@ -4,7 +4,7 @@
             <div v-if="picture" class="relative">
                 <img :src="'data:image/jpeg;base64,' + picture" alt="Spot's profile picture" class="object-cover w-full h-56">
                 <div class="rating h-12 w-12 bg-theme text-lg rounded-full flex justify-center items-center border border-white absolute bottom-0 right-0 mr-2">
-                    <h1 class="text-white font-bold">{{ spot.rating.avg }}</h1>
+                    <h1 class="text-white font-semibold">{{ spot.rating.avg }}</h1>
                 </div>
             </div>
             <div v-else class="w-full h-56 bg-uinput flex justify-center items-center text-secondary">
@@ -39,7 +39,7 @@
                             <i class="material-icons md-18 md-uicolor">schedule</i>
                             <h1 v-if="opened == true && spot.openingHrs[today].closed == false" class="text-green-600 font-semibold pl-2">Open</h1>
                             <h1 v-else class="text-red-600 font-semibold pl-2">Closed</h1>
-                            <h1 class="text-primary px-1">
+                            <h1 v-if="opened == true && spot.openingHrs[today].closed == false" class="text-primary px-1">
                                 {{ '(' + todayFrom + ' - ' + todayTo + ')' }}
                             </h1>
                         </nuxt-link>
@@ -68,7 +68,6 @@
                                     <h1 class="text-sm text-blue-700 font-semibold px-1">|</h1>
                                     <a :href="'https://google.com/maps/dir/?api=1&destination=' + spot.address" target='_blank'
                                     class="text-sm text-blue-700 font-semibold px-1">NAVIGATE</a>
-                                    <!-- <h1 class="text-xs text-blue-700 font-semibold px-1">NAVIGATE</h1> -->
                                 </div>
                             </div>
                         </div>
@@ -82,7 +81,7 @@
                         class="flex items-center">
                             <i class="material-icons md-18 md-uicolor mr-2">star_outline</i>
                             <div class="flex items-center">
-                                <h1 class="text-primary font-semibold mr-1 font-bold">{{ spot.rating.avg }}</h1>
+                                <h1 class="text-primary font-semibold mr-1">{{ spot.rating.avg }}</h1>
                                 <h1 v-if="spot.rating.count > 1" class="text-primary">{{ 'out of ' + spot.rating.count + ' ratings' }}</h1>
                                 <h1 v-if="spot.rating.count == 1" class="text-primary">{{ 'out of ' + spot.rating.count + ' rating' }}</h1>
                             </div>
@@ -198,6 +197,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="my-8 p-2 text-center">
+            <h1 class="text-lg font-semibold text-center mb-2">Is something incorrect or missing?</h1>
+            <p class="text-center text-secondary text-sm mb-2 mx-3">Help others find their perfect spot and become recognizable member of MySpot community</p>
+            <nuxt-link :to="{ name: 'spotId-edit', params: {spotId: this.spotId} }" class="text-blue-700 font-semibold text-sm p-2">
+                EDIT THIS SPOT >>
+            </nuxt-link>
         </div>
     </div>
 </template>

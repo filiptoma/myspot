@@ -12,11 +12,12 @@ export default {
         Footer
     },
     mounted() {
-        document.getElementById('searchpage').classList.remove('md-footer')
-        document.getElementById('searchpage').classList.add('md-theme')
+        this.$nextTick(() => {
+            document.getElementById('searchpage').style.fill = '#963c61'
+        })
     },
     destroyed() {
-        document.getElementById('searchpage').classList.add('md-footer')
+        document.getElementById('searchpage').style.fill = 'grey'
     }
 }
 </script>

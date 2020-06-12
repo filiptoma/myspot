@@ -3,7 +3,12 @@
         <div id="auth-index-popup" class="text-center">
             <div class="flex justify-end my-3">
                 <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
-                    <button class="material-icons text-secondary font-light focus:outline-none" @click="closePopup">close</button>
+                    <!-- <button class="material-icons text-secondary font-light focus:outline-none" @click="closePopup">close</button> -->
+                    <client-only>
+                    <button class="text-secondary focus:outline-none center-icon" @click="closePopup">
+                        <unicon name="times" fill="grey" />
+                    </button>
+                </client-only>
                 </div>
             </div>
             <div class="flex justify-center items-center my-2">
@@ -28,10 +33,20 @@
         <div id="auth-reg-popup" class="hidden-part">
             <div class="flex justify-between my-3">
                 <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
-                    <button class="material-icons text-secondary focus:outline-none" @click="regToIndex">arrow_back</button>
+                    <!-- <button class="material-icons text-secondary focus:outline-none" @click="regToIndex">arrow_back</button> -->
+                    <client-only>
+                    <button class="text-secondary focus:outline-none center-icon" @click="regToIndex">
+                        <unicon name="arrow-left" fill="grey" />
+                    </button>
+                </client-only>
                 </div>
                 <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
-                    <button class="material-icons text-secondary focus:outline-none" @click="closePopup">close</button>
+                    <!-- <button class="material-icons text-secondary focus:outline-none" @click="closePopup">close</button> -->
+                    <client-only>
+                    <button class="text-secondary focus:outline-none center-icon" @click="closePopup">
+                        <unicon name="times" fill="grey" />
+                    </button>
+                </client-only>
                 </div>
             </div>
             <div class="my-2">
@@ -55,10 +70,20 @@
         <div id="auth-log-popup" class="hidden-part">
             <div class="flex justify-between my-3">
                 <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
-                    <button class="material-icons text-secondary focus:outline-none" @click="logToIndex">arrow_back</button>
+                    <!-- <button class="material-icons text-secondary focus:outline-none" @click="logToIndex">arrow_back</button> -->
+                    <client-only>
+                    <button class="text-secondary focus:outline-none center-icon" @click="logToIndex">
+                        <unicon name="arrow-left" fill="grey" />
+                    </button>
+                </client-only>
                 </div>
                 <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
-                    <button class="material-icons text-secondary focus:outline-none" @click="closePopup">close</button>
+                    <!-- <button class="material-icons text-secondary focus:outline-none" @click="closePopup">close</button> -->
+                    <client-only>
+                    <button class="text-secondary focus:outline-none center-icon" @click="closePopup">
+                        <unicon name="times" fill="grey" />
+                    </button>
+                </client-only>
                 </div>
             </div>
             <div class="my-2">

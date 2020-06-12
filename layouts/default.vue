@@ -9,9 +9,18 @@ export default {
   head() {
     return {
       link: [
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap' }
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap' },
+        // { rel: 'stylesheet', href: 'https://unicons.iconscout.com/release/v2.1.9/css/unicons.css' }
       ]
     }
+  },
+  mounted() {
+    const iconsScript = document.createElement('script')
+    iconsScript.src = 'https://unpkg.com/feather-icons'
+    document.head.appendChild(iconsScript)
+    // const loadIconsScript = document.createElement('script')
+    // loadIconsScript.innerText = 'feather.replace()'
+    // document.head.appendChild(loadIconsScript)
   }
 }
 </script>
@@ -149,5 +158,9 @@ input:matches(
   -moz-appearance: none;
   appearance: none;
   transition: 200ms;
+}
+
+.center-icon {
+  padding-top: 0.43rem;
 }
 </style>

@@ -4,10 +4,20 @@
             <div id="popdown">
                 <div class="flex justify-between my-3">
                     <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
-                        <button class="material-icons text-secondary font-light focus:outline-none" @click="close">close</button>
+                        <!-- <button class="material-icons text-secondary font-light focus:outline-none" @click="close">close</button> -->
+                        <client-only>
+                            <button class="text-secondary focus:outline-none center-icon" @click="close">
+                                <unicon name="times" fill="grey" />
+                            </button>
+                        </client-only>
                     </div>
                     <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
-                        <button class="material-icons text-secondary font-light focus:outline-none" @click="nextDetail">arrow_forward</button>
+                        <!-- <button class="material-icons text-secondary font-light focus:outline-none" @click="nextDetail">arrow_forward</button> -->
+                        <client-only>
+                            <button class="text-secondary focus:outline-none center-icon" @click="nextDetail">
+                                <unicon name="arrow-right" fill="grey" />
+                            </button>
+                        </client-only>
                     </div>
                 </div>
 

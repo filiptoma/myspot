@@ -4,10 +4,20 @@
             <div id="popdown">
                 <div class="flex justify-between py-3 sticky top-0">
                     <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center" id="hideCloseBtn">
-                        <button class="material-icons text-secondary font-light focus:outline-none" @click="close">close</button>
+                        <!-- <button class="material-icons text-secondary font-light focus:outline-none" @click="close">close</button> -->
+                        <client-only>
+                            <button class="text-secondary focus:outline-none center-icon" @click="close">
+                                <unicon name="times" fill="grey" />
+                            </button>
+                        </client-only>
                     </div>
                     <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center" id="emphasizeNextBtn">
-                        <button class="material-icons text-secondary font-light focus:outline-none" id="emphasizeNextBtnText" @click="nextDetail">arrow_forward</button>
+                        <!-- <button class="material-icons text-secondary font-light focus:outline-none" id="emphasizeNextBtnText" @click="nextDetail">arrow_forward</button> -->
+                        <client-only>
+                            <button class="text-secondary focus:outline-none center-icon" @click="nextDetail">
+                                <unicon name="arrow-right" fill="grey" id="emphasizeNextBtnText" />
+                            </button>
+                        </client-only>
                     </div>
                 </div>
 
@@ -162,11 +172,11 @@ export default {
             if (window.scrollY > 0) {
                 hideCloseBtn.style.opacity = 0
                 emphasizeNextBtn.style.boxShadow = '0 0 10px #bfbfbf'
-                emphasizeNextBtnText.style.color = '#4299e1'
+                emphasizeNextBtnText.style.fill = '#4299e1'
             } else {
                 hideCloseBtn.style.opacity = 1
                 emphasizeNextBtn.style.boxShadow = 'none'
-                emphasizeNextBtnText.style.color = '#808080'
+                emphasizeNextBtnText.style.fill = 'grey'
             }
         }
     }

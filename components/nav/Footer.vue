@@ -1,13 +1,19 @@
 <template>
     <div>
-        <footer class="flex justify-between w-screen items-center border-t z-40 h-12">
-            <nuxt-link to="/" class="material-icons px-5 py-2 md-30 md-footer" id="homepage">home</nuxt-link>
-            <nuxt-link to="/search" class="material-icons px-5 py-2 md-30 md-footer" id="searchpage">search</nuxt-link>
-            <nuxt-link v-if="usr" :to="{ name: 'u-usr', params: { usr: usr } }"
-            class="material-icons px-5 py-2 md-30 md-footer" id="accountpage">account_circle</nuxt-link>
-            <nuxt-link v-else to="/a"
-            class="material-icons px-5 py-2 md-30 md-footer">account_circle</nuxt-link>
-        </footer>
+        <client-only>
+            <footer class="flex justify-between w-screen items-center border-t z-40 h-12">
+                <!-- <nuxt-link to="/" class="material-icons px-5 py-2 md-30 md-footer" id="homepage">home</nuxt-link> -->
+                <nuxt-link to="/" class="px-5 center-icon"><unicon name="home-alt" fill="grey" id="homepage" /></nuxt-link>
+                <!-- <nuxt-link to="/search" class="material-icons px-5 py-2 md-30 md-footer" id="searchpage">search</nuxt-link> -->
+                <nuxt-link to="/search" class="px-5 center-icon"><unicon name="search" fill="grey" id="searchpage" /></nuxt-link>
+                <!-- <nuxt-link v-if="usr" :to="{ name: 'u-usr', params: { usr: usr } }"
+                class="material-icons px-5 py-2 md-30 md-footer" id="accountpage">account_circle</nuxt-link> -->
+                <nuxt-link v-if="usr" :to="{ name: 'u-usr', params: { usr: usr } }" class="px-5 center-icon"><unicon name="user" fill="grey" id="accountpage" /></nuxt-link>
+                <!-- <nuxt-link v-else to="/a"
+                class="material-icons px-5 py-2 md-30 md-footer">account_circle</nuxt-link> -->
+                <nuxt-link v-else to="/a" class="px-5 center-icon"><unicon name="user" fill="grey" id="accountpage" /></nuxt-link>
+            </footer>
+        </client-only>
         <div class="container h-12 z-30"></div>
     </div>
 </template>

@@ -4,10 +4,20 @@
             <div id="popdown">
                 <div class="flex justify-between py-3 sticky top-0">
                     <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center" id="hideCloseBtn">
-                        <button class="material-icons text-secondary font-light focus:outline-none" @click="close">close</button>
+                        <!-- <button class="material-icons text-secondary font-light focus:outline-none" @click="close">close</button> -->
+                        <client-only>
+                            <button class="text-secondary focus:outline-none center-icon" @click="close">
+                                <unicon name="times" fill="grey" />
+                            </button>
+                        </client-only>
                     </div>
                     <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center" id="emphasizeNextBtn">
-                        <button class="material-icons text-secondary font-light focus:outline-none" id="emphasizeNextBtnText" @click="finish">done</button>
+                        <!-- <button class="material-icons text-secondary font-light focus:outline-none" id="emphasizeNextBtnText" @click="finish">done</button> -->
+                        <client-only>
+                            <button class="text-secondary focus:outline-none center-icon" @click="finish">
+                                <unicon name="check" fill="grey" id="emphasizeNextBtnText" />
+                            </button>
+                        </client-only>
                     </div>
                 </div>
 
@@ -66,8 +76,18 @@
                             <h1 class="text-sm text-secondary">I recommend horizontal, it looks better after cropping</h1>
                         </div>
                         <input @change="processImage" type="file" accept="image/*" id="addImage" class="hidden">
-                        <label v-if="!picture" for="addImage" class="material-icons pr-3 pl-8 md-icon-inactive">add_a_photo</label>
-                        <label v-else for="addImage" class="material-icons pr-3 pl-8 md-imageUploaded">add_a_photo</label>
+                        <!-- <label v-if="!picture" for="addImage" class="material-icons pr-3 pl-8 md-icon-inactive">add_a_photo</label> -->
+                        <label v-if="!picture" for="addImage" class="pr-3 pl-8">
+                            <client-only>
+                                <unicon name="image-plus" fill="grey" />
+                            </client-only>
+                        </label>
+                        <!-- <label v-else for="addImage" class="material-icons pr-3 pl-8 md-imageUploaded">add_a_photo</label> -->
+                        <label v-else for="addImage" class="pr-3 pl-8">
+                            <client-only>
+                                <unicon name="image-check" fill="#208325" />
+                            </client-only>
+                        </label>
                     </div>
 
                     <div class="my-3">
@@ -353,11 +373,11 @@ export default {
             if (window.scrollY > 0) {
                 hideCloseBtn.style.opacity = 0
                 emphasizeNextBtn.style.boxShadow = '0 0 10px #bfbfbf'
-                emphasizeNextBtnText.style.color = '#4299e1'
+                emphasizeNextBtnText.style.fill = '#4299e1'
             } else {
                 hideCloseBtn.style.opacity = 1
                 emphasizeNextBtn.style.boxShadow = 'none'
-                emphasizeNextBtnText.style.color = '#808080'
+                emphasizeNextBtnText.style.fill = 'grey'
             }
         },
         fillOut() {
