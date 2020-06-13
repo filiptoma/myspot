@@ -3,7 +3,12 @@
         <div id="afterLoading">
             <div class="flex justify-start m-3">
                 <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
-                    <button class="material-icons text-secondary font-light focus:outline-none" @click="goBack">arrow_back</button>
+                    <!-- <button class="material-icons text-secondary font-light focus:outline-none" @click="goBack">arrow_back</button> -->
+                    <client-only>
+                        <button class="focus:outline-none center-icon" @click="goBack">
+                            <unicon name="arrow-left" fill="grey" />
+                        </button>
+                    </client-only>
                 </div>
             </div>
 

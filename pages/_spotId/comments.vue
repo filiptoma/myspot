@@ -3,7 +3,12 @@
         <div id="afterLoading">
             <div class="flex justify-start m-3">
                 <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
-                    <button class="material-icons text-secondary font-light focus:outline-none" @click="goBack">arrow_back</button>
+                    <!-- <button class="material-icons text-secondary font-light focus:outline-none" @click="goBack">arrow_back</button> -->
+                    <client-only>
+                        <button class="focus:outline-none center-icon" @click="goBack">
+                            <unicon name="arrow-left" fill="grey" />
+                        </button>
+                    </client-only>
                 </div>
             </div>
             <Comments :key="reload" />
@@ -17,7 +22,12 @@
                 </div>
             </div>
             <div v-else class="flex w-screen comment-container-div text-sm mx-auto items-end p-2 relative border-t border-divide justify-center h-12 items-center">
-                <nuxt-link to="/a" class="text-red-600 font-semibold">If you wish to comment, please sign in.</nuxt-link>
+                <nuxt-link to="/a" class="text-red-600 font-semibold flex items-center justify-center">
+                    If you wish to comment, please sign in.
+                    <client-only>
+                        <unicon name="sign-in-alt" fill="#e53e3e" width="18" height="18" class="pl-2" />
+                    </client-only>
+                </nuxt-link>
             </div>
         </div>
         <BeforeLoading id="beforeLoading" />

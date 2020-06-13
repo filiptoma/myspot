@@ -36,15 +36,24 @@
                 <div class="">
                     <div class="border-b border-divide py-2">
                         <nuxt-link :to="{ name: 'spotId-opening-hrs', params: { spotId: this.spotId } }" v-if="!openedError" class="flex items-center">
-                            <i class="material-icons md-18 md-uicolor">schedule</i>
+                            <!-- <i class="material-icons md-18 md-uicolor">schedule</i> -->
+                            <client-only>
+                                <unicon name="clock" fill="#aaaaaa" width="18" height="18" />
+                            </client-only>
                             <h1 v-if="opened == true && spot.openingHrs[today].closed == false" class="text-green-600 font-semibold pl-2">Open</h1>
                             <h1 v-else class="text-red-600 font-semibold pl-2">Closed</h1>
                             <h1 v-if="opened == true && spot.openingHrs[today].closed == false" class="text-primary px-1">
                                 {{ '(' + todayFrom + ' - ' + todayTo + ')' }}
                             </h1>
+                            <h1 v-if="opened == false && spot.openingHrs[today].closed == false" class="text-primary px-1">
+                                {{ '(' + todayFrom + ' - ' + todayTo + ')' }}
+                            </h1>
                         </nuxt-link>
                         <div v-else class="flex items-center">
-                            <i class="material-icons md-18 md-uicolor">schedule</i>
+                            <!-- <i class="material-icons md-18 md-uicolor">schedule</i> -->
+                            <client-only>
+                                <unicon name="clock" fill="#aaaaaa" width="18" height="18" />
+                            </client-only>
                             <h1 class="text-sm text-secondary ml-2 italic">{{ openedError }}</h1>
                         </div>
                     </div>
@@ -52,7 +61,10 @@
                         <div v-if="spot.address">
                             <div class="flex justify-between">
                                 <div class="flex items-start">
-                                    <i class="material-icons md-18 md-uicolor address-icon">place</i>
+                                    <!-- <i class="material-icons md-18 md-uicolor address-icon">place</i> -->
+                                    <client-only>
+                                        <unicon name="map-marker" fill="#aaaaaa" width="18" height="18" />
+                                    </client-only>
                                     <div class="address text-primary">
                                         <h1 class="font-semibold pl-2">
                                             {{ spot.address.split(',').slice(0, spot.address.split(',').length-2).toString() }}
@@ -72,14 +84,20 @@
                             </div>
                         </div>
                         <div v-else class="flex items-center">
-                            <i class="material-icons md-18 md-uicolor address-icon">place</i>
+                            <!-- <i class="material-icons md-18 md-uicolor address-icon">place</i> -->
+                            <client-only>
+                                <unicon name="map-marker" fill="#aaaaaa" width="18" height="18" />
+                            </client-only>
                             <h1 class="text-sm text-secondary ml-2 italic">Address not yet added</h1>
                         </div>
                     </div>
                     <div class="py-2">
                         <nuxt-link :to="{ name: 'spotId-comments', params: { spotId: this.spotId } }" v-if="spot.rating.avg"
                         class="flex items-center">
-                            <i class="material-icons md-18 md-uicolor mr-2">star_outline</i>
+                            <!-- <i class="material-icons md-18 md-uicolor mr-2">star_outline</i> -->
+                            <client-only>
+                                <unicon name="star" fill="#aaaaaa" width="18" height="18" class="mr-2" />
+                            </client-only>
                             <div class="flex items-center">
                                 <h1 class="text-primary font-semibold mr-1">{{ spot.rating.avg }}</h1>
                                 <h1 v-if="spot.rating.count > 1" class="text-primary">{{ 'out of ' + spot.rating.count + ' ratings' }}</h1>
@@ -87,7 +105,10 @@
                             </div>
                         </nuxt-link>
                         <div v-else class="flex items-center">
-                            <i class="material-icons md-18 md-uicolor">star_outline</i>
+                            <!-- <i class="material-icons md-18 md-uicolor">star_outline</i> -->
+                            <client-only>
+                                <unicon name="star" fill="#aaaaaa" width="18" height="18" />
+                            </client-only>
                             <h1 class="text-sm text-secondary ml-2 italic">Not yet rated</h1>
                         </div>
                     </div>
@@ -95,36 +116,51 @@
             </div>
         </div>
 
-        <div class="relative border-b border-t border-uinput shadow-md px-2 mb-3">
+        <div class="relative border-b border-uinput shadow-md px-2 mt-12">
             <nuxt-link :to="{ name: 'spotId-about', params: { spotId: this.spotId } }" class="flex justify-between text-black my-2 mx-1">
                 <h1 class="text-lg font-semibold">About this spot</h1>
-                <i class="material-icons">navigate_next</i>
+                <!-- <i class="material-icons">navigate_next</i> -->
+                <client-only>
+                    <unicon name="angle-right" fill="black" width="26" height="26" />
+                </client-only>
             </nuxt-link>
-            <div class="text-sm text-primary my-2 mx-1">
+            <div class="text-sm text-primary mx-1">
                 <h1 v-if="spot.about" class="w-full pr-1" id="about-text">{{ spot.about }}</h1>
                 <h1 v-else class="w-full text-secondary italic">About text not yet added</h1>
             </div>
             <div class="text-primary py-2">
-                <div class="flex border-b border-divide items-center py-1">
-                    <i class="material-icons md-18 md-uicolor">language</i>
+                <div class="flex border-b border-divide items-center py-2">
+                    <!-- <i class="material-icons md-18 md-uicolor">language</i> -->
+                    <client-only>
+                        <unicon name="link" fill="#aaaaaa" width="18" height="18" />
+                    </client-only>
                     <div v-if="spot.web">
                         <a v-if="spot.web.split(':')[1]" :href="spot.web" target='_blank' class="ml-2 font-semibold">{{ spot.web.split(':')[1].split('/')[2] }}</a>
                         <a v-else :href="'http://' + spot.web" target='_blank' class="ml-2 font-semibold">{{ spot.web }}</a>
                     </div>
                     <h1 v-else class="text-secondary italic ml-2">Web not yet added</h1>
                 </div>
-                <div class="flex border-b border-divide items-center py-1">
-                    <i class="material-icons md-18 md-uicolor">phone</i>
+                <div class="flex border-b border-divide items-center py-2">
+                    <!-- <i class="material-icons md-18 md-uicolor">phone</i> -->
+                    <client-only>
+                        <unicon name="phone" fill="#aaaaaa" width="18" height="18" />
+                    </client-only>
                     <a v-if="spot.phone" :href="`tel:${spot.phone.replace(/ /g, '')}`" class="ml-2 font-semibold">{{ spot.phone }}</a>
                     <h1 v-else class="text-secondary italic ml-2">Phone number not yet added</h1>
                 </div>
-                <div class="flex border-b border-divide items-center py-1">
-                    <i class="material-icons md-18 md-uicolor">email</i>
+                <div class="flex border-b border-divide items-center py-2">
+                    <!-- <i class="material-icons md-18 md-uicolor">email</i> -->
+                    <client-only>
+                        <unicon name="envelope" fill="#aaaaaa" width="18" height="18" />
+                    </client-only>
                     <a v-if="spot.email" :href="`mailto:${spot.email}`" class="ml-2 font-semibold">{{ spot.email }}</a>
                     <h1 v-else class="text-secondary italic ml-2">Email address not yet added</h1>
                 </div>
-                <div class="flex border-b border-divide items-center py-1">
-                    <i class="material-icons md-18 md-uicolor">person_outline</i>
+                <div class="flex border-b border-divide items-center py-2">
+                    <!-- <i class="material-icons md-18 md-uicolor">person_outline</i> -->
+                    <client-only>
+                        <unicon name="instagram" fill="#aaaaaa" width="18" height="18" />
+                    </client-only>
                     <div v-if="spot.instagram">
                         <a v-if="spot.instagram.split(':')[1]" :href="spot.instagram" target='_blank' class="ml-2 font-semibold">Instagram profile</a>
                         <a v-if="!spot.instagram.split(':')[1] && spot.instagram.split('/')[1]" :href="'http://' + spot.instagram"
@@ -134,39 +170,51 @@
                     </div>
                     <h1 v-else class="text-secondary italic ml-2">Instagram profile not yet added</h1>
                 </div>
-                <div class="flex items-center py-1">
-                    <i class="material-icons md-18 md-uicolor">person_outline</i>
+                <div class="flex items-center py-2">
+                    <!-- <i class="material-icons md-18 md-uicolor">person_outline</i> -->
+                    <client-only>
+                        <unicon name="facebook-f" fill="#aaaaaa" width="18" height="18" />
+                    </client-only>
                     <div v-if="spot.facebook">
-                        <a v-if="spot.facebook.split(':')[1]" :href="spot.facebook" target='_blank' class="ml-2 font-semibold">Facebook profile</a>
+                        <a v-if="spot.facebook.split(':')[1]" :href="spot.facebook" target='_blank' class="ml-2 font-semibold">Facebook page</a>
                         <a v-if="!spot.facebook.split(':')[1] && spot.facebook.split('/')[1]" :href="'http://' + spot.facebook"
-                        target='_blank' class="ml-2 font-semibold">Facebook profile</a>
+                        target='_blank' class="ml-2 font-semibold">Facebook page</a>
                         <a v-if="!spot.facebook.split(':')[1] && !spot.facebook.split('/')[1]" :href="'http://facebook.com/' + spot.facebook"
-                        target='_blank' class="ml-2 font-semibold">Facebook profile</a>
+                        target='_blank' class="ml-2 font-semibold">Facebook page</a>
                     </div>
-                    <h1 v-else class="text-secondary italic ml-2">Facebook profile not yet added</h1>
+                    <h1 v-else class="text-secondary italic ml-2">Facebook page not yet added</h1>
                 </div>
             </div>
         </div>
 
-        <div class="relative border-b border-t border-uinput shadow-md px-2 mb-3">
-            <div class="flex items-center justify-between text-black py-2 mx-1 border-b border-divide">
-                <h1 class="text-lg font-semibold self-center">Rate this spot</h1>
-                <div v-if="alreadyRated == false" class="flex items-end">
-                    <button class="material-icons focus:outline-none md-icon-inactive" id="1" @click="gaveRating1" name="rating">star_border</button>
-                    <button class="material-icons focus:outline-none md-icon-inactive" id="2" @click="gaveRating2" name="rating">star_border</button>
-                    <button class="material-icons focus:outline-none md-icon-inactive" id="3" @click="gaveRating3" name="rating">star_border</button>
-                    <button class="material-icons focus:outline-none md-icon-inactive" id="4" @click="gaveRating4" name="rating">star_border</button>
-                    <button class="material-icons focus:outline-none md-icon-inactive" id="5" @click="gaveRating5" name="rating">star_border</button>
-                    <button v-if="rating > 0 && rating <= 5 && usr" @click="rate" class=" pl-2 focus:outline-none text-sm text-blue-700 font-semibold">SEND</button>
-                    <button v-else class="pl-2 focus:outline-none text-sm text-secondary font-semibold" disabled>SEND</button>
-                </div>
-                <h1 v-if="alreadyRated == true" class="italic text-secondary text-sm">Already rated</h1>
-                <nuxt-link to="/a" v-if="!usr" class="text-red-600 font-semibold text-sm">Please, sign in.</nuxt-link>
+        <div class="text-center text-black py-2 mx-1 my-10">
+            <h1 class="text-lg font-semibold self-center">Rate this spot</h1>
+            <div v-if="alreadyRated == false" class="flex items-end justify-center">
+                <button class="material-icons focus:outline-none md-icon-inactive" id="1" @click="gaveRating1" name="rating">star_border</button>
+                <button class="material-icons focus:outline-none md-icon-inactive" id="2" @click="gaveRating2" name="rating">star_border</button>
+                <button class="material-icons focus:outline-none md-icon-inactive" id="3" @click="gaveRating3" name="rating">star_border</button>
+                <button class="material-icons focus:outline-none md-icon-inactive" id="4" @click="gaveRating4" name="rating">star_border</button>
+                <button class="material-icons focus:outline-none md-icon-inactive" id="5" @click="gaveRating5" name="rating">star_border</button>
+                <button v-if="rating > 0 && rating <= 5 && usr" @click="rate" class=" pl-2 focus:outline-none text-sm text-blue-700 font-semibold">SEND</button>
+                <button v-else class="pl-2 focus:outline-none text-sm text-secondary font-semibold" disabled>SEND</button>
             </div>
+            <h1 v-if="alreadyRated == true" class="italic text-secondary text-sm">Thanks for your feedback!</h1>
+            <nuxt-link to="/a" v-if="!usr" class="text-red-600 text-sm flex items-center justify-center font-semibold">
+                Please, sign in.
+                <client-only>
+                    <unicon name="sign-in-alt" fill="#e53e3e" width="18" height="18" class="pl-2" />
+                </client-only>
+            </nuxt-link>
+        </div>
+
+        <div class="relative border-b border-uinput shadow-md px-2 mb-3">
             <div class="text-black my-2 mx-1">
-                <nuxt-link :to="{ name: 'spotId-comments', params: { spotId: this.spotId } }" class="flex justify-between pb-2">
+                <nuxt-link :to="{ name: 'spotId-comments', params: { spotId: this.spotId } }" class="flex justify-between items-center pb-2">
                     <h1 class="font-semibold text-lg">Comments <span class="font-normal text-sm text-secondary">(latest 2)</span></h1>
-                    <i class="material-icons">create</i>
+                    <!-- <i class="material-icons">create</i> -->
+                    <client-only>
+                        <unicon name="comment-plus" fill="black" width="22" height="22" />
+                    </client-only>
                 </nuxt-link>
                 <div class="comments"
                 v-for="(comment, index) in spot.comments.slice().reverse()"
@@ -198,7 +246,7 @@
                 </div>
             </div>
         </div>
-        <div class="my-8 p-2 text-center">
+        <div class="my-12 p-2 text-center">
             <h1 class="text-lg font-semibold text-center mb-2">Is something incorrect or missing?</h1>
             <p class="text-center text-secondary text-sm mb-2 mx-3">Help others find their perfect spot and become recognizable member of MySpot community</p>
             <nuxt-link :to="{ name: 'spotId-edit', params: {spotId: this.spotId} }" class="text-blue-700 font-semibold text-sm p-2">

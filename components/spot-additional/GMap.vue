@@ -2,7 +2,13 @@
     <div>
         <div id="map"></div>
         <a :href="'https://www.google.com/maps/dir/?api=1&destination=' + address" target='_blank'
-        class="flex justify-center h-12 items-center my-5 mx-3 border rounded-md border-bordercol font-semibold text-primary">Navigate me to the spot</a>
+        class="flex justify-center h-12 items-center my-5 mx-3 border rounded-md border-bordercol font-semibold text-primary">
+            
+            <client-only>
+                <unicon name="location-arrow" fill="grey" class="pr-2" width="20" height="20" />
+            </client-only>
+            Navigate me to the spot
+        </a>
     </div>
 </template>
 
