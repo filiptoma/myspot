@@ -258,6 +258,7 @@
 
 <script>
 import axios from 'axios'
+import AuthService from '~/server/services/AuthService'
 export default {
     name: 'Spot',
     data() {
