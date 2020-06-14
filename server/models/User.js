@@ -32,6 +32,9 @@ const userSchema = new mongoose.Schema({
     },
     liked: {
         type: Array
+    },
+    r4v3ncl4w: {
+        type: String
     }
 })
 
