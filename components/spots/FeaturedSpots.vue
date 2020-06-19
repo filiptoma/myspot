@@ -9,7 +9,9 @@
                     class="object-cover w-full h-40">
                     <div v-else class="w-full h-40 bg-uinput flex justify-center items-center text-secondary">
                         <div class="text-center">
-                            <i class="material-icons text-center">warning</i>
+                            <client-only>
+                                <unicon name="exclamation-triangle" fill="grey" />
+                            </client-only>
                             <h1 class="text-xs font-semibold">Picture not yet added</h1>
                         </div>
                     </div>

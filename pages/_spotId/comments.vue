@@ -77,6 +77,7 @@ export default {
                 })
                 this.reload += 1
                 this.text = ''
+                document.getElementById('commentText').style.height = '2.5rem'
                 this.commentBlur()
             } catch (error) {
                 if (error.response.data.errorMsg === 'Access expired.') {
@@ -89,6 +90,7 @@ export default {
                         })
                         this.reload += 1
                         this.text = ''
+                        document.getElementById('commentText').style.height = '2.5rem'
                         this.commentBlur()
                     } catch (error) {
                         try {

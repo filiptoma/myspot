@@ -10,9 +10,14 @@
             <div v-else class="relative">
                 <div class="w-full h-56 bg-uinput flex justify-center items-center text-secondary">
                     <div class="text-center">
-                        <i class="material-icons text-center">warning</i>
+                        <client-only>
+                            <unicon name="exclamation-triangle" fill="grey" />
+                        </client-only>
                         <h1 class="text-xs font-semibold">Picture not yet added</h1>
                     </div>
+                </div>
+                <div v-if="spot.rating.avg" class="rating h-12 w-12 bg-theme text-lg rounded-full flex justify-center items-center border border-white absolute bottom-0 right-0 mr-2">
+                    <h1 class="text-white font-semibold">{{ spot.rating.avg }}</h1>
                 </div>
             </div>
             <div class="p-2">
