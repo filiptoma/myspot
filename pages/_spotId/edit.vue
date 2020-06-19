@@ -670,12 +670,14 @@ export default {
             try {
                 for (var i = 0; i < this.spotsArr.length; i++) {
                     const selectedCateg = document.querySelectorAll('input[name='+ this.spotsArr[i] +'-cbc]:checked')
+                    this.spot.categories[this.spotsArr[i]] = []
                     for (var j = 0; j < selectedCateg.length; j++) {
                         this.spot.categories[this.spotsArr[i]].push(selectedCateg[j].id)
                     }
                 }
                 for (var i = 0; i < this.tagsArr.length; i++) {
                     const selectedTags = document.querySelectorAll('input[name='+ this.tagsArr[i] +'-cbt]:checked')
+                    this.spot.tags[this.tagsArr[i]] = []
                     for (var j = 0; j < selectedTags.length; j++) {
                         this.spot.tags[this.tagsArr[i]].push(selectedTags[j].id)
                     }
