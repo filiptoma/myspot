@@ -578,26 +578,6 @@ export default {
                 email: '',
             },
             gmapsApiKey: process.env.gmapsApiKey,
-            categories: {
-                drink: [],
-                food: [],
-                chill: [],
-                shop: [],
-                music: []
-            },
-            tags: {
-                price: [],
-                services: [],
-                atmosphere: [],
-                environment: [],
-                size: [],
-                smoking: [],
-                food: [],
-                beverages: [],
-                events: [],
-                entertainment: [],
-                stock: []
-            },
             core: {
                 categories: {
                     drink: [],
@@ -686,15 +666,27 @@ export default {
         goBack() {
             history.go(-1)
         },
-        async saveChanges() {
+        async saveChanges() {   
             try {
+                for (var i = 0; i < this.spotsArr.length; i++) {
+                    const selectedCateg = document.querySelectorAll('input[name='+ this.spotsArr[i] +'-cbc]:checked')
+                    for (var j = 0; j < selectedCateg.length; j++) {
+                        this.spot.categories[this.spotsArr[i]].push(selectedCateg[j].id)
+                    }
+                }
+                for (var i = 0; i < this.tagsArr.length; i++) {
+                    const selectedTags = document.querySelectorAll('input[name='+ this.tagsArr[i] +'-cbt]:checked')
+                    for (var j = 0; j < selectedTags.length; j++) {
+                        this.spot.tags[this.tagsArr[i]].push(selectedTags[j].id)
+                    }
+                }
                 await axios.post('/api/spot/edit', {
                     spotId: this.spotId,
                     name: this.spot.name,
                     address: this.spot.address,
                     about: this.spot.about,
-                    tags: this.tags,
-                    categories: this.categories,
+                    tags: this.spot.tags,
+                    categories: this.spot.categories,
                     phone: this.spot.phone,
                     web: this.spot.web,
                     instagram: this.spot.instagram,
@@ -708,6 +700,18 @@ export default {
                 if (error.response.data.errorMsg === 'Access expired.') {
                     try {
                         await axios.get('/api/renewAccess')
+                        for (var i = 0; i < this.spotsArr.length; i++) {
+                            const selectedCateg = document.querySelectorAll('input[name='+ this.spotsArr[i] +'-cbc]:checked')
+                            for (var j = 0; j < selectedCateg.length; j++) {
+                                this.spot.categories[this.spotsArr[i]].push(selectedCateg[j].id)
+                            }
+                        }
+                        for (var i = 0; i < this.tagsArr.length; i++) {
+                            const selectedTags = document.querySelectorAll('input[name='+ this.tagsArr[i] +'-cbt]:checked')
+                            for (var j = 0; j < selectedTags.length; j++) {
+                                this.spot.tags[this.tagsArr[i]].push(selectedTags[j].id)
+                            }
+                        }
                         await axios.post('/api/spot/edit', {
                             spotId: this.spotId,
                             name: this.spot.name,

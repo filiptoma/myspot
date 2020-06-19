@@ -3,6 +3,20 @@
         <div class="relative border-b border-divide shadow-md mb-3">
             <div v-if="picture" class="relative">
                 <img :src="'data:image/jpeg;base64,' + picture" alt="Spot's profile picture" class="object-cover w-full h-56">
+                <div class="flex absolute bottom-0 text-white text-sm py-2 px-1">
+                    <div
+                    v-for="(points, category, index) in spot.categories"
+                    :item="points"
+                    :index="index"
+                    :key="index">
+                        <div v-if="points[0] && index < 3" class="flex px-1 font-semibold">
+                            <h1 class="border border-white rounded-full px-2 category">{{ category.charAt(0).toUpperCase() + category.slice(1) + ' spot'}}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="spot.rating.avg" class="rating h-12 w-12 bg-theme text-lg rounded-full flex justify-center items-center border border-white absolute bottom-0 right-0 mr-2">
+                    <h1 class="text-white font-semibold">{{ spot.rating.avg }}</h1>
+                </div>
             </div>
             <div v-else class="relative">
                 <div class="w-full h-56 bg-uinput flex justify-center items-center text-secondary">
@@ -10,9 +24,6 @@
                         <i class="material-icons text-center">warning</i>
                         <h1 class="text-xs font-semibold">Picture not yet added</h1>
                     </div>
-                </div>
-                <div v-if="spot.rating.avg" class="rating h-12 w-12 bg-theme text-lg rounded-full flex justify-center items-center border border-white absolute bottom-0 right-0 mr-2">
-                    <h1 class="text-white font-semibold">{{ spot.rating.avg }}</h1>
                 </div>
             </div>
             <div class="p-2">
