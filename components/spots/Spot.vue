@@ -3,14 +3,16 @@
         <div class="relative border-b border-divide shadow-md mb-3">
             <div v-if="picture" class="relative">
                 <img :src="'data:image/jpeg;base64,' + picture" alt="Spot's profile picture" class="object-cover w-full h-56">
-                <div class="rating h-12 w-12 bg-theme text-lg rounded-full flex justify-center items-center border border-white absolute bottom-0 right-0 mr-2">
-                    <h1 class="text-white font-semibold">{{ spot.rating.avg }}</h1>
-                </div>
             </div>
-            <div v-else class="w-full h-56 bg-uinput flex justify-center items-center text-secondary">
-                <div class="text-center">
-                    <i class="material-icons text-center">warning</i>
-                    <h1 class="text-xs font-semibold">Picture not yet added</h1>
+            <div v-else class="relative">
+                <div class="w-full h-56 bg-uinput flex justify-center items-center text-secondary">
+                    <div class="text-center">
+                        <i class="material-icons text-center">warning</i>
+                        <h1 class="text-xs font-semibold">Picture not yet added</h1>
+                    </div>
+                </div>
+                <div v-if="spot.rating.avg" class="rating h-12 w-12 bg-theme text-lg rounded-full flex justify-center items-center border border-white absolute bottom-0 right-0 mr-2">
+                    <h1 class="text-white font-semibold">{{ spot.rating.avg }}</h1>
                 </div>
             </div>
             <div class="p-2">
@@ -36,25 +38,28 @@
                 <div class="">
                     <div class="border-b border-divide py-2">
                         <nuxt-link :to="{ name: 'spotId-opening-hrs', params: { spotId: this.spotId } }" v-if="!openedError" class="flex items-center">
-                            <!-- <i class="material-icons md-18 md-uicolor">schedule</i> -->
                             <client-only>
                                 <unicon name="clock" fill="#aaaaaa" width="18" height="18" />
                             </client-only>
-                            <h1 v-if="opened == true && spot.openingHrs[today].closed == false" class="text-green-600 font-semibold pl-2">Open</h1>
-                            <h1 v-else class="text-red-600 font-semibold pl-2">Closed</h1>
-                            <h1 v-if="opened == true && spot.openingHrs[today].closed == false" class="text-primary px-1">
-                                {{ '(' + todayFrom + ' - ' + todayTo + ')' }}
-                            </h1>
-                            <h1 v-if="opened == false && spot.openingHrs[today].closed == false" class="text-primary px-1">
+                            <h1 v-if="opened == true" class="text-green-600 font-semibold pl-2">Open</h1>
+                            <h1 v-if="opened == false" class="text-red-600 font-semibold pl-2">Closed</h1>
+                            <h1 class="text-primary px-1">
                                 {{ '(' + todayFrom + ' - ' + todayTo + ')' }}
                             </h1>
                         </nuxt-link>
-                        <div v-else class="flex items-center">
-                            <!-- <i class="material-icons md-18 md-uicolor">schedule</i> -->
-                            <client-only>
-                                <unicon name="clock" fill="#aaaaaa" width="18" height="18" />
-                            </client-only>
-                            <h1 class="text-sm text-secondary ml-2 italic">{{ openedError }}</h1>
+                        <div v-else>
+                            <div v-if="openedError == 'Opening hours not yet added'" class="flex items-center">
+                                <client-only>
+                                    <unicon name="clock" fill="#aaaaaa" width="18" height="18" />
+                                </client-only>
+                                <h1 class="text-sm text-secondary ml-2 italic">{{ openedError }}</h1>
+                            </div>
+                            <nuxt-link :to="{ name: 'spotId-opening-hrs', params: { spotId: this.spotId } }" v-if="openedError == 'Closed'" class="flex items-center">
+                                <client-only>
+                                    <unicon name="clock" fill="#aaaaaa" width="18" height="18" />
+                                </client-only>
+                                <h1 class="text-red-600 font-semibold pl-2">{{ openedError }}</h1>
+                            </nuxt-link>
                         </div>
                     </div>
                     <div class="border-b border-divide py-2">
@@ -117,17 +122,18 @@
         </div>
 
         <div class="relative border-b border-uinput shadow-md px-2 mt-12">
-            <nuxt-link :to="{ name: 'spotId-about', params: { spotId: this.spotId } }" class="flex justify-between text-black my-2 mx-1">
-                <h1 class="text-lg font-semibold">About this spot</h1>
-                <!-- <i class="material-icons">navigate_next</i> -->
-                <client-only>
-                    <unicon name="angle-right" fill="black" width="26" height="26" />
-                </client-only>
+            <nuxt-link :to="{ name: 'spotId-about', params: { spotId: this.spotId } }" class="">
+                <div class="flex justify-between text-black mt-2 mx-1">
+                    <h1 class="text-lg font-semibold">About this spot</h1>
+                    <client-only>
+                        <unicon name="angle-right" fill="black" width="26" height="26" />
+                    </client-only>
+                </div>
+                <div class="text-sm text-primary mx-1">
+                    <h1 v-if="spot.about" class="w-full pr-1" id="about-text">{{ spot.about }}</h1>
+                    <h1 v-else class="w-full text-secondary italic">About text not yet added</h1>
+                </div>
             </nuxt-link>
-            <div class="text-sm text-primary mx-1">
-                <h1 v-if="spot.about" class="w-full pr-1" id="about-text">{{ spot.about }}</h1>
-                <h1 v-else class="w-full text-secondary italic">About text not yet added</h1>
-            </div>
             <div class="text-primary py-2">
                 <div class="flex border-b border-divide items-center py-2">
                     <!-- <i class="material-icons md-18 md-uicolor">language</i> -->
@@ -449,21 +455,11 @@ export default {
             } else {
                 this.opened = false
             }
+        } else if (this.spot.openingHrs[today].closed == true) {
+            this.openedError = 'Closed'
         } else {
             this.openedError = 'Opening hours not yet added'
         }
-
-        // about text trunctuating
-        this.$nextTick(() => {
-            if (this.spot.about) {
-                var aboutText = document.getElementById('about-text')
-                var aboutTextWordArray = [...aboutText.innerText]
-                while (aboutText.scrollHeight > aboutText.offsetHeight) {
-                    aboutTextWordArray.pop()
-                    aboutText.innerText = aboutTextWordArray.join('') + '...'
-                }
-            }
-        })
 
         this.$nextTick(() => {
             this.$nuxt.$loading.finish()
@@ -723,7 +719,9 @@ export default {
     line-height: 1rem;
 }
 #about-text {
-    height: 4rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .comments input[type=checkbox]:checked ~ .likeBtn:before {

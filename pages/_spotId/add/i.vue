@@ -2,7 +2,7 @@
     <div class="w-11/12 mx-auto">
         <div id="afterLoading">
             <div id="popdown">
-                <div class="flex justify-between py-3 sticky top-0">
+                <div class="flex justify-between py-3 sticky top-0 bg-white">
                     <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center" id="hideCloseBtn">
                         <!-- <button class="material-icons text-secondary font-light focus:outline-none" @click="close">close</button> -->
                         <client-only>
@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-                <div class="mt-1 bg-orange-100 border-t-4 border-orange-500 rounded-b-md text-orange-800 shadow-md px-2 py-1">
+                <div class="mt-1 bg-orange-100 border-t-4 border-orange-500 rounded-b-md text-orange-800 shadow-md px-2 py-1 mx-1">
                     <div class="flex">
                         <i class="material-icons py-1">error_outline</i>
                         <div class="px-2">
@@ -59,7 +59,7 @@
                     </div>
 
                     <div class="my-3">
-                        <h1 class="text-sm text-primary font-semibold">Instagram page</h1>
+                        <h1 class="text-sm text-primary font-semibold">Instagram profile</h1>
                         <input type="text" placeholder="instagram.com/yourspotpage" v-model="instagram"
                         class="border border-bordercol text-sm w-full rounded-md p-2 focus:outline-none focus:border-theme my-1 infoInput">
                     </div>
@@ -96,9 +96,9 @@
                             <button class="font-semibold text-primary focus:outline-none" @click="fillOut">FILL OUT</button>
                         </h1>
                     </div>
-                    <table class="table-auto text-sm rounded-md">
+                    <table class="table-auto text-sm rounded-md w-full">
                         <tbody class="text-secondary">
-                            <tr id="div-0" class="closedDay-transition">
+                            <tr id="div-0">
                                 <td class="pl-1 pr-4 py-1 text-primary">Monday</td>
                                 <td class="pr-3">
                                     <input type="time" id="firstValue" name="from" v-model="openingHrs.monday.from"
@@ -287,11 +287,7 @@ export default {
                 }
             }
         }
-        window.addEventListener('scroll', this.setFixedHeader)
         document.getElementById('afterLoading').style.display = 'block'
-    },
-    destroyed() {
-        window.removeEventListener('scroll', this.setFixedHeader)
     },
     methods: {
         async finish() {
@@ -447,24 +443,38 @@ export default {
             if (event.target.checked) {
                 if (event.target.id == 0) {
                     this.openingHrs.monday.closed = true
+                    this.openingHrs.monday.from = ''
+                    this.openingHrs.monday.to = ''
                 }
                 if (event.target.id == 1) {
                     this.openingHrs.tuesday.closed = true
+                    this.openingHrs.tuesday.from = ''
+                    this.openingHrs.tuesday.to = ''
                 }
                 if (event.target.id == 2) {
                     this.openingHrs.wednesday.closed = true
+                    this.openingHrs.wednesday.from = ''
+                    this.openingHrs.wednesday.to = ''
                 }
                 if (event.target.id == 3) {
                     this.openingHrs.thursday.closed = true
+                    this.openingHrs.thursday.from = ''
+                    this.openingHrs.thursday.to = ''
                 }
                 if (event.target.id == 4) {
                     this.openingHrs.friday.closed = true
+                    this.openingHrs.friday.from = ''
+                    this.openingHrs.friday.to = ''
                 }
                 if (event.target.id == 5) {
                     this.openingHrs.saturday.closed = true
+                    this.openingHrs.saturday.from = ''
+                    this.openingHrs.saturday.to = ''
                 }
                 if (event.target.id == 6) {
                     this.openingHrs.sunday.closed = true
+                    this.openingHrs.sunday.from = ''
+                    this.openingHrs.sunday.to = ''
                 }
                 document.getElementById('div-' + event.target.id).classList.add('bg-red-200')
                 var timeInputsFrom = document.querySelectorAll('input[name=from]')
@@ -524,20 +534,7 @@ export default {
     transition: 200ms;
 }
 
-#hideCloseBtn {
-    transition: 200ms;
-}
-#emphasizeNextBtnText {
-    transition: 300ms;
-}
-#emphasizeNextBtn {
-    transition: 100ms;
-}
-
 .infoInput {
-    transition: 200ms;
-}
-.closedDay-transition {
     transition: 200ms;
 }
 </style>

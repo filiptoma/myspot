@@ -15,7 +15,8 @@
             <div class="py-2 px-3">
                 <div class="mb-5">
                     <h1 class="text-lg text-black font-semibold mb-1">About this spot</h1>
-                    <h1 class="text-sm text-primary mr-2">{{ about }}</h1>
+                    <h1 v-if="about" class="text-sm text-primary mr-2">{{ about }}</h1>
+                    <h1 v-else class="text-sm text-secondary mr-2 italic">About text not yet added</h1>
                 </div>
                 <div class="">
                     <h1 class="text-lg text-black font-semibold mb-1 w-full">Spot's tags</h1>
@@ -32,6 +33,7 @@
                                 :key="tag">
                                     <h1 class="rounded-full bg-uinput border-2 border-uinput px-2 text-xs text-primary font-semibold">{{ tag }}</h1>
                                 </div>
+                                <h1 v-if="tagsArr.length == 0" class="w-full text-right pr-3 font-semibold">-</h1>
                             </div>
                         </div>
                         <div v-else class="flex text-sm text-primary pt-3 pb-2">
@@ -44,6 +46,7 @@
                                 :key="tag">
                                     <h1 class="rounded-full bg-uinput border-2 border-uinput px-2 text-xs text-primary font-semibold">{{ tag }}</h1>
                                 </div>
+                                <h1 v-if="tagsArr.length == 0" class="w-full text-right pr-3 font-semibold">-</h1>
                             </div>
                         </div>
                     </div>

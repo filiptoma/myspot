@@ -1,11 +1,11 @@
 <template>
     <div class="px-2">
-        <div v-if="openedError" class="text-center text-primary text-xl my-5 font-semibold">
+        <div v-if="openedError == 'Opening hours not yet added'" class="text-center text-primary text-xl my-5 font-semibold">
             <h1>{{ openedError }}</h1>
         </div>
         <div v-else>
             <div class="text-center text-primary text-xl my-10 font-semibold">
-                <h1 v-if="opened == true && openingHrs[today].closed == false" class="">This spot is now <span class="text-green-600">open</span></h1>
+                <h1 v-if="opened == true" class="">This spot is now <span class="text-green-600">open</span></h1>
                 <h1 v-else class="">This spot is now <span class="text-red-600">closed</span></h1>
             </div>
             <div class="text-primary"
@@ -118,6 +118,8 @@ export default {
             } else {
                 this.opened = false
             }
+        } else if (this.openingHrs[today].closed == true) {
+            this.openedError = 'Closed'
         } else {
             this.openedError = 'Opening hours not yet added'
         }

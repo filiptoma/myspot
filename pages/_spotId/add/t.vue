@@ -2,20 +2,18 @@
     <div class="w-11/12 mx-auto">
         <div id="afterLoading">
             <div id="popdown">
-                <div class="flex justify-between py-3 sticky top-0">
-                    <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center" id="hideCloseBtn">
-                        <!-- <button class="material-icons text-secondary font-light focus:outline-none" @click="close">close</button> -->
+                <div class="flex justify-between py-3 sticky top-0 bg-white">
+                    <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
                         <client-only>
                             <button class="text-secondary focus:outline-none center-icon" @click="close">
                                 <unicon name="times" fill="grey" />
                             </button>
                         </client-only>
                     </div>
-                    <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center" id="emphasizeNextBtn">
-                        <!-- <button class="material-icons text-secondary font-light focus:outline-none" id="emphasizeNextBtnText" @click="nextDetail">arrow_forward</button> -->
+                    <div class="rounded-full bg-uinput h-10 w-10 flex items-center justify-center">
                         <client-only>
                             <button class="text-secondary focus:outline-none center-icon" @click="nextDetail">
-                                <unicon name="arrow-right" fill="grey" id="emphasizeNextBtnText" />
+                                <unicon name="arrow-right" fill="grey" />
                             </button>
                         </client-only>
                     </div>
@@ -32,7 +30,6 @@
                                 <h1 class="font-semibold text-base">
                                     {{ tagCateg.charAt(0).toUpperCase() + tagCateg.slice(1) }}
                                 </h1>
-                                <!-- <i class="material-icons">expand_more</i> -->
                             </div>
                             <div class="flex flex-wrap my-2">
                                 <div
@@ -115,14 +112,10 @@ export default {
                 console.log(error)
             }
         }
-        window.addEventListener('scroll', this.setFixedHeader)
         this.$nextTick(() => {
             this.$nuxt.$loading.finish()
         })
         document.getElementById('afterLoading').style.display = 'block'
-    },
-    destroyed() {
-        window.removeEventListener('scroll', this.setFixedHeader)
     },
     methods: {
         async nextDetail() {
@@ -166,19 +159,6 @@ export default {
         close() {
             this.$router.push('/')
         },
-        setFixedHeader() {
-            var hideCloseBtn = document.getElementById('hideCloseBtn')
-            var emphasizeNextBtn = document.getElementById('emphasizeNextBtn')
-            if (window.scrollY > 0) {
-                hideCloseBtn.style.opacity = 0
-                emphasizeNextBtn.style.boxShadow = '0 0 10px #bfbfbf'
-                emphasizeNextBtnText.style.fill = '#4299e1'
-            } else {
-                hideCloseBtn.style.opacity = 1
-                emphasizeNextBtn.style.boxShadow = 'none'
-                emphasizeNextBtnText.style.fill = 'grey'
-            }
-        }
     }
 
 }
@@ -190,16 +170,6 @@ export default {
 }
 #auth-popup {
     display: none;
-}
-
-#hideCloseBtn {
-    transition: 200ms;
-}
-#emphasizeNextBtnText {
-    transition: 300ms;
-}
-#emphasizeNextBtn {
-    transition: 100ms;
 }
 
 .tags input[type=checkbox]:checked + .tag-container > .tag {
