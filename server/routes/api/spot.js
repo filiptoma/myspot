@@ -9,8 +9,15 @@ router.post('/new', VerifyAccess, async (req, res) => {
     if (req.body.name === '') {
         return res.status(400).json({ errorMsg: 'You forgot the name!' })
     }
+    function slugify(string) {
+        const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
+        const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
+        const p = new RegExp(a.split('').join('|'), 'g')
+        return string.toString().toLowerCase().replace(p, c => b.charAt(a.indexOf(c)))
+    }
     const newSpot = new Spot({
-        name: req.body.name
+        name: req.body.name,
+        queryName: slugify(req.body.name)
     })
     try {
         const savedSpot = await newSpot.save()
@@ -55,10 +62,16 @@ router.get('/profile', async (req, res) => {
 
 router.post('/edit', VerifyAccess, async (req, res) => {
     if (req.body.name) {
+        function slugify(string) {
+            const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
+            const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
+            const p = new RegExp(a.split('').join('|'), 'g')
+            return string.toString().toLowerCase().replace(p, c => b.charAt(a.indexOf(c)))
+        }
         try {
             await Spot.updateOne(
                 { _id: new ObjectId(req.body.spotId) },
-                { $set: {name: req.body.name} }
+                { $set: {name: req.body.name, queryName: slugify(req.body.name)} }
             )
             res.status(200).end()
         } catch (error) {

@@ -5,6 +5,10 @@ const spotSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
+    queryName: {
+        type: String,
+        default: ''
+    },
     address: {
         type: String,
         default: ''

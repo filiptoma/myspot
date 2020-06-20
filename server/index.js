@@ -14,6 +14,7 @@ const spotAdditionalRoute = require('./routes/api/spot-additional')
 const coreRoute = require('./routes/api/core')
 const commentsRoute = require('./routes/api/comments')
 const imageRoute = require('./services/ImageService')
+const searchRoute = require('./routes/api/search')
 
 const dotenv = require('dotenv')
 dotenv.config()
@@ -68,6 +69,7 @@ async function start () {
   app.use('/api/core', coreRoute)
   app.use('/api/comments', commentsRoute)
   app.use('/image', imageRoute)
+  app.use('/api/search', searchRoute)
 
   app.use(express.static('data'))
 
