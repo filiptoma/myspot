@@ -1,7 +1,7 @@
 <template>
     <div>
         <client-only>
-            <footer class="flex justify-between w-screen items-center border-t z-40 h-12">
+            <footer class="flex justify-between w-screen items-center border-t z-30 h-12">
                 <!-- <nuxt-link to="/" class="material-icons px-5 py-2 md-30 md-footer" id="homepage">home</nuxt-link> -->
                 <nuxt-link to="/" class="px-5 center-icon"><unicon name="home-alt" fill="grey" id="homepage" /></nuxt-link>
                 <!-- <nuxt-link to="/search" class="material-icons px-5 py-2 md-30 md-footer" id="searchpage">search</nuxt-link> -->

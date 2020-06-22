@@ -179,24 +179,18 @@ export default {
             document.body.style.overflow = 'hidden'
         },
         async hidePricePopup() {
-            
             document.getElementById('price-popup-bg').classList.remove('fade-in')
             document.getElementById('price-popup-bg').classList.add('fade-out')
             document.getElementById('price-popup-content').classList.remove('swing-in-bottom-fwd')
             document.getElementById('price-popup-content').classList.add('swing-out-bottom-bck')
-            document.body.style.overflow = 'auto'
-            
+            document.body.style.overflow = 'auto'       
             await new Promise(r => setTimeout(r, 200))
-            this.test()
-            console.log('now')
+            document.getElementById('price-popup').style.display = 'none'
             document.getElementById('price-popup-bg').classList.remove('fade-out')
             document.getElementById('price-popup-bg').classList.add('fade-in')
             document.getElementById('price-popup-content').classList.remove('swing-out-bottom-bck')
             document.getElementById('price-popup-content').classList.add('swing-in-bottom-fwd')
             
-        },
-        test() {
-            document.getElementById('price-popup').style.display = 'none'
         }
     }
 }
