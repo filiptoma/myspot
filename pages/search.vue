@@ -218,9 +218,7 @@ export default {
 
 #price-popup {
     display: none;
-}
-#price-popup-bg {
-    perspective: 1000px;
+    z-index: 30;
 }
 
 /* 
@@ -255,6 +253,8 @@ export default {
             transform: rotateX(100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
+    -webkit-transform-style: flat;
+            transform-style: flat;
     opacity: 0;
   }
   100% {
@@ -262,6 +262,8 @@ export default {
             transform: rotateX(0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
+    -webkit-transform-style: flat;
+            transform-style: flat;
     opacity: 1;
   }
 }
@@ -271,6 +273,8 @@ export default {
             transform: rotateX(100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
+    -webkit-transform-style: flat;
+            transform-style: flat;
     opacity: 0;
   }
   100% {
@@ -278,6 +282,8 @@ export default {
             transform: rotateX(0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
+    -webkit-transform-style: flat;
+            transform-style: flat;
     opacity: 1;
   }
 }
