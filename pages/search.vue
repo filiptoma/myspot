@@ -183,7 +183,6 @@ export default {
             document.getElementById('price-popup-content').classList.add('swing-out-bottom-bck')
             document.getElementById('price-popup-bg').classList.remove('fade-in')
             document.getElementById('price-popup-bg').classList.add('fade-out')
-            
             document.body.style.overflow = 'auto'
             await new Promise(r => setTimeout(r, 500))
             document.getElementById('price-popup').style.display = 'none'
@@ -191,8 +190,6 @@ export default {
             document.getElementById('price-popup-content').classList.add('swing-in-bottom-fwd')
             document.getElementById('price-popup-bg').classList.remove('fade-out')
             document.getElementById('price-popup-bg').classList.add('fade-in')
-            
-            
         }
     }
 }
@@ -255,7 +252,7 @@ export default {
             transform: rotateX(100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    opacity: 0;
+    /* opacity: 0; */
     z-index: 50;
   }
   100% {
@@ -263,7 +260,7 @@ export default {
             transform: rotateX(0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    opacity: 1;
+    /* opacity: 1; */
     z-index: 50;
   }
 }
@@ -273,7 +270,7 @@ export default {
             transform: rotateX(100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    opacity: 0;
+    /* opacity: 0; */
     z-index: 50;
   }
   100% {
@@ -281,7 +278,7 @@ export default {
             transform: rotateX(0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    opacity: 1;
+    /* opacity: 1; */
     z-index: 50;
   }
 }
@@ -292,7 +289,7 @@ export default {
             transform: rotateX(0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    opacity: 1;
+    /* opacity: 1; */
     z-index: 50;
   }
   100% {
@@ -300,7 +297,7 @@ export default {
             transform: rotateX(100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    opacity: 0;
+    /* opacity: 0; */
     z-index: 50;
   }
 }
@@ -310,7 +307,7 @@ export default {
             transform: rotateX(0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    opacity: 1;
+    /* opacity: 1; */
     z-index: 50;
   }
   100% {
@@ -318,7 +315,7 @@ export default {
             transform: rotateX(100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    opacity: 0;
+    /* opacity: 0; */
     z-index: 50;
   }
 }
