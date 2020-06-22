@@ -219,6 +219,9 @@ export default {
 #price-popup {
     display: none;
 }
+#price-popup-bg {
+    perspective: 1000px;
+}
 
 /* 
     ANIMATION CLASSES ----------------------------------------------------------------------------------------------------------
@@ -252,16 +255,14 @@ export default {
             transform: rotateX(100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    /* opacity: 0; */
-    /* z-index: 50; */
+    opacity: 0;
   }
   100% {
     -webkit-transform: rotateX(0);
             transform: rotateX(0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    /* opacity: 1; */
-    /* z-index: 50; */
+    opacity: 1;
   }
 }
 @keyframes swing-in-bottom-fwd {
@@ -270,16 +271,14 @@ export default {
             transform: rotateX(100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    /* opacity: 0; */
-    /* z-index: 50; */
+    opacity: 0;
   }
   100% {
     -webkit-transform: rotateX(0);
             transform: rotateX(0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    /* opacity: 1; */
-    /* z-index: 50; */
+    opacity: 1;
   }
 }
 /* SWING OUT BOTTOM BACK ANIMATION ------------------------------ */
