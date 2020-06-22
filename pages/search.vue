@@ -95,7 +95,7 @@
         </div>
 
         <div id="price-popup">
-            <div class="fixed bottom-0 z-50 bg-white w-screen swing-in-bottom-fwd" id="price-popup-content">
+            <div class="fixed bottom-0 z-40 bg-white w-screen swing-in-bottom-fwd" id="price-popup-content">
                 <div v-for="(tag, index) in core.tags.price"
                 :index="index"
                 :key="tag">
@@ -103,7 +103,7 @@
                     <h1 v-else class="m-3 px-2">{{ tag }}</h1>
                 </div>
             </div>
-            <div class="fixed top-0 bottom-0 left-0 right-0 z-40 bg-black fade-in" id="price-popup-bg" @click="hidePricePopup"></div>
+            <div class="fixed top-0 bottom-0 left-0 right-0 z-30 bg-black fade-in" id="price-popup-bg" @click="hidePricePopup"></div>
         </div>
 
         <Footer />
@@ -253,7 +253,7 @@ export default {
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
     /* opacity: 0; */
-    z-index: 50;
+    /* z-index: 50; */
   }
   100% {
     -webkit-transform: rotateX(0);
@@ -261,7 +261,7 @@ export default {
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
     /* opacity: 1; */
-    z-index: 50;
+    /* z-index: 50; */
   }
 }
 @keyframes swing-in-bottom-fwd {
@@ -271,7 +271,7 @@ export default {
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
     /* opacity: 0; */
-    z-index: 50;
+    /* z-index: 50; */
   }
   100% {
     -webkit-transform: rotateX(0);
@@ -279,7 +279,7 @@ export default {
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
     /* opacity: 1; */
-    z-index: 50;
+    /* z-index: 50; */
   }
 }
 /* SWING OUT BOTTOM BACK ANIMATION ------------------------------ */
@@ -290,7 +290,7 @@ export default {
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
     /* opacity: 1; */
-    z-index: 50;
+    /* z-index: 50; */
   }
   100% {
     -webkit-transform: rotateX(100deg);
@@ -298,7 +298,7 @@ export default {
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
     /* opacity: 0; */
-    z-index: 50;
+    /* z-index: 50; */
   }
 }
 @keyframes swing-out-bottom-bck {
@@ -308,7 +308,7 @@ export default {
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
     /* opacity: 1; */
-    z-index: 50;
+    /* z-index: 50; */
   }
   100% {
     -webkit-transform: rotateX(100deg);
@@ -316,49 +316,49 @@ export default {
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
     /* opacity: 0; */
-    z-index: 50;
+    /* z-index: 50; */
   }
 }
 /* FADE IN ANIMATION ---------------------------------------- */
 @-webkit-keyframes fade-in {
   0% {
     opacity: 0;
-    z-index: 40;
+    /* z-index: 40; */
   }
   100% {
     opacity: 0.6;
-    z-index: 40;
+    /* z-index: 40; */
   }
 }
 @keyframes fade-in {
   0% {
     opacity: 0;
-    z-index: 40;
+    /* z-index: 40; */
   }
   100% {
     opacity: 0.6;
-    z-index: 40;
+    /* z-index: 40; */
   }
 }
 /* FADE OUT ANIMATION ---------------------------------------- */
 @-webkit-keyframes fade-out {
   0% {
     opacity: 0.6;
-    z-index: 40;
+    /* z-index: 40; */
   }
   100% {
     opacity: 0;
-    z-index: 40;
+    /* z-index: 40; */
   }
 }
 @keyframes fade-out {
   0% {
     opacity: 0.6;
-    z-index: 40;
+    /* z-index: 40; */
   }
   100% {
     opacity: 0;
-    z-index: 40;
+    /* z-index: 40; */
   }
 }
 
