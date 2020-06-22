@@ -219,12 +219,6 @@ export default {
 #price-popup {
     display: none;
 }
-#price-popup-bg {
-    -webkit-transform: translate3d(0,0,0);
-}
-#price-popup-content {
-    -webkit-transform: translate3d(0,0,0);
-}
 
 /* 
     ANIMATION CLASSES ----------------------------------------------------------------------------------------------------------
@@ -258,8 +252,9 @@ export default {
             transform: rotate3d(1,0,0,100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
+    transform-style: flat;
+-webkit-transform-style: flat;
+-moz-transform-style: flat;
     z-index: 40;
     position: fixed;
     width: 100vw;
@@ -271,8 +266,9 @@ export default {
             transform: rotate3d(1,0,0,0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
+    transform-style: flat;
+-webkit-transform-style: flat;
+-moz-transform-style: flat;
     z-index: 40;
     position: fixed;
     width: 100vw;
@@ -286,8 +282,9 @@ export default {
             transform: rotate3d(1,0,0,100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
+    transform-style: flat;
+-webkit-transform-style: flat;
+-moz-transform-style: flat;
     z-index: 40;
     position: fixed;
     width: 100vw;
@@ -299,8 +296,9 @@ export default {
             transform: rotate3d(1,0,0,0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
+    transform-style: flat;
+-webkit-transform-style: flat;
+-moz-transform-style: flat;
     z-index: 40;
     position: fixed;
     width: 100vw;
@@ -315,8 +313,9 @@ export default {
             transform: rotate3d(1,0,0,0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
+    transform-style: flat;
+-webkit-transform-style: flat;
+-moz-transform-style: flat;
     z-index: 40;
     position: fixed;
     width: 100vw;
@@ -328,8 +327,9 @@ export default {
             transform: rotate3d(1,0,0,100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
+    transform-style: flat;
+-webkit-transform-style: flat;
+-moz-transform-style: flat;
     z-index: 40;
     position: fixed;
     width: 100vw;
@@ -343,8 +343,9 @@ export default {
             transform: rotate3d(1,0,0,0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
+    transform-style: flat;
+-webkit-transform-style: flat;
+-moz-transform-style: flat;
     z-index: 40;
     position: fixed;
     width: 100vw;
@@ -356,8 +357,9 @@ export default {
             transform: rotate3d(1,0,0,100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
+    transform-style: flat;
+-webkit-transform-style: flat;
+-moz-transform-style: flat;
     z-index: 40;
     position: fixed;
     width: 100vw;
