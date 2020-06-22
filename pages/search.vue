@@ -249,41 +249,33 @@ export default {
 /* SWING IN BOTTOM FWD ANIMATION ----------------------------- */
 @-webkit-keyframes swing-in-bottom-fwd {
   0% {
-    -webkit-transform: rotateX(100deg);
-            transform: rotateX(100deg);
+    -webkit-transform: rotate3d(1,0,0,100deg);
+            transform: rotate3d(1,0,0,100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    -webkit-transform-style: flat;
-            transform-style: flat;
     opacity: 0;
   }
   100% {
-    -webkit-transform: rotateX(0);
-            transform: rotateX(0);
+    -webkit-transform: rotate3d(1,0,0,0);
+            transform: rotate3d(1,0,0,0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    -webkit-transform-style: flat;
-            transform-style: flat;
     opacity: 1;
   }
 }
 @keyframes swing-in-bottom-fwd {
   0% {
-    -webkit-transform: rotateX(100deg);
-            transform: rotateX(100deg);
+    -webkit-transform: rotate3d(1,0,0,100deg);
+            transform: rotate3d(1,0,0,100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    -webkit-transform-style: flat;
-            transform-style: flat;
     opacity: 0;
   }
   100% {
-    -webkit-transform: rotateX(0);
-            transform: rotateX(0);
+    -webkit-transform: rotate3d(1,0,0,0);
+            transform: rotate3d(1,0,0,0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    -webkit-transform-style: flat;
-            transform-style: flat;
     opacity: 1;
   }
 }
