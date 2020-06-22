@@ -257,6 +257,7 @@ export default {
             transform-style: preserve-3d;
     -webkit-perspective: 9999px;
             perspective: 9999px;
+    z-index: 999;
     opacity: 0;
   }
   100% {
@@ -268,6 +269,7 @@ export default {
             transform-style: preserve-3d;
     -webkit-perspective: 9999px;
             perspective: 9999px;
+    z-index: 999;
     opacity: 1;
   }
 }
@@ -281,6 +283,7 @@ export default {
             transform-style: preserve-3d;
     -webkit-perspective: 9999px;
             perspective: 9999px;
+    z-index: 999;
     opacity: 0;
   }
   100% {
@@ -292,6 +295,7 @@ export default {
             transform-style: preserve-3d;
     -webkit-perspective: 9999px;
             perspective: 9999px;
+    z-index: 999;
     opacity: 1;
   }
 }
