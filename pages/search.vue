@@ -254,6 +254,7 @@ export default {
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
     opacity: 0;
+    z-index: 50;
   }
   100% {
     -webkit-transform: rotateX(0);
@@ -261,6 +262,7 @@ export default {
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
     opacity: 1;
+    z-index: 50;
   }
 }
 @keyframes swing-in-bottom-fwd {
@@ -270,6 +272,7 @@ export default {
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
     opacity: 0;
+    z-index: 50;
   }
   100% {
     -webkit-transform: rotateX(0);
@@ -277,6 +280,7 @@ export default {
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
     opacity: 1;
+    z-index: 50;
   }
 }
 /* SWING OUT BOTTOM BACK ANIMATION ------------------------------ */
@@ -287,6 +291,7 @@ export default {
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
     opacity: 1;
+    z-index: 50;
   }
   100% {
     -webkit-transform: rotateX(100deg);
@@ -294,6 +299,7 @@ export default {
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
     opacity: 0;
+    z-index: 50;
   }
 }
 @keyframes swing-out-bottom-bck {
@@ -303,6 +309,7 @@ export default {
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
     opacity: 1;
+    z-index: 50;
   }
   100% {
     -webkit-transform: rotateX(100deg);
@@ -310,40 +317,49 @@ export default {
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
     opacity: 0;
+    z-index: 50;
   }
 }
 /* FADE IN ANIMATION ---------------------------------------- */
 @-webkit-keyframes fade-in {
   0% {
     opacity: 0;
+    z-index: 40;
   }
   100% {
     opacity: 0.6;
+    z-index: 40;
   }
 }
 @keyframes fade-in {
   0% {
     opacity: 0;
+    z-index: 40;
   }
   100% {
     opacity: 0.6;
+    z-index: 40;
   }
 }
 /* FADE OUT ANIMATION ---------------------------------------- */
 @-webkit-keyframes fade-out {
   0% {
     opacity: 0.6;
+    z-index: 40;
   }
   100% {
     opacity: 0;
+    z-index: 40;
   }
 }
 @keyframes fade-out {
   0% {
     opacity: 0.6;
+    z-index: 40;
   }
   100% {
     opacity: 0;
+    z-index: 40;
   }
 }
 
