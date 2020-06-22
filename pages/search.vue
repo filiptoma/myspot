@@ -184,7 +184,7 @@ export default {
             document.getElementById('price-popup-bg').classList.remove('fade-in')
             document.getElementById('price-popup-bg').classList.add('fade-out')
             document.body.style.overflow = 'auto'
-            await new Promise(r => setTimeout(r, 500))
+            await new Promise(r => setTimeout(r, 200))
             document.getElementById('price-popup').style.display = 'none'
             document.getElementById('price-popup-content').classList.remove('swing-out-bottom-bck')
             document.getElementById('price-popup-content').classList.add('swing-in-bottom-fwd')
@@ -218,7 +218,6 @@ export default {
 
 #price-popup {
     display: none;
-    z-index: 30;
 }
 
 /* 
@@ -255,9 +254,10 @@ export default {
             transform-origin: bottom;
     -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
-    -webkit-perspective: 9999px;
-            perspective: 9999px;
-    z-index: 999;
+    z-index: 40;
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
     opacity: 0;
   }
   100% {
@@ -267,9 +267,10 @@ export default {
             transform-origin: bottom;
     -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
-    -webkit-perspective: 9999px;
-            perspective: 9999px;
-    z-index: 999;
+    z-index: 40;
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
     opacity: 1;
   }
 }
@@ -281,9 +282,10 @@ export default {
             transform-origin: bottom;
     -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
-    -webkit-perspective: 9999px;
-            perspective: 9999px;
-    z-index: 999;
+    z-index: 40;
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
     opacity: 0;
   }
   100% {
@@ -293,89 +295,166 @@ export default {
             transform-origin: bottom;
     -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
-    -webkit-perspective: 9999px;
-            perspective: 9999px;
-    z-index: 999;
+    z-index: 40;
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
     opacity: 1;
   }
 }
 /* SWING OUT BOTTOM BACK ANIMATION ------------------------------ */
 @-webkit-keyframes swing-out-bottom-bck {
   0% {
-    -webkit-transform: rotateX(0);
-            transform: rotateX(0);
+    -webkit-transform: rotate3d(1,0,0,0);
+            transform: rotate3d(1,0,0,0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    /* opacity: 1; */
-    /* z-index: 50; */
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    z-index: 40;
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
+    opacity: 1;
   }
   100% {
-    -webkit-transform: rotateX(100deg);
-            transform: rotateX(100deg);
+    -webkit-transform: rotate3d(1,0,0,100deg);
+            transform: rotate3d(1,0,0,100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    /* opacity: 0; */
-    /* z-index: 50; */
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    z-index: 40;
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
+    opacity: 0;
   }
 }
 @keyframes swing-out-bottom-bck {
   0% {
-    -webkit-transform: rotateX(0);
-            transform: rotateX(0);
+    -webkit-transform: rotate3d(1,0,0,0);
+            transform: rotate3d(1,0,0,0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    /* opacity: 1; */
-    /* z-index: 50; */
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    z-index: 40;
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
+    opacity: 1;
   }
   100% {
-    -webkit-transform: rotateX(100deg);
-            transform: rotateX(100deg);
+    -webkit-transform: rotate3d(1,0,0,100deg);
+            transform: rotate3d(1,0,0,100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    /* opacity: 0; */
-    /* z-index: 50; */
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    z-index: 40;
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
+    opacity: 0;
   }
 }
 /* FADE IN ANIMATION ---------------------------------------- */
 @-webkit-keyframes fade-in {
   0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
     opacity: 0;
-    /* z-index: 40; */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 30;
   }
   100% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
     opacity: 0.6;
-    /* z-index: 40; */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 30;
   }
 }
 @keyframes fade-in {
   0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
     opacity: 0;
-    /* z-index: 40; */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 30;
   }
   100% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
     opacity: 0.6;
-    /* z-index: 40; */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 30;
   }
 }
 /* FADE OUT ANIMATION ---------------------------------------- */
 @-webkit-keyframes fade-out {
   0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
     opacity: 0.6;
-    /* z-index: 40; */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 30;
   }
   100% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
     opacity: 0;
-    /* z-index: 40; */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 30;
   }
 }
 @keyframes fade-out {
   0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
     opacity: 0.6;
-    /* z-index: 40; */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 30;
   }
   100% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
     opacity: 0;
-    /* z-index: 40; */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 30;
   }
 }
 
