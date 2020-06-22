@@ -230,12 +230,12 @@ export default {
 */
 
 .swing-in-bottom-fwd {
-	-webkit-animation: swing-in-bottom-fwd 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
-	        animation: swing-in-bottom-fwd 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+	-webkit-animation: swing-in-bottom-fwd 500ms cubic-bezier(.17,.89,.2,1) both;
+	        animation: swing-in-bottom-fwd 500ms cubic-bezier(.17,.89,.2,1) both;
 }
 .swing-out-bottom-bck {
-	-webkit-animation: swing-out-bottom-bck 200ms cubic-bezier(0.600, -0.280, 0.735, 0.045) both;
-	        animation: swing-out-bottom-bck 200ms cubic-bezier(0.600, -0.280, 0.735, 0.045) both;
+	-webkit-animation: swing-out-bottom-bck 200ms cubic-bezier(0.80, 0.00, 0.83, 0.11) both;
+	        animation: swing-out-bottom-bck 200ms cubic-bezier(0.80, 0.00, 0.83, 0.11) both;
 }
 .fade-in {
 	-webkit-animation: fade-in 200ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
