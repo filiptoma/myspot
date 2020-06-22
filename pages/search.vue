@@ -103,7 +103,7 @@
                     <h1 v-else class="m-3 px-2">{{ tag }}</h1>
                 </div>
             </div>
-            <div class="fixed top-0 bottom-0 left-0 right-0 z-30 bg-black fade-in" id="price-popup-bg" @click="hidePricePopup"></div>
+            <div class="fixed top-0 bottom-0 left-0 right-0 bg-black fade-in" id="price-popup-bg" @click="hidePricePopup"></div>
         </div>
 
         <Footer />
@@ -378,7 +378,6 @@ export default {
     bottom: 0;
     right: 0;
     left: 0;
-    z-index: 30;
   }
   100% {
     -webkit-transform: translate(0);
@@ -389,7 +388,6 @@ export default {
     bottom: 0;
     right: 0;
     left: 0;
-    z-index: 30;
   }
 }
 @keyframes fade-in {
@@ -402,7 +400,6 @@ export default {
     bottom: 0;
     right: 0;
     left: 0;
-    z-index: 30;
   }
   100% {
     -webkit-transform: translate(0);
@@ -413,7 +410,6 @@ export default {
     bottom: 0;
     right: 0;
     left: 0;
-    z-index: 30;
   }
 }
 /* FADE OUT ANIMATION ---------------------------------------- */
@@ -427,7 +423,6 @@ export default {
     bottom: 0;
     right: 0;
     left: 0;
-    z-index: 30;
   }
   100% {
     -webkit-transform: translate(0);
@@ -438,7 +433,6 @@ export default {
     bottom: 0;
     right: 0;
     left: 0;
-    z-index: 30;
   }
 }
 @keyframes fade-out {
@@ -451,7 +445,6 @@ export default {
     bottom: 0;
     right: 0;
     left: 0;
-    z-index: 30;
   }
   100% {
     -webkit-transform: translate(0);
@@ -462,7 +455,6 @@ export default {
     bottom: 0;
     right: 0;
     left: 0;
-    z-index: 30;
   }
 }
 
