@@ -219,6 +219,12 @@ export default {
 #price-popup {
     display: none;
 }
+#price-popup-bg {
+    -webkit-transform: translate3d(0,0,0);
+}
+#price-popup-content {
+    -webkit-transform: translate3d(0,0,0);
+}
 
 /* 
     ANIMATION CLASSES ----------------------------------------------------------------------------------------------------------
