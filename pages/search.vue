@@ -219,7 +219,6 @@ export default {
 #price-popup {
     display: none;
     z-index: 30;
-    
 }
 
 /* 
@@ -256,7 +255,8 @@ export default {
             transform-origin: bottom;
     -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
-
+    -webkit-perspective: 9999px;
+            perspective: 9999px;
     opacity: 0;
   }
   100% {
@@ -266,6 +266,8 @@ export default {
             transform-origin: bottom;
     -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
+    -webkit-perspective: 9999px;
+            perspective: 9999px;
     opacity: 1;
   }
 }
@@ -277,6 +279,8 @@ export default {
             transform-origin: bottom;
     -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
+    -webkit-perspective: 9999px;
+            perspective: 9999px;
     opacity: 0;
   }
   100% {
@@ -286,6 +290,8 @@ export default {
             transform-origin: bottom;
     -webkit-transform-style: preserve-3d;
             transform-style: preserve-3d;
+    -webkit-perspective: 9999px;
+            perspective: 9999px;
     opacity: 1;
   }
 }
