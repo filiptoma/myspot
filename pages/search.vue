@@ -95,7 +95,7 @@
         </div>
 
         <div id="price-popup">
-            <div class="fixed bottom-0 z-40 bg-white w-screen swing-in-bottom-fwd" id="price-popup-content">
+            <div class="fixed bottom-0 bg-white w-screen swing-in-bottom-fwd" id="price-popup-content">
                 <div v-for="(tag, index) in core.tags.price"
                 :index="index"
                 :key="tag">
@@ -103,10 +103,10 @@
                     <h1 v-else class="m-3 px-2">{{ tag }}</h1>
                 </div>
             </div>
-            <div class="fixed top-0 bottom-0 left-0 right-0 bg-black fade-in" id="price-popup-bg" @click="hidePricePopup"></div>
+            <div class="absolute top-0 w-screen bg-black fade-in" id="price-popup-bg" @click="hidePricePopup"></div>
         </div>
 
-        <Footer />
+        <Footer id="footer" />
     </div>
 </template>
 
@@ -176,7 +176,11 @@ export default {
         },
         showFilter(event) {
             document.getElementById(event.target.id + '-popup').style.display = 'block'
+            document.getElementById(event.target.id + '-popup-bg').style.height = 
+            document.documentElement.clientHeight - document.getElementById(event.target.id + '-popup-content').offsetHeight + 'px'
+            document.getElementById('footer').style.display = 'none'
             document.body.style.overflow = 'hidden'
+            
         },
         async hidePricePopup() {
             document.getElementById('price-popup-content').classList.remove('swing-in-bottom-fwd')
@@ -186,6 +190,7 @@ export default {
             document.body.style.overflow = 'auto'
             await new Promise(r => setTimeout(r, 200))
             document.getElementById('price-popup').style.display = 'none'
+            document.getElementById('footer').style.display = 'block'
             document.getElementById('price-popup-content').classList.remove('swing-out-bottom-bck')
             document.getElementById('price-popup-content').classList.add('swing-in-bottom-fwd')
             document.getElementById('price-popup-bg').classList.remove('fade-out')
@@ -252,13 +257,6 @@ export default {
             transform: rotate3d(1,0,0,100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    transform-style: flat;
--webkit-transform-style: flat;
--moz-transform-style: flat;
-    z-index: 40;
-    position: fixed;
-    width: 100vw;
-    bottom: 0;
     opacity: 0;
   }
   100% {
@@ -266,13 +264,6 @@ export default {
             transform: rotate3d(1,0,0,0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    transform-style: flat;
--webkit-transform-style: flat;
--moz-transform-style: flat;
-    z-index: 40;
-    position: fixed;
-    width: 100vw;
-    bottom: 0;
     opacity: 1;
   }
 }
@@ -282,13 +273,6 @@ export default {
             transform: rotate3d(1,0,0,100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    transform-style: flat;
--webkit-transform-style: flat;
--moz-transform-style: flat;
-    z-index: 40;
-    position: fixed;
-    width: 100vw;
-    bottom: 0;
     opacity: 0;
   }
   100% {
@@ -296,13 +280,6 @@ export default {
             transform: rotate3d(1,0,0,0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    transform-style: flat;
--webkit-transform-style: flat;
--moz-transform-style: flat;
-    z-index: 40;
-    position: fixed;
-    width: 100vw;
-    bottom: 0;
     opacity: 1;
   }
 }
@@ -313,13 +290,6 @@ export default {
             transform: rotate3d(1,0,0,0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    transform-style: flat;
--webkit-transform-style: flat;
--moz-transform-style: flat;
-    z-index: 40;
-    position: fixed;
-    width: 100vw;
-    bottom: 0;
     opacity: 1;
   }
   100% {
@@ -327,13 +297,6 @@ export default {
             transform: rotate3d(1,0,0,100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    transform-style: flat;
--webkit-transform-style: flat;
--moz-transform-style: flat;
-    z-index: 40;
-    position: fixed;
-    width: 100vw;
-    bottom: 0;
     opacity: 0;
   }
 }
@@ -343,13 +306,6 @@ export default {
             transform: rotate3d(1,0,0,0);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    transform-style: flat;
--webkit-transform-style: flat;
--moz-transform-style: flat;
-    z-index: 40;
-    position: fixed;
-    width: 100vw;
-    bottom: 0;
     opacity: 1;
   }
   100% {
@@ -357,104 +313,41 @@ export default {
             transform: rotate3d(1,0,0,100deg);
     -webkit-transform-origin: bottom;
             transform-origin: bottom;
-    transform-style: flat;
--webkit-transform-style: flat;
--moz-transform-style: flat;
-    z-index: 40;
-    position: fixed;
-    width: 100vw;
-    bottom: 0;
     opacity: 0;
   }
 }
 /* FADE IN ANIMATION ---------------------------------------- */
 @-webkit-keyframes fade-in {
   0% {
-    -webkit-transform: translate(0);
-            transform: translate(0);
     opacity: 0;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
   }
   100% {
-    -webkit-transform: translate(0);
-            transform: translate(0);
     opacity: 0.6;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
   }
 }
 @keyframes fade-in {
   0% {
-    -webkit-transform: translate(0);
-            transform: translate(0);
     opacity: 0;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
   }
   100% {
-    -webkit-transform: translate(0);
-            transform: translate(0);
     opacity: 0.6;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
   }
 }
 /* FADE OUT ANIMATION ---------------------------------------- */
 @-webkit-keyframes fade-out {
   0% {
-    -webkit-transform: translate(0);
-            transform: translate(0);
     opacity: 0.6;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
   }
   100% {
-    -webkit-transform: translate(0);
-            transform: translate(0);
     opacity: 0;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
   }
 }
 @keyframes fade-out {
   0% {
-    -webkit-transform: translate(0);
-            transform: translate(0);
     opacity: 0.6;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
   }
   100% {
-    -webkit-transform: translate(0);
-            transform: translate(0);
     opacity: 0;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
   }
 }
 
