@@ -184,8 +184,8 @@ export default {
             document.getElementById('price-popup-bg').classList.remove('fade-in')
             document.getElementById('price-popup-bg').classList.add('fade-out')
             
-            document.body.style.overflow = 'auto'       
-            await new Promise(r => setTimeout(r, 200))
+            document.body.style.overflow = 'auto'
+            await new Promise(r => setTimeout(r, 500))
             document.getElementById('price-popup').style.display = 'none'
             document.getElementById('price-popup-content').classList.remove('swing-out-bottom-bck')
             document.getElementById('price-popup-content').classList.add('swing-in-bottom-fwd')
