@@ -95,7 +95,6 @@
         </div>
 
         <div id="price-popup">
-            <div class="fixed top-0 bottom-0 left-0 right-0 z-40 bg-black fade-in" id="price-popup-bg" @click="hidePricePopup"></div>
             <div class="fixed bottom-0 z-50 bg-white w-screen swing-in-bottom-fwd" id="price-popup-content">
                 <div v-for="(tag, index) in core.tags.price"
                 :index="index"
@@ -104,6 +103,7 @@
                     <h1 v-else class="m-3 px-2">{{ tag }}</h1>
                 </div>
             </div>
+            <div class="fixed top-0 bottom-0 left-0 right-0 z-40 bg-black fade-in" id="price-popup-bg" @click="hidePricePopup"></div>
         </div>
 
         <Footer />
@@ -179,17 +179,19 @@ export default {
             document.body.style.overflow = 'hidden'
         },
         async hidePricePopup() {
-            document.getElementById('price-popup-bg').classList.remove('fade-in')
-            document.getElementById('price-popup-bg').classList.add('fade-out')
             document.getElementById('price-popup-content').classList.remove('swing-in-bottom-fwd')
             document.getElementById('price-popup-content').classList.add('swing-out-bottom-bck')
+            document.getElementById('price-popup-bg').classList.remove('fade-in')
+            document.getElementById('price-popup-bg').classList.add('fade-out')
+            
             document.body.style.overflow = 'auto'       
             await new Promise(r => setTimeout(r, 200))
             document.getElementById('price-popup').style.display = 'none'
-            document.getElementById('price-popup-bg').classList.remove('fade-out')
-            document.getElementById('price-popup-bg').classList.add('fade-in')
             document.getElementById('price-popup-content').classList.remove('swing-out-bottom-bck')
             document.getElementById('price-popup-content').classList.add('swing-in-bottom-fwd')
+            document.getElementById('price-popup-bg').classList.remove('fade-out')
+            document.getElementById('price-popup-bg').classList.add('fade-in')
+            
             
         }
     }
