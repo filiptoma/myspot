@@ -96,11 +96,17 @@
 
         <div id="price-popup">
             <div class="fixed bottom-0 bg-white w-screen swing-in-bottom-fwd" id="price-popup-content">
-                <div v-for="(tag, index) in core.tags.price"
+                <h1 class="text-primary font-semibold mx-3 p-2 border-b border-divide">Filter by Price Tags</h1>
+                <div v-for="(tag, index) in core.tags.price" class="mx-3 text-sm text-primary"
                 :index="index"
                 :key="tag">
-                    <h1 v-if="index < core.tags.price.length - 1" class="m-3 pb-2 px-2 border-b border-divide">{{ tag }}</h1>
-                    <h1 v-else class="m-3 px-2">{{ tag }}</h1>
+                    <h1 v-if="index < core.tags.price.length - 1" class="p-2 border-b border-divide" :id="tag">{{ tag }}</h1>
+                    <h1 v-else class="p-2" :id="tag">{{ tag }}</h1>
+                </div>
+                <div class="mx-3">
+                    <button class="w-full mx-auto m-3 p-2 text-sm bg-theme text-white font-semibold rounded-md focus:outline-none">
+                        APPLY
+                    </button>
                 </div>
             </div>
             <div class="absolute top-0 w-screen bg-black fade-in" id="price-popup-bg" @click="hidePricePopup"></div>
@@ -161,12 +167,12 @@ export default {
             this.showingResults = false
             this.names = []
             this.spotIds = []
-            const original = this.searchQuery
+            const original = this.searchQuery.toLowerCase()
             await new Promise(r => setTimeout(r, 400))
-            if (original == this.searchQuery && original != '') {
+            if (original == this.searchQuery.toLowerCase() && original != '') {
                 const response = await axios.get('/api/search/live', {
                     params: {
-                        searchQuery: this.searchQuery
+                        searchQuery: this.searchQuery.toLowerCase()
                     }
                 })
                 this.names = response.data.names
@@ -230,16 +236,16 @@ export default {
 */
 
 .swing-in-bottom-fwd {
-	-webkit-animation: swing-in-bottom-fwd 500ms cubic-bezier(.17,.89,.2,1) both;
-	        animation: swing-in-bottom-fwd 500ms cubic-bezier(.17,.89,.2,1) both;
+	-webkit-animation: swing-in-bottom-fwd 2000ms cubic-bezier(.17,.89,.2,1) both;
+	        animation: swing-in-bottom-fwd 2000ms cubic-bezier(.17,.89,.2,1) both;
 }
 .swing-out-bottom-bck {
 	-webkit-animation: swing-out-bottom-bck 200ms cubic-bezier(0.80, 0.00, 0.83, 0.11) both;
 	        animation: swing-out-bottom-bck 200ms cubic-bezier(0.80, 0.00, 0.83, 0.11) both;
 }
 .fade-in {
-	-webkit-animation: fade-in 200ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: fade-in 200ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	-webkit-animation: fade-in 100ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: fade-in 100ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 .fade-out {
 	-webkit-animation: fade-out 200ms ease-out both;
