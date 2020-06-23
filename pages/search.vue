@@ -95,7 +95,7 @@
         </div>
 
         <div id="price-popup">
-            <div class="fixed bottom-0 bg-white w-screen swing-in-bottom-fwd" id="price-popup-content">
+            <div class="fixed bottom-0 bg-white w-screen swing-in-bottom-fwd z-30" id="price-popup-content">
                 <h1 class="text-primary font-semibold mx-3 p-2 border-b border-divide">Filter by Price Tags</h1>
                 <div v-for="(tag, index) in core.tags.price" class="mx-3 text-sm text-primary"
                 :index="index"
@@ -109,7 +109,7 @@
                     </button>
                 </div>
             </div>
-            <div class="absolute top-0 w-screen bg-black fade-in" id="price-popup-bg" @click="hidePricePopup"></div>
+            <div class="absolute top-0 w-screen h-screen bg-black fade-in z-20" id="price-popup-bg" @click="hidePricePopup"></div>
         </div>
 
         <Footer id="footer" />
@@ -182,8 +182,6 @@ export default {
         },
         showFilter(event) {
             document.getElementById(event.target.id + '-popup').style.display = 'block'
-            document.getElementById(event.target.id + '-popup-bg').style.height = 
-            document.documentElement.clientHeight - document.getElementById(event.target.id + '-popup-content').offsetHeight + 'px'
             document.getElementById('footer').style.display = 'none'
             document.body.style.overflow = 'hidden'
             
@@ -236,8 +234,8 @@ export default {
 */
 
 .swing-in-bottom-fwd {
-	-webkit-animation: swing-in-bottom-fwd 2000ms cubic-bezier(.17,.89,.2,1) both;
-	        animation: swing-in-bottom-fwd 2000ms cubic-bezier(.17,.89,.2,1) both;
+	-webkit-animation: swing-in-bottom-fwd 500ms cubic-bezier(.17,.89,.2,1) both;
+	        animation: swing-in-bottom-fwd 500ms cubic-bezier(.17,.89,.2,1) both;
 }
 .swing-out-bottom-bck {
 	-webkit-animation: swing-out-bottom-bck 200ms cubic-bezier(0.80, 0.00, 0.83, 0.11) both;
