@@ -36,7 +36,7 @@
                     class="flex flex-none items-center bg-uinput rounded-full my-2 mr-2 pl-2 pr-1 py-1 text-sm font-semibold text-primary focus:outline-none">
                         Price
                         <client-only>
-                            <unicon name="angle-down" fill="grey" width="20" height="20" class="" id="price" />
+                            <unicon name="angle-down" fill="grey" width="20" height="20" class="" />
                         </client-only>
                     </button>
                     <button @click="showFilter($event)" id="services"
@@ -94,22 +94,28 @@
             </nuxt-link>
         </div>
 
+        <div v-if="filteredSpots.length > 0">
+            <div v-for="spot in filteredSpots"
+            :key="spot._id">
+                <h1>{{ spot.name }}</h1>
+            </div>
+        </div>
+
         <div id="price-popup">
-            <div class="fixed bottom-0 bg-white w-screen swing-in-bottom-fwd z-30" id="price-popup-content">
+            <div class="fixed bottom-0 bg-white w-screen swing-in-bottom-fwd" id="price-popup-content">
                 <h1 class="text-primary font-semibold mx-3 p-2 border-b border-divide">Filter by Price Tags</h1>
                 <div v-for="(tag, index) in core.tags.price" class="mx-3 text-sm text-primary"
                 :index="index"
                 :key="tag">
-                    <h1 v-if="index < core.tags.price.length - 1" class="p-2 border-b border-divide" :id="tag">{{ tag }}</h1>
+                    <button v-if="index < core.tags.price.length - 1" @click="filterSearch($event)"
+                    class="p-2 border-b border-divide focus:outline-none flex items-center justify-between w-full" :id="'price-' + tag">
+                        <h1>{{ tag }}</h1>
+                        <div class="rounded-full bg-green-700 h-2 w-2 hidden" :id="'price-' + tag + '-btn'"></div>
+                    </button>
                     <h1 v-else class="p-2" :id="tag">{{ tag }}</h1>
                 </div>
-                <div class="mx-3">
-                    <button class="w-full mx-auto m-3 p-2 text-sm bg-theme text-white font-semibold rounded-md focus:outline-none">
-                        APPLY
-                    </button>
-                </div>
             </div>
-            <div class="absolute top-0 w-screen h-screen bg-black fade-in z-20" id="price-popup-bg" @click="hidePricePopup"></div>
+            <div class="absolute top-0 w-screen bg-black fade-in" id="price-popup-bg" @click="hidePricePopup"></div>
         </div>
 
         <Footer id="footer" />
@@ -144,7 +150,10 @@ export default {
                     stock: []
                 }
             },
-            tagsArr: ['price', 'services', 'atmosphere', 'environment', 'size', 'smoking', 'food', 'beverages', 'events', 'entertainment', 'stock']
+            tagsArr: ['price', 'services', 'atmosphere', 'environment', 'size', 'smoking', 'food', 'beverages', 'events', 'entertainment', 'stock'],
+            selectedTags: [],
+            spots: [],
+            filteredSpots: [],
         }
     },
     async mounted() {
@@ -152,9 +161,10 @@ export default {
             document.getElementById('searchpage').style.fill = '#963c61'
         })
         try {
-            const response = await axios.get('/api/core')
-            this.core.tags = response.data.core[0].tags
-            console.log(this.core.tags)
+            const responseCore = await axios.get('/api/core')
+            const responseSearch = await axios.get('/api/search')
+            this.core.tags = responseCore.data.core[0].tags
+            this.spots = responseSearch.data.spots
         } catch (error) {
             console.log(error)
         }
@@ -181,10 +191,12 @@ export default {
             }
         },
         showFilter(event) {
-            document.getElementById(event.target.id + '-popup').style.display = 'block'
+            var divId = event.target.id || event.target.parentNode.parentNode.id || event.target.parentNode.parentNode.parentNode.id
+            document.getElementById(divId + '-popup').style.display = 'block'
+            document.getElementById(divId + '-popup-bg').style.height = 
+            document.documentElement.clientHeight - document.getElementById(divId + '-popup-content').offsetHeight + 'px'
             document.getElementById('footer').style.display = 'none'
             document.body.style.overflow = 'hidden'
-            
         },
         async hidePricePopup() {
             document.getElementById('price-popup-content').classList.remove('swing-in-bottom-fwd')
@@ -199,7 +211,63 @@ export default {
             document.getElementById('price-popup-content').classList.add('swing-in-bottom-fwd')
             document.getElementById('price-popup-bg').classList.remove('fade-out')
             document.getElementById('price-popup-bg').classList.add('fade-in')
-        }
+        },
+        filterSearch(event) {
+            const self = this
+            var filterId = event.target.id || event.target.parentNode.id
+            let checker = (arr, target) => target.every(v => arr.includes(v))
+            function removeElementFromArray(arr) {
+                var what, a = arguments, L = a.length, ax;
+                while (L > 1 && arr.length) {
+                    what = a[--L];
+                    while ((ax= arr.indexOf(what)) !== -1) {
+                        arr.splice(ax, 1);
+                    }
+                }
+                return arr;
+            }
+            if (self.selectedTags.includes(document.getElementById(filterId).id.split('-')[1])) {
+                removeElementFromArray(self.selectedTags, document.getElementById(filterId).id.split('-')[1])
+                document.getElementById(filterId + '-btn').style.display = 'none'
+                var unfilteredSpots = new Array()
+                unfilteredSpots = self.spots.slice()
+                for (var i = 0; i < unfilteredSpots.length; i++) {
+                    var pureTags = []
+                    const tagEntries = Object.entries(unfilteredSpots[i].tags)
+                    for (var j = 0; j < tagEntries.length; j++) {
+                        for (var k = 0; k < tagEntries[j][1].length; k++) {
+                            pureTags.push(tagEntries[j][1][k])
+                        }
+                    }
+                    if (!checker(pureTags, self.selectedTags)) {
+                        unfilteredSpots.splice(i, 1)
+                        i-=1
+                    }
+                }
+                self.filteredSpots = unfilteredSpots
+                console.log(self.filteredSpots)
+            } else {
+                self.selectedTags.push(document.getElementById(filterId).id.split('-')[1])
+                document.getElementById(filterId + '-btn').style.display = 'block'
+                var unfilteredSpots = new Array()
+                unfilteredSpots = self.spots.slice()
+                for (var i = 0; i < unfilteredSpots.length; i++) {
+                    var pureTags = []
+                    const tagEntries = Object.entries(unfilteredSpots[i].tags)
+                    for (var j = 0; j < tagEntries.length; j++) {
+                        for (var k = 0; k < tagEntries[j][1].length; k++) {
+                            pureTags.push(tagEntries[j][1][k])
+                        }
+                    }
+                    if (!checker(pureTags, self.selectedTags)) {
+                        unfilteredSpots.splice(i, 1)
+                        i-=1
+                    }
+                }
+                self.filteredSpots = unfilteredSpots
+                console.log(self.filteredSpots)
+            }
+        },
     }
 }
 </script>
@@ -234,16 +302,18 @@ export default {
 */
 
 .swing-in-bottom-fwd {
-	-webkit-animation: swing-in-bottom-fwd 500ms cubic-bezier(.17,.89,.2,1) both;
-	        animation: swing-in-bottom-fwd 500ms cubic-bezier(.17,.89,.2,1) both;
+	-webkit-animation: swing-in-bottom-fwd 200ms cubic-bezier(.17,.89,.2,1) both;
+	        animation: swing-in-bottom-fwd 200ms cubic-bezier(.17,.89,.2,1) both;
 }
 .swing-out-bottom-bck {
 	-webkit-animation: swing-out-bottom-bck 200ms cubic-bezier(0.80, 0.00, 0.83, 0.11) both;
 	        animation: swing-out-bottom-bck 200ms cubic-bezier(0.80, 0.00, 0.83, 0.11) both;
 }
 .fade-in {
-	-webkit-animation: fade-in 100ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: fade-in 100ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	-webkit-animation: fade-in 75ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: fade-in 75ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    -webkit-animation-delay: 25ms;
+            animation-delay: 25ms;
 }
 .fade-out {
 	-webkit-animation: fade-out 200ms ease-out both;
