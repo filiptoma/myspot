@@ -29,6 +29,7 @@
                     </client-only>
                 </nuxt-link>
             </div>
+            <div class="container h-16 fixed bottom-0 w-screen"></div>
         </div>
         <BeforeLoading id="beforeLoading" />
     </div>

@@ -302,16 +302,16 @@ export default {
 */
 
 .swing-in-bottom-fwd {
-	-webkit-animation: swing-in-bottom-fwd 200ms cubic-bezier(.17,.89,.2,1) both;
-	        animation: swing-in-bottom-fwd 200ms cubic-bezier(.17,.89,.2,1) both;
+	-webkit-animation: swing-in-bottom-fwd 400ms cubic-bezier(.17,.89,.2,1) both;
+	        animation: swing-in-bottom-fwd 400ms cubic-bezier(.17,.89,.2,1) both;
 }
 .swing-out-bottom-bck {
 	-webkit-animation: swing-out-bottom-bck 200ms cubic-bezier(0.80, 0.00, 0.83, 0.11) both;
 	        animation: swing-out-bottom-bck 200ms cubic-bezier(0.80, 0.00, 0.83, 0.11) both;
 }
 .fade-in {
-	-webkit-animation: fade-in 75ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: fade-in 75ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	-webkit-animation: fade-in 150ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: fade-in 150ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
     -webkit-animation-delay: 25ms;
             animation-delay: 25ms;
 }
