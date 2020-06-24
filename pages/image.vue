@@ -29,7 +29,7 @@ export default {
             formData.append('file', this.file)
             
             try {
-                await axios.post('/image', formData, {
+                await axios.post('/api/image', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }

@@ -12,7 +12,7 @@
                 </div>
             </div>
             <Comments :key="reload" />
-            <div v-if="usr" class="flex w-screen comment-container-div text-sm mx-auto items-end p-2 relative border-t border-divide">
+            <div v-if="usr" class="z-20 flex w-screen comment-container-div text-sm mx-auto items-end p-2 relative border-t border-divide">
                 <img src="~/assets/images/profile_pics/users/default.png" alt="User's profile picture"
                 class="object-cover rounded-full w-10 h-10 border border-divide mr-2">
                 <div class="flex w-full border border-divide comment-div items-end">
@@ -21,7 +21,7 @@
                     <button class="comment-post-btn text-blue-500 font-semibold mr-3 focus:outline-none" id="comment-post-btn" @click="postComment">Post</button>
                 </div>
             </div>
-            <div v-else class="flex w-screen comment-container-div text-sm mx-auto items-end p-2 relative border-t border-divide justify-center h-12 items-center">
+            <div v-else class="z-20 flex w-screen comment-container-div text-sm mx-auto items-end p-2 relative border-t border-divide justify-center h-12 items-center">
                 <nuxt-link to="/a" class="text-red-600 font-semibold flex items-center justify-center">
                     If you wish to comment, please sign in.
                     <client-only>
@@ -29,7 +29,7 @@
                     </client-only>
                 </nuxt-link>
             </div>
-            <div class="container h-16 fixed bottom-0 w-screen"></div>
+            <div class="container h-16 z-10"></div>
         </div>
         <BeforeLoading id="beforeLoading" />
     </div>

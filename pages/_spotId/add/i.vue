@@ -90,6 +90,14 @@
                         </label>
                     </div>
 
+                    <div class="w-full text-center border-b border-divide pb-5">
+                        <form enctype="multipart/form-data">
+                            <input type="file" ref="image" @change="onSelect" class="hidden" id="imageInput" />
+                            <label for="imageInput" class="text-primary font-semibold">Select image</label>
+                            <h1 class="text-red-700 font-semibold">{{ message }}</h1>
+                        </form>
+                    </div>
+
                     <div class="my-3">
                         <h1 class="text-primary font-semibold text-sm">Opening hours</h1>
                         <h1 class="text-secondary text-sm">Choose two initial values and press 
@@ -268,12 +276,16 @@ export default {
                     to: '',
                     closed: false
                 }
-            }
+            },
+            image: '',
+            message: '',
+            usr: '',
         }
     },
     mounted() {
         document.getElementById('beforeLoading').style.display = 'none'
         const usrExists = (document.cookie.match(/^(?:.*;)?\s*usr\s*=\s*([^;]+)(?:.*)?$/)||[,null])[1]
+        this.usr = usrExists
         if (!usrExists) {
             document.getElementById('auth-popup').style.display = 'block'
             document.getElementById('popdown').style.display = 'none'
@@ -306,6 +318,7 @@ export default {
                 this.$router.push({ name: 'spotId-add-finish', params: {spotId: this.spotId} })
             } catch (error) {
                 if (error.response.data.errorMsg === 'Access expired.') {
+                    console.log('here')
                     try {
                         await axios.get('/api/renewAccess')
                         await axios.post('/api/spot/edit', {
@@ -504,6 +517,27 @@ export default {
                     this.openingHrs.sunday.closed = false
                 }
                 document.getElementById('div-' + event.target.id).classList.remove('bg-red-200')
+            }
+        },
+        onSelect() {
+            const image = this.$refs.image.files[0]
+            this.image = image
+            this.onSubmit()
+        },
+        async onSubmit() {
+            const formData = new FormData()
+            formData.append('spot', this.spotId)
+            formData.append('image', this.image)
+            try {
+                await axios.post('/api/image', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                this.message = 'uploaded!'
+            } catch (error) {
+                console.log(error)
+                this.message = 'Something went wrong :('
             }
         }
     }

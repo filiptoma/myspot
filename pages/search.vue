@@ -1,133 +1,124 @@
 <template>
     <div>
-        <!-- <div class="overflow-x-scroll w-screen scrolling-touch test2">
-            <div class="test flex flex-wrap">
-                <h1>c oeeeeeeeee</h1>
-                <h1>c oeeeeeeeee</h1>
-                <h1>c oeeeeeeeee</h1>
-                <h1>c oeeeeeeeee</h1>
-                <h1>c oeeeeeeeee</h1>
-                <h1>c oeeeeeeeee</h1>
-                <h1>c oeeeeeeeee</h1>
-                <h1>c oeeeeeeeee</h1>
-                <h1>c oeeeeeeeee</h1>
-                <h1>c oeeeeeeeee</h1>
-            </div>
-        </div> -->
-        <div class="fixed top-0">
-            <div class="bg-theme w-screen p-3">
-                <div class="bg-white rounded-md flex items-center py-1">
-                    <client-only>
-                        <unicon name="search" fill="grey" width="18" height="18" class="ml-2" />
-                    </client-only>
-                    <input type="text" placeholder="Search for specific spot..." @keyup="liveSearch" v-model="searchQuery"
-                    class="focus:outline-none w-full mx-2">
+        <div id="afterLoading">
+            <div class="fixed top-0">
+                <div class="bg-theme w-screen p-3">
+                    <div class="bg-white rounded-md flex items-center py-1">
+                        <client-only>
+                            <unicon name="search" fill="grey" width="18" height="18" class="ml-2" />
+                        </client-only>
+                        <input type="text" placeholder="Search for specific spot..." @keyup="liveSearch" v-model="searchQuery"
+                        class="focus:outline-none w-full mx-2">
+                    </div>
+                </div>
+                <div class="border-b border-divide shadow-md overflow-x-scroll w-screen scrolling-touch filters-container bg-white">
+                    <div class="filters flex">
+                        <button class="flex flex-none items-center bg-uinput rounded-full m-2 pl-2 pr-1 py-1 text-sm font-semibold text-primary">
+                            Sort by
+                            <client-only>
+                                <unicon name="angle-down" fill="grey" width="20" height="20" class="" />
+                            </client-only>
+                        </button>
+                        <button @click="showFilter($event)" id="price"
+                        class="flex flex-none items-center bg-uinput rounded-full my-2 mr-2 pl-2 pr-1 py-1 text-sm font-semibold text-primary focus:outline-none">
+                            Price
+                            <client-only>
+                                <unicon name="angle-down" fill="grey" width="20" height="20" class="" />
+                            </client-only>
+                        </button>
+                        <button @click="showFilter($event)" id="services"
+                        class="flex flex-none items-center bg-uinput rounded-full my-2 mr-2 pl-2 pr-1 py-1 text-sm font-semibold text-primary focus:outline-none">
+                            Services
+                            <client-only>
+                                <unicon name="angle-down" fill="grey" width="20" height="20" class="" />
+                            </client-only>
+                        </button>
+                        <button @click="showFilter($event)" id="atmosphere"
+                        class="flex flex-none items-center bg-uinput rounded-full my-2 mr-2 pl-2 pr-1 py-1 text-sm font-semibold text-primary focus:outline-none">
+                            Atmosphere
+                            <client-only>
+                                <unicon name="angle-down" fill="grey" width="20" height="20" class="" />
+                            </client-only>
+                        </button>
+                        <button @click="showFilter($event)" id="environment"
+                        class="flex flex-none items-center bg-uinput rounded-full my-2 mr-2 pl-2 pr-1 py-1 text-sm font-semibold text-primary focus:outline-none">
+                            Environment
+                            <client-only>
+                                <unicon name="angle-down" fill="grey" width="20" height="20" class="" />
+                            </client-only>
+                        </button>
+                        <button class="flex flex-none my-2 pr-2 text-sm font-semibold text-blue-700">
+                            MORE FILTERS
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="border-b border-divide shadow-md overflow-x-scroll w-screen scrolling-touch filters-container bg-white">
-                <div class="filters flex">
-                    <button class="flex flex-none items-center bg-uinput rounded-full m-2 pl-2 pr-1 py-1 text-sm font-semibold text-primary">
-                        Sort by
-                        <client-only>
-                            <unicon name="angle-down" fill="grey" width="20" height="20" class="" />
-                        </client-only>
-                    </button>
-                    <button @click="showFilter($event)" id="price"
-                    class="flex flex-none items-center bg-uinput rounded-full my-2 mr-2 pl-2 pr-1 py-1 text-sm font-semibold text-primary focus:outline-none">
-                        Price
-                        <client-only>
-                            <unicon name="angle-down" fill="grey" width="20" height="20" class="" />
-                        </client-only>
-                    </button>
-                    <button @click="showFilter($event)" id="services"
-                    class="flex flex-none items-center bg-uinput rounded-full my-2 mr-2 pl-2 pr-1 py-1 text-sm font-semibold text-primary focus:outline-none">
-                        Services
-                        <client-only>
-                            <unicon name="angle-down" fill="grey" width="20" height="20" class="" />
-                        </client-only>
-                    </button>
-                    <button @click="showFilter($event)" id="atmosphere"
-                    class="flex flex-none items-center bg-uinput rounded-full my-2 mr-2 pl-2 pr-1 py-1 text-sm font-semibold text-primary focus:outline-none">
-                        Atmosphere
-                        <client-only>
-                            <unicon name="angle-down" fill="grey" width="20" height="20" class="" />
-                        </client-only>
-                    </button>
-                    <button @click="showFilter($event)" id="environment"
-                    class="flex flex-none items-center bg-uinput rounded-full my-2 mr-2 pl-2 pr-1 py-1 text-sm font-semibold text-primary focus:outline-none">
-                        Environment
-                        <client-only>
-                            <unicon name="angle-down" fill="grey" width="20" height="20" class="" />
-                        </client-only>
-                    </button>
-                    <button class="flex flex-none my-2 pr-2 text-sm font-semibold text-blue-700">
-                        MORE FILTERS
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="container h-24"></div>
+            <div class="container h-24"></div>
 
-        <div v-if="searchQuery.length == 0">
-            <h1 class="text-center mt-10 text-secondary font-semibold"><span class="text-primary">Discover</span> new spots using various filters</h1>
-            <h1 class="text-center text-secondary">or</h1>
-            <h1 class="text-center text-secondary font-semibold"><span class="text-primary">Search</span> for a specific spot</h1>
-            <img src="~/assets/images/logo.png" alt="MySpot.io logo" class="h-24 w-24 logo mx-auto mt-10">
-        </div>
-        <div v-else class="mt-2">
-            <div class=""
-            v-for="(name, index) in names"
-            :key="index">
-                <nuxt-link :to="{ name: 'spotId', params: { spotId: spotIds[index] } }" class="flex items-center mx-3 py-3 border-b border-divide px-2">
+            <div v-if="searchQuery.length == 0 && selectedTags.length == 0">
+                <h1 class="text-center mt-10 text-secondary font-semibold"><span class="text-primary">Discover</span> new spots using various filters</h1>
+                <h1 class="text-center text-secondary">or</h1>
+                <h1 class="text-center text-secondary font-semibold"><span class="text-primary">Search</span> for a specific spot</h1>
+                <img src="~/assets/images/logo.png" alt="MySpot.io logo" class="h-24 w-24 logo mx-auto mt-10">
+            </div>
+            <div v-else class="mt-2">
+                <div class=""
+                v-for="(name, index) in names"
+                :key="index">
+                    <nuxt-link :to="{ name: 'spotId', params: { spotId: spotIds[index] } }" class="flex items-center mx-3 py-3 border-b border-divide px-2">
+                        <client-only>
+                            <unicon name="search" fill="grey" width="18" height="18" class="mr-2" />
+                        </client-only>
+                        <h1 class="text-primary font-semibold">{{ name }}</h1>
+                    </nuxt-link>
+                </div>
+                <nuxt-link to="/add" v-if="names.length == 0 && showingResults == true"
+                class="flex items-center justify-between mx-3 py-3 border-b border-divide px-2">
+                    <h1 class="text-secondary font-semibold">Spot not found, want to add it?</h1>
                     <client-only>
-                        <unicon name="search" fill="grey" width="18" height="18" class="mr-2" />
+                        <unicon name="plus" fill="grey" width="18" height="18" />
                     </client-only>
-                    <h1 class="text-primary font-semibold">{{ name }}</h1>
                 </nuxt-link>
             </div>
-            <nuxt-link to="/add" v-if="names.length == 0 && showingResults == true"
-            class="flex items-center justify-between mx-3 py-3 border-b border-divide px-2">
-                <h1 class="text-secondary font-semibold">Spot not found, want to add it?</h1>
-                <client-only>
-                    <unicon name="plus" fill="grey" width="18" height="18" />
-                </client-only>
-            </nuxt-link>
-        </div>
 
-        <div v-if="filteredSpots.length > 0">
-            <div v-for="spot in filteredSpots"
-            :key="spot._id">
-                <h1>{{ spot.name }}</h1>
-            </div>
-        </div>
-
-        <div id="price-popup">
-            <div class="fixed bottom-0 bg-white w-screen swing-in-bottom-fwd" id="price-popup-content">
-                <h1 class="text-primary font-semibold mx-3 p-2 border-b border-divide">Filter by Price Tags</h1>
-                <div v-for="(tag, index) in core.tags.price" class="mx-3 text-sm text-primary"
-                :index="index"
-                :key="tag">
-                    <button v-if="index < core.tags.price.length - 1" @click="filterSearch($event)"
-                    class="p-2 border-b border-divide focus:outline-none flex items-center justify-between w-full" :id="'price-' + tag">
-                        <h1>{{ tag }}</h1>
-                        <div class="rounded-full bg-green-700 h-2 w-2 hidden" :id="'price-' + tag + '-btn'"></div>
-                    </button>
-                    <h1 v-else class="p-2" :id="tag">{{ tag }}</h1>
+            <div v-if="filteredSpots.length > 0 && selectedTags.length > 0">
+                <div v-for="spot in filteredSpots"
+                :key="spot._id">
+                    <h1>{{ spot.name }}</h1>
                 </div>
             </div>
-            <div class="absolute top-0 w-screen bg-black fade-in" id="price-popup-bg" @click="hidePricePopup"></div>
+            <h1 v-if="filteredSpots.length == 0 && selectedTags.length > 0">No spots with these filters found</h1>
+
+            <div id="price-popup">
+                <div class="fixed bottom-0 bg-white w-screen swing-in-bottom-fwd" id="price-popup-content">
+                    <h1 class="text-primary font-semibold mx-3 p-2 border-b border-divide">Filter by Price Tags</h1>
+                    <div v-for="(tag, index) in core.tags.price" class="mx-3 text-sm text-primary"
+                    :index="index"
+                    :key="tag">
+                        <button v-if="index < core.tags.price.length - 1" @click="filterSearch($event)"
+                        class="p-2 border-b border-divide focus:outline-none flex items-center justify-between w-full" :id="'price-' + tag">
+                            <h1>{{ tag }}</h1>
+                            <div class="rounded-full bg-green-700 h-2 w-2 hidden" :id="'price-' + tag + '-btn'"></div>
+                        </button>
+                        <h1 v-else class="p-2" :id="tag">{{ tag }}</h1>
+                    </div>
+                </div>
+                <div class="absolute top-0 w-screen bg-black fade-in" id="price-popup-bg" @click="hidePricePopup"></div>
+            </div>
         </div>
 
         <Footer id="footer" />
+        <BeforeLoading id="beforeLoading" />
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import BeforeLoading from '~/components/BeforeLoading'
 import Footer from '~/components/nav/Footer'
 export default {
     components: {
-        Footer
+        Footer, BeforeLoading
     },
     data() {
         return {
@@ -157,6 +148,10 @@ export default {
         }
     },
     async mounted() {
+        document.getElementById('beforeLoading').style.display = 'none'
+        this.$nextTick(() => {
+            this.$nuxt.$loading.start()
+        })
         this.$nextTick(() => {
             document.getElementById('searchpage').style.fill = '#963c61'
         })
@@ -168,6 +163,10 @@ export default {
         } catch (error) {
             console.log(error)
         }
+        this.$nextTick(() => {
+            this.$nuxt.$loading.finish()
+        })
+        document.getElementById('afterLoading').style.display = 'block'
     },
     destroyed() {
         document.getElementById('searchpage').style.fill = 'grey'
@@ -245,7 +244,6 @@ export default {
                     }
                 }
                 self.filteredSpots = unfilteredSpots
-                console.log(self.filteredSpots)
             } else {
                 self.selectedTags.push(document.getElementById(filterId).id.split('-')[1])
                 document.getElementById(filterId + '-btn').style.display = 'block'
@@ -265,7 +263,6 @@ export default {
                     }
                 }
                 self.filteredSpots = unfilteredSpots
-                console.log(self.filteredSpots)
             }
         },
     }
@@ -273,15 +270,9 @@ export default {
 </script>
 
 <style scoped>
-/* .test {
-    width: 200vw;
-}
-.test2::-webkit-scrollbar {
+#afterLoading {
     display: none;
 }
-.test2 {
-    -ms-overflow-style: none;
-} */
 .logo {
     opacity: 0.3;
 }

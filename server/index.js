@@ -68,7 +68,7 @@ async function start () {
   app.use('/api/spot-additional', spotAdditionalRoute)
   app.use('/api/core', coreRoute)
   app.use('/api/comments', commentsRoute)
-  app.use('/image', imageRoute)
+  app.use('/api/image', imageRoute)
   app.use('/api/search', searchRoute)
 
   app.use(express.static('data'))
