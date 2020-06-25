@@ -14,7 +14,7 @@
                             <h1 class="text-xs font-semibold">Picture not yet added</h1>
                         </div>
                     </div>
-                    <img v-if="spotIds[index] == spot._id" :src="require(`~/data/images/spots/${spot._id}/spot-${spot._id}-profile.jpg`)"
+                    <img v-if="spotIds[index] == spot._id" :src="`/images/spots/${spot._id}/spot-${spot._id}-profile.jpg`"
                     :alt="spot._id" class="object-cover w-full h-40">
                     <div class="flex absolute bottom-0 text-white text-sm py-2 px-1">
                         <div

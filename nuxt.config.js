@@ -75,6 +75,5 @@ module.exports = {
   },
   dir: {
     static: 'data',
-    assets: 'data'
   }
 }

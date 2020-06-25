@@ -10,7 +10,7 @@
                         <h1 class="text-xs font-semibold">Picture not yet added</h1>
                     </div>
                 </div>
-                <img v-if="hasImage == true" :src="require(`~/data/images/spots/${this.spotId}/spot-${this.spotId}-profile.jpg`)"
+                <img v-if="hasImage == true" :src="`/images/spots/${this.spotId}/spot-${this.spotId}-profile.jpg`"
                 alt="Spot's profile picture" class="object-cover w-full h-56">
                 <div v-if="spot.rating.avg" class="rating h-12 w-12 bg-theme text-lg rounded-full flex justify-center items-center border border-white absolute bottom-0 right-0 mr-2">
                     <h1 class="text-white font-semibold">{{ spot.rating.avg }}</h1>
