@@ -75,26 +75,23 @@
                             <h1 class="text-sm text-primary font-semibold">Upload spot's profile picture</h1>
                             <h1 class="text-sm text-secondary">I recommend horizontal, it looks better after cropping</h1>
                         </div>
-                        <input @change="processImage" type="file" accept="image/*" id="addImage" class="hidden">
-                        <!-- <label v-if="!picture" for="addImage" class="material-icons pr-3 pl-8 md-icon-inactive">add_a_photo</label> -->
-                        <label v-if="!picture" for="addImage" class="pr-3 pl-8">
-                            <client-only>
-                                <unicon name="image-plus" fill="grey" />
-                            </client-only>
-                        </label>
-                        <!-- <label v-else for="addImage" class="material-icons pr-3 pl-8 md-imageUploaded">add_a_photo</label> -->
-                        <label v-else for="addImage" class="pr-3 pl-8">
-                            <client-only>
-                                <unicon name="image-check" fill="#208325" />
-                            </client-only>
-                        </label>
-                    </div>
-
-                    <div class="w-full text-center border-b border-divide pb-5">
-                        <form enctype="multipart/form-data">
+                        <form enctype="multipart/form-data" class="px-3 ml-4">
                             <input type="file" ref="image" @change="onSelect" class="hidden" id="imageInput" />
-                            <label for="imageInput" class="text-primary font-semibold">Select image</label>
-                            <h1 class="text-red-700 font-semibold">{{ message }}</h1>
+                            <label v-if="message == 'uploaded!'" for="imageInput">
+                                <client-only>
+                                    <unicon name="image-check" fill="#38a169" />
+                                </client-only>
+                            </label>
+                            <label v-if="message == 'Something went wrong :('" for="imageInput">
+                                <client-only>
+                                    <unicon name="image-times" fill="#e53e3e" />
+                                </client-only>
+                            </label>
+                            <label v-if="message.length == 0" for="imageInput">
+                                <client-only>
+                                    <unicon name="image-plus" fill="grey" />
+                                </client-only>
+                            </label>
                         </form>
                     </div>
 
@@ -239,7 +236,6 @@ export default {
             instagram: '',
             facebook: '',
             email: '',
-            picture: '',
             openingHrs: {
                 monday: {
                     from: '',
@@ -305,7 +301,6 @@ export default {
         async finish() {
             try {
                 await axios.post('/api/spot/edit', {
-                    picture: this.picture,
                     openingHrs: this.openingHrs,
                     about: this.about,
                     phone: this.phone,
@@ -318,11 +313,9 @@ export default {
                 this.$router.push({ name: 'spotId-add-finish', params: {spotId: this.spotId} })
             } catch (error) {
                 if (error.response.data.errorMsg === 'Access expired.') {
-                    console.log('here')
                     try {
                         await axios.get('/api/renewAccess')
                         await axios.post('/api/spot/edit', {
-                            picture: this.picture,
                             openingHrs: this.openingHrs,
                             about: this.about,
                             phone: this.phone,
@@ -440,17 +433,6 @@ export default {
                     this.openingHrs.sunday.to = openingHrsTo[i].value
                 }
             }
-        },
-        processImage(event) {
-            const picture = event.target.files[0]
-            this.createBase64Image(picture)
-        },
-        createBase64Image(fileObject) {
-            const reader = new FileReader()
-            reader.onload = (event) => {
-                this.picture = event.target.result
-            }
-            reader.readAsDataURL(fileObject)
         },
         changeClosedState(event) {
             if (event.target.checked) {

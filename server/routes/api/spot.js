@@ -30,15 +30,7 @@ router.post('/new', VerifyAccess, async (req, res) => {
 router.get('/featured', async (req, res) => {
     try {
         const spots = await Spot.find()
-        var pictures = new Array()
-        for (var i = 0; i < spots.length; i++) {
-            if (spots[i].picture) {
-                pictures.push(Buffer.from(spots[i].picture).toString('base64'))
-            } else {
-                pictures.push('')
-            }
-        }
-        res.status(200).json({ spots: spots, pictures: pictures })
+        res.status(200).json({ spots: spots })
     } catch (error) {
         res.status(400).send(error)
     }
@@ -49,12 +41,7 @@ router.get('/profile', async (req, res) => {
         const spot = await Spot.findOne(
             { _id: new ObjectId(req.query.spotId) }
         )
-        if (spot.picture) {
-            const picture = Buffer.from(spot.picture).toString('base64')
-            res.status(200).json({ spot: spot, picture: picture })
-        } else {
-            res.status(200).json({ spot: spot })
-        }
+        res.status(200).json({ spot: spot })
     } catch (error) {
         res.status(400).send(error)
     }
@@ -157,33 +144,6 @@ router.post('/edit', VerifyAccess, async (req, res) => {
             res.status(200).end()
         } catch (error) {
             res.status(400).send(error)
-        }
-    }
-
-    if (req.body.picture) {
-        const picture = req.body.picture
-        if (picture.split(',')[1]) {
-            const pictureBuffer = Buffer.from(picture.split(',')[1], 'base64')
-            try {
-                await Spot.updateOne(
-                    { _id: new ObjectId(req.body.spotId) },
-                    { $set: {picture: pictureBuffer} }
-                )
-                res.status(200).end()
-            } catch (error) {
-                res.status(400).send(error)
-            }
-        } else {
-            const pictureBuffer = Buffer.from(picture, 'base64')
-            try {
-                await Spot.updateOne(
-                    { _id: new ObjectId(req.body.spotId) },
-                    { $set: {picture: pictureBuffer} }
-                )
-                res.status(200).end()
-            } catch (error) {
-                res.status(400).send(error)
-            }
         }
     }
 

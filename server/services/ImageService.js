@@ -9,7 +9,7 @@ const multerStorage = multer.diskStorage({
     },
     filename: (req, image, cb) => {
         const ext = image.mimetype.split('/')[1]
-        cb(null, `spot-${req.body.spot.toLowerCase()}-${Date.now()}.${ext}`)
+        cb(null, `spot-${req.body.spot.toLowerCase()}-profile.jpg`)
     }
 })
 const upload = multer({

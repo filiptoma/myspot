@@ -469,19 +469,24 @@
                 <div class="text-primary p-2">
                     <h1 class="font-semibold text-lg text-black">Edit the picture of the spot</h1>
                     <h1 class="text-sm text-secondary">I recommend horizontal, it looks better after cropping</h1>
-                    <div class="flex items-center justify-center my-8">
-                        <input type="file" @change="processImage" accept="image/*" id="addImage" class="hidden">
-                        <label v-if="updatedPicture == true" for="addImage">
+                    <form enctype="multipart/form-data" class="flex items-center justify-center my-8">
+                        <input type="file" ref="image" @change="onSelect" class="hidden" id="imageInput" />
+                        <label v-if="message == 'uploaded!'" for="imageInput">
                             <client-only>
-                                <unicon name="image-plus" fill="#208325" />
+                                <unicon name="image-check" fill="#38a169" />
                             </client-only>
                         </label>
-                        <label v-else for="addImage">
+                        <label v-if="message == 'Something went wrong :('" for="imageInput">
+                            <client-only>
+                                <unicon name="image-times" fill="#e53e3e" />
+                            </client-only>
+                        </label>
+                        <label v-if="message.length == 0" for="imageInput">
                             <client-only>
                                 <unicon name="image-plus" fill="grey" />
                             </client-only>
                         </label>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -502,7 +507,8 @@ export default {
         return {
             spotId: this.$route.params.spotId,
             usr: '',
-            picture: '',
+            image: '',
+            message: '',
             updatedPicture: Boolean,
             spot: {
                 name: '',
@@ -624,9 +630,6 @@ export default {
                 }
             })
             this.spot = response.data.spot
-            if (response.data.picture) {
-                this.picture = response.data.picture
-            }
         } catch (error) {
             console.log(error)
         }
@@ -695,7 +698,6 @@ export default {
                     facebook: this.spot.facebook,
                     email: this.spot.email,
                     openingHrs: this.spot.openingHrs,
-                    picture: this.picture
                 })
                 location.reload()
             } catch (error) {
@@ -727,7 +729,6 @@ export default {
                             facebook: this.spot.facebook,
                             email: this.spot.email,
                             openingHrs: this.spot.openingHrs,
-                            picture: this.picture
                         })
                         location.reload()
                     } catch (error) {
@@ -1062,18 +1063,27 @@ export default {
             document.getElementById('index').style.display = 'block'
             document.getElementById('image').style.display = 'none'
         },
-        processImage(event) {
-            const picture = event.target.files[0]
-            this.createBase64Image(picture)
+        onSelect() {
+            const image = this.$refs.image.files[0]
+            this.image = image
+            this.onSubmit()
         },
-        createBase64Image(fileObject) {
-            const reader = new FileReader()
-            reader.onload = (event) => {
-                this.picture = event.target.result
-                this.updatedPicture = true
+        async onSubmit() {
+            const formData = new FormData()
+            formData.append('spot', this.spotId)
+            formData.append('image', this.image)
+            try {
+                await axios.post('/api/image', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                this.message = 'uploaded!'
+            } catch (error) {
+                console.log(error)
+                this.message = 'Something went wrong :('
             }
-            reader.readAsDataURL(fileObject)
-        },
+        }
     }
 }
 </script>

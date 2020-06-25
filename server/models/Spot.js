@@ -82,9 +82,6 @@ const spotSchema = new mongoose.Schema({
     comments: {
         type: Array
     },
-    picture: {
-        type: Buffer
-    },
     openingHrs: {
         monday: {
             from: {

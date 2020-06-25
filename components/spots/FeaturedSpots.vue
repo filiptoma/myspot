@@ -1,13 +1,12 @@
 <template>
     <div class="">
         <nuxt-link :to="{ name: 'spotId', params: { spotId: spot._id } }"
-        v-for="(spot) in spots"
+        v-for="(spot, index) in spots"
+        :index="index"
         :key="spot._id">
             <div class="relative border-b border-divide shadow-md">
                 <div class="relative">
-                    <img v-if="spot.picture" :src="'data:image/jpeg;base64,' + spot.picture" alt="Spot's profile picture"
-                    class="object-cover w-full h-40">
-                    <div v-else class="w-full h-40 bg-uinput flex justify-center items-center text-secondary">
+                    <div v-if="spotIds[index] == 'nope'" class="w-full h-40 bg-uinput flex justify-center items-center text-secondary">
                         <div class="text-center">
                             <client-only>
                                 <unicon name="exclamation-triangle" fill="grey" />
@@ -15,6 +14,8 @@
                             <h1 class="text-xs font-semibold">Picture not yet added</h1>
                         </div>
                     </div>
+                    <img v-if="spotIds[index] == spot._id" :src="require(`~/data/images/spots/${spot._id}/spot-${spot._id}-profile.jpg`)"
+                    :alt="spot._id" class="object-cover w-full h-40">
                     <div class="flex absolute bottom-0 text-white text-sm py-2 px-1">
                         <div
                         v-for="(points, category, index) in spot.categories"
@@ -52,7 +53,7 @@ export default {
     data() {
         return {
             spots: [],
-            pictures: []
+            spotIds: []
         }
     },
     async mounted() {
@@ -62,20 +63,22 @@ export default {
         try {
             const response = await axios.get('/api/spot/featured')
             this.spots = response.data.spots
-            this.pictures = response.data.pictures
-            for (var i = 0; i < this.spots.length; i++) {
-                if (this.spots[i].picture) {
-                    this.spots[i].picture = this.pictures[i]
-                }
-            }
         } catch (error) {
             console.error()
+        }
+        for (var i = 0; i < this.spots.length; i++) {
+            try {
+                require(`~/data/images/spots/${this.spots[i]._id}/spot-${this.spots[i]._id}-profile.jpg`)
+                this.spotIds.push(this.spots[i]._id)
+            } catch (error) {
+                this.spotIds.push('nope')
+            }
         }
         this.$nextTick(() => {
             this.$nuxt.$loading.finish()
         })
         document.getElementById('afterLoading').style.display = 'block'
-    }
+    },
 }
 </script>
 

@@ -1,14 +1,8 @@
 <template>
     <div :key="reload">
         <div class="relative border-b border-divide shadow-md mb-3">
-            <div v-if="picture" class="relative">
-                <img :src="'data:image/jpeg;base64,' + picture" alt="Spot's profile picture" class="object-cover w-full h-56">
-                <div v-if="spot.rating.avg" class="rating h-12 w-12 bg-theme text-lg rounded-full flex justify-center items-center border border-white absolute bottom-0 right-0 mr-2">
-                    <h1 class="text-white font-semibold">{{ spot.rating.avg }}</h1>
-                </div>
-            </div>
-            <div v-else class="relative">
-                <div class="w-full h-56 bg-uinput flex justify-center items-center text-secondary">
+            <div class="relative">
+                <div v-if="hasImage == false" class="w-full h-56 bg-uinput flex justify-center items-center text-secondary">
                     <div class="text-center">
                         <client-only>
                             <unicon name="exclamation-triangle" fill="grey" />
@@ -16,6 +10,8 @@
                         <h1 class="text-xs font-semibold">Picture not yet added</h1>
                     </div>
                 </div>
+                <img v-if="hasImage == true" :src="require(`~/data/images/spots/${this.spotId}/spot-${this.spotId}-profile.jpg`)"
+                alt="Spot's profile picture" class="object-cover w-full h-56">
                 <div v-if="spot.rating.avg" class="rating h-12 w-12 bg-theme text-lg rounded-full flex justify-center items-center border border-white absolute bottom-0 right-0 mr-2">
                     <h1 class="text-white font-semibold">{{ spot.rating.avg }}</h1>
                 </div>
@@ -275,7 +271,6 @@ export default {
     data() {
         return {
             spotId: this.$route.params.spotId,
-            picture: '',
             usr: '',
             spot: {
                 name: '',
@@ -357,7 +352,8 @@ export default {
             rating: null,
             reload: null,
             alreadyLiked: [],
-            alreadyRated: Boolean
+            alreadyRated: Boolean,
+            hasImage: Boolean,
         }
     },
     async mounted() {
@@ -377,11 +373,14 @@ export default {
                 }
             })
             this.spot = response.data.spot
-            if (response.data.picture) {
-                this.picture = response.data.picture
-            }
         } catch (error) {
             console.log(error)
+        }
+        try {
+            require(`~/data/images/spots/${this.spotId}/spot-${this.spotId}-profile.jpg`)
+            this.hasImage = true
+        } catch (error) {
+            this.hasImage = false
         }
 
         // getting data of already liked comments by user and whether user already rated the spot
@@ -413,6 +412,15 @@ export default {
                         const response = await axios.post('/api/comments/already-liked', {
                             user: this.usr
                         })
+                        const response2 = await axios.post('/api/spot-additional/rate/check', {
+                            user: this.usr,
+                            spotId: this.spotId
+                        })
+                        if (response2.data.alreadyRated == true) {
+                            this.alreadyRated = true
+                        } else {
+                            this.alreadyRated = false
+                        }
                         this.alreadyLiked = response.data.alreadyLiked
                         const checkboxes = document.querySelectorAll('input[name=likeBtns]')
                         for (var i = 0; i < checkboxes.length; i++) {
@@ -707,6 +715,16 @@ export default {
                     }
                 }
             }
+        },
+        spotImage() {
+            // try {
+            //     return require(`~/data/images/spots/${this.spotId}/spot-${this.spotId}-profile.jpg`)
+            // } catch (error) {
+            //     this.$nextTick(() => {
+            //         document.getElementById('spotImage').style.display = 'none'
+            //         document.getElementById('spotImageMissing').style.display = 'flex'
+            //     })
+            // }
         }
     }
 }

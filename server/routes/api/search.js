@@ -6,15 +6,7 @@ const ObjectId = require('mongodb').ObjectId
 router.get('/', async (req, res) => {
     try {
         const spots = await Spot.find()
-        var pictures = new Array()
-        for (var i = 0; i < spots.length; i++) {
-            if (spots[i].picture) {
-                pictures.push(Buffer.from(spots[i].picture).toString('base64'))
-            } else {
-                pictures.push('')
-            }
-        }
-        res.status(200).json({ spots: spots, pictures: pictures })
+        res.status(200).json({ spots: spots })
     } catch (error) {
         res.status(400).send(error)
     }
