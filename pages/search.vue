@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="afterLoading">
-            <div class="fixed top-0">
+            <div class="fixed top-0 z-50" id="search-header">
                 <div class="bg-theme w-screen p-3">
                     <div class="bg-white rounded-md flex items-center py-1">
                         <client-only>
@@ -54,6 +54,7 @@
                 </div>
             </div>
             <div class="container h-24"></div>
+            <div class="container bg-white w-full h-2"></div>
 
             <div v-if="searchQuery.length == 0 && selectedTags.length == 0">
                 <h1 class="text-center mt-10 text-secondary font-semibold"><span class="text-primary">Discover</span> new spots using various filters</h1>
@@ -61,7 +62,7 @@
                 <h1 class="text-center text-secondary font-semibold"><span class="text-primary">Search</span> for a specific spot</h1>
                 <img src="~/assets/images/logo.png" alt="MySpot.io logo" class="h-24 w-24 logo mx-auto mt-10">
             </div>
-            <div v-else class="mt-2">
+            <div v-else class="">
                 <div class=""
                 v-for="(name, index) in names"
                 :key="index">
@@ -81,16 +82,58 @@
                 </nuxt-link>
             </div>
 
-            <div v-if="filteredSpots.length > 0 && selectedTags.length > 0">
-                <div v-for="spot in filteredSpots"
+            <div v-if="filteredSpots.length > 0 && selectedTags.length > 0" id="found-spots" class="mt-2">
+                <nuxt-link :to="{ name: 'spotId', params: { spotId: spot._id } }"
+                v-for="(spot, index) in filteredSpots"
+                :index="index"
                 :key="spot._id">
-                    <h1>{{ spot.name }}</h1>
-                </div>
+                    <div class="relative border-b border-divide shadow-md">
+                        <div class="relative">
+                            <div v-if="spotIds[index] == 'nope'" class="w-full h-40 bg-uinput flex justify-center items-center text-secondary">
+                                <div class="text-center">
+                                    <client-only>
+                                        <unicon name="exclamation-triangle" fill="grey" />
+                                    </client-only>
+                                    <h1 class="text-xs font-semibold">Picture not yet added</h1>
+                                </div>
+                            </div>
+                            <img v-if="spotIds[index] == spot._id" :src="`/images/spots/${spot._id}/spot-${spot._id}-profile.jpg`"
+                            :alt="spot._id" class="object-cover w-full h-40">
+                            <div class="flex absolute bottom-0 text-white text-sm py-2 px-1">
+                                <div
+                                v-for="(points, category, index) in spot.categories"
+                                :item="points"
+                                :index="index"
+                                :key="index">
+                                    <div v-if="points[0] && index < 3" class="flex px-1 font-semibold">
+                                        <h1 class="border border-white rounded-full px-2 category">{{ category.charAt(0).toUpperCase() + category.slice(1) + ' spot'}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="spot.rating.avg" class="absolute bottom-0 right-0 font-semibold text-white p-2">
+                                <div class="rating h-10 w-10 bg-theme rounded-full flex justify-center items-center border-white">
+                                    <h1 class="font-semibold">{{ spot.rating.avg }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="py-3 tile-header px-2">
+                            <h1 class="text-primary text-lg font-semibold">{{ spot.name }}</h1>
+                            <div class="text-secondary text-sm">
+                                <h1 v-if="spot.address" class="">{{ spot.address.split(',').slice(0, spot.address.split(',').length-1).toString() }}</h1>
+                                <h1 v-else class="italic">Address not yet added</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container bg-white w-full h-2"></div>
+                </nuxt-link>
             </div>
-            <h1 v-if="filteredSpots.length == 0 && selectedTags.length > 0">No spots with these filters found</h1>
+            <div v-if="filteredSpots.length == 0 && selectedTags.length > 0" id="not-found-spots" class="mt-2 mx-3">
+                <h1 class="text-center text-primary font-semibold">There are no spots with these filters :(</h1>
+                <h1 class="text-center text-secondary text-sm">Spread the word about MySpot, and a spot with your preferred filters may be added here soon!</h1>
+            </div>
 
             <div id="price-popup">
-                <div class="fixed bottom-0 bg-white w-screen swing-in-bottom-fwd" id="price-popup-content">
+                <div class="fixed bottom-0 bg-white w-screen swing-in-bottom-fwd z-50" id="price-popup-content">
                     <h1 class="text-primary font-semibold mx-3 p-2 border-b border-divide">Filter by Price Tags</h1>
                     <div v-for="(tag, index) in core.tags.price" class="mx-3 text-sm text-primary"
                     :index="index"
@@ -100,10 +143,14 @@
                             <h1>{{ tag }}</h1>
                             <div class="rounded-full bg-green-700 h-2 w-2 hidden" :id="'price-' + tag + '-btn'"></div>
                         </button>
-                        <h1 v-else class="p-2" :id="tag">{{ tag }}</h1>
+                        <button v-else @click="filterSearch($event)"
+                        class="p-2 focus:outline-none flex items-center justify-between w-full" :id="'price-' + tag">
+                            <h1>{{ tag }}</h1>
+                            <div class="rounded-full bg-green-700 h-2 w-2 hidden" :id="'price-' + tag + '-btn'"></div>
+                        </button>
                     </div>
                 </div>
-                <div class="absolute top-0 w-screen bg-black fade-in" id="price-popup-bg" @click="hidePricePopup"></div>
+                <div class="fixed top-0 bottom-0 left-0 right-0 bg-black fade-in z-50" id="price-popup-bg" @click="hidePricePopup"></div>
             </div>
         </div>
 
@@ -145,6 +192,7 @@ export default {
             selectedTags: [],
             spots: [],
             filteredSpots: [],
+            spotIds: [],
         }
     },
     async mounted() {
@@ -173,10 +221,33 @@ export default {
     },
     methods: {
         async liveSearch() {
+            if (document.getElementById('found-spots')) {
+                document.getElementById('found-spots').style.display = 'none'
+            }
+            if (document.getElementById('not-found-spots')) {
+                document.getElementById('not-found-spots').style.display = 'none'
+            }
             this.showingResults = false
             this.names = []
             this.spotIds = []
             const original = this.searchQuery.toLowerCase()
+            if (original == '') {
+                this.spotIds = []
+                for (var i = 0; i < this.filteredSpots.length; i++) {
+                    try {
+                        require(`~/data/images/spots/${this.filteredSpots[i]._id}/spot-${this.filteredSpots[i]._id}-profile.jpg`)
+                        this.spotIds.push(this.filteredSpots[i]._id)
+                    } catch (error) {
+                        this.spotIds.push('nope')
+                    }
+                }
+                if (document.getElementById('found-spots')) {
+                    document.getElementById('found-spots').style.display = 'block'
+                }
+                if (document.getElementById('not-found-spots')) {
+                    document.getElementById('not-found-spots').style.display = 'block'
+                }
+            }
             await new Promise(r => setTimeout(r, 400))
             if (original == this.searchQuery.toLowerCase() && original != '') {
                 const response = await axios.get('/api/search/live', {
@@ -194,7 +265,7 @@ export default {
             document.getElementById(divId + '-popup').style.display = 'block'
             document.getElementById(divId + '-popup-bg').style.height = 
             document.documentElement.clientHeight - document.getElementById(divId + '-popup-content').offsetHeight + 'px'
-            document.getElementById('footer').style.display = 'none'
+            document.getElementById('search-header').style.zIndex = '1'
             document.body.style.overflow = 'hidden'
         },
         async hidePricePopup() {
@@ -205,7 +276,7 @@ export default {
             document.body.style.overflow = 'auto'
             await new Promise(r => setTimeout(r, 200))
             document.getElementById('price-popup').style.display = 'none'
-            document.getElementById('footer').style.display = 'block'
+            document.getElementById('search-header').style.zIndex = '50'
             document.getElementById('price-popup-content').classList.remove('swing-out-bottom-bck')
             document.getElementById('price-popup-content').classList.add('swing-in-bottom-fwd')
             document.getElementById('price-popup-bg').classList.remove('fade-out')
@@ -213,6 +284,7 @@ export default {
         },
         filterSearch(event) {
             const self = this
+            self.spotIds = []
             var filterId = event.target.id || event.target.parentNode.id
             let checker = (arr, target) => target.every(v => arr.includes(v))
             function removeElementFromArray(arr) {
@@ -243,6 +315,14 @@ export default {
                         i-=1
                     }
                 }
+                for (var i = 0; i < unfilteredSpots.length; i++) {
+                    try {
+                        require(`~/data/images/spots/${unfilteredSpots[i]._id}/spot-${unfilteredSpots[i]._id}-profile.jpg`)
+                        self.spotIds.push(unfilteredSpots[i]._id)
+                    } catch (error) {
+                        self.spotIds.push('nope')
+                    }
+                }
                 self.filteredSpots = unfilteredSpots
             } else {
                 self.selectedTags.push(document.getElementById(filterId).id.split('-')[1])
@@ -260,6 +340,14 @@ export default {
                     if (!checker(pureTags, self.selectedTags)) {
                         unfilteredSpots.splice(i, 1)
                         i-=1
+                    }
+                }
+                for (var i = 0; i < unfilteredSpots.length; i++) {
+                    try {
+                        require(`~/data/images/spots/${unfilteredSpots[i]._id}/spot-${unfilteredSpots[i]._id}-profile.jpg`)
+                        self.spotIds.push(unfilteredSpots[i]._id)
+                    } catch (error) {
+                        self.spotIds.push('nope')
                     }
                 }
                 self.filteredSpots = unfilteredSpots
@@ -286,6 +374,18 @@ export default {
 
 #price-popup {
     display: none;
+}
+
+
+.tile-header {
+    line-height: 1.2rem;
+}
+.category {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.rating {
+    margin-bottom: -1.25rem;
+    border-width: 3px;
 }
 
 /* 
