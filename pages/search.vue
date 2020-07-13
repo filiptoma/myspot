@@ -1,55 +1,36 @@
 <template>
     <div>
         <div id="afterLoading">
-            <div class="fixed top-0 z-50" id="search-header">
-                <div class="bg-theme w-screen p-3">
-                    <div class="bg-white rounded-md flex items-center py-1">
-                        <client-only>
-                            <unicon name="search" fill="grey" width="18" height="18" class="ml-2" />
-                        </client-only>
-                        <input type="text" placeholder="Search for specific spot..." @keyup="liveSearch" v-model="searchQuery"
-                        class="focus:outline-none w-full mx-2">
+            <div class="fixed top-0 bg-white z-20" id="search-header">
+                <div class="flex justify-between">
+                    <div class="bg-theme w-full p-3">
+                        <div class="bg-white rounded-md flex items-center py-1">
+                            <client-only>
+                                <unicon name="search" fill="grey" width="18" height="18" class="ml-2" />
+                            </client-only>
+                            <input type="text" placeholder="Search for a specific spot..." @keyup="liveSearch" v-model="searchQuery"
+                            class="focus:outline-none w-full mx-2">
+                        </div>
                     </div>
+                    <button v-if="selectedTags.length > 0"
+                            class="text-white font-bold text-xs focus:outline-none bg-theme pr-3"
+                            @click="clearFilters">
+                        CLEAR<br/>FILTERS
+                    </button>
                 </div>
                 <div class="border-b border-divide shadow-md overflow-x-scroll w-screen scrolling-touch filters-container bg-white">
-                    <div class="filters flex">
-                        <button class="flex flex-none items-center bg-uinput rounded-full m-2 pl-2 pr-1 py-1 text-sm font-semibold text-primary">
-                            Sort by
+                    <div class="filters flex px-1">
+                        <button v-for="filter in tagsArr"
+                                :key="filter"
+                                class="flex flex-none items-center bg-uinput rounded-full my-2 mx-1 pl-3 pr-1 py-1 text-sm font-semibold text-primary focus:outline-none"
+                                :id="filter"
+                                @click="showFilter($event)">
+                            {{ filter.charAt(0).toUpperCase() + filter.slice(1) }}
                             <client-only>
                                 <unicon name="angle-down" fill="grey" width="20" height="20" class="" />
                             </client-only>
                         </button>
-                        <button @click="showFilter($event)" id="price"
-                        class="flex flex-none items-center bg-uinput rounded-full my-2 mr-2 pl-2 pr-1 py-1 text-sm font-semibold text-primary focus:outline-none">
-                            Price
-                            <client-only>
-                                <unicon name="angle-down" fill="grey" width="20" height="20" class="" />
-                            </client-only>
-                        </button>
-                        <button @click="showFilter($event)" id="services"
-                        class="flex flex-none items-center bg-uinput rounded-full my-2 mr-2 pl-2 pr-1 py-1 text-sm font-semibold text-primary focus:outline-none">
-                            Services
-                            <client-only>
-                                <unicon name="angle-down" fill="grey" width="20" height="20" class="" />
-                            </client-only>
-                        </button>
-                        <button @click="showFilter($event)" id="atmosphere"
-                        class="flex flex-none items-center bg-uinput rounded-full my-2 mr-2 pl-2 pr-1 py-1 text-sm font-semibold text-primary focus:outline-none">
-                            Atmosphere
-                            <client-only>
-                                <unicon name="angle-down" fill="grey" width="20" height="20" class="" />
-                            </client-only>
-                        </button>
-                        <button @click="showFilter($event)" id="environment"
-                        class="flex flex-none items-center bg-uinput rounded-full my-2 mr-2 pl-2 pr-1 py-1 text-sm font-semibold text-primary focus:outline-none">
-                            Environment
-                            <client-only>
-                                <unicon name="angle-down" fill="grey" width="20" height="20" class="" />
-                            </client-only>
-                        </button>
-                        <button class="flex flex-none my-2 pr-2 text-sm font-semibold text-blue-700">
-                            MORE FILTERS
-                        </button>
+                        <div class="container pr-1 bg-white"></div>
                     </div>
                 </div>
             </div>
@@ -132,25 +113,33 @@
                 <h1 class="text-center text-secondary text-sm">Spread the word about MySpot, and a spot with your preferred filters may be added here soon!</h1>
             </div>
 
-            <div id="price-popup">
-                <div class="fixed bottom-0 bg-white w-screen swing-in-bottom-fwd z-50" id="price-popup-content">
-                    <h1 class="text-primary font-semibold mx-3 p-2 border-b border-divide">Filter by Price Tags</h1>
-                    <div v-for="(tag, index) in core.tags.price" class="mx-3 text-sm text-primary"
-                    :index="index"
-                    :key="tag">
-                        <button v-if="index < core.tags.price.length - 1" @click="filterSearch($event)"
-                        class="p-2 border-b border-divide focus:outline-none flex items-center justify-between w-full" :id="'price-' + tag">
+            <div v-for="filter in tagsArr"
+                 :key="filter"
+                 :id="filter + '-popup'"
+                 class="popup">
+                <div class="fixed bottom-0 bg-white w-screen z-30">
+                    <h1 class="text-primary font-semibold mx-3 p-2 border-b border-divide">
+                        {{ 'Filter by ' + filter.charAt(0).toUpperCase() + filter.slice(1) + ' Tags' }}
+                    </h1>
+                    <div v-for="(tag, index) in core.tags[filter]"
+                         :index="index"
+                         :key="tag"
+                         class="mx-3 text-sm text-primary">
+                        <button v-if="index < core.tags[filter].length - 1" @click="filterSearch($event)"
+                                class="p-2 border-b border-divide focus:outline-none flex items-center justify-between w-full"
+                                :id="filter + '-' + tag">
                             <h1>{{ tag }}</h1>
-                            <div class="rounded-full bg-green-700 h-2 w-2 hidden" :id="'price-' + tag + '-btn'"></div>
+                            <div class="rounded-full bg-green-700 h-2 w-2 hidden filter-active-indicator" :id="filter + '-' + tag + '-btn'"></div>
                         </button>
                         <button v-else @click="filterSearch($event)"
-                        class="p-2 focus:outline-none flex items-center justify-between w-full" :id="'price-' + tag">
+                                class="p-2 focus:outline-none flex items-center justify-between w-full"
+                                :id="filter + '-' + tag">
                             <h1>{{ tag }}</h1>
-                            <div class="rounded-full bg-green-700 h-2 w-2 hidden" :id="'price-' + tag + '-btn'"></div>
+                            <div class="rounded-full bg-green-700 h-2 w-2 hidden filter-active-indicator" :id="filter + '-' + tag + '-btn'"></div>
                         </button>
                     </div>
                 </div>
-                <div class="fixed top-0 bottom-0 left-0 right-0 bg-black fade-in z-50" id="price-popup-bg" @click="hidePricePopup"></div>
+                <div class="fixed top-0 bottom-0 left-0 right-0 bg-black popup-bg z-20" @click="hideFilter($event)" :id="filter + '-hide'"></div>
             </div>
         </div>
 
@@ -263,24 +252,22 @@ export default {
         showFilter(event) {
             var divId = event.target.id || event.target.parentNode.parentNode.id || event.target.parentNode.parentNode.parentNode.id
             document.getElementById(divId + '-popup').style.display = 'block'
-            document.getElementById(divId + '-popup-bg').style.height = 
-            document.documentElement.clientHeight - document.getElementById(divId + '-popup-content').offsetHeight + 'px'
-            document.getElementById('search-header').style.zIndex = '1'
             document.body.style.overflow = 'hidden'
         },
-        async hidePricePopup() {
-            document.getElementById('price-popup-content').classList.remove('swing-in-bottom-fwd')
-            document.getElementById('price-popup-content').classList.add('swing-out-bottom-bck')
-            document.getElementById('price-popup-bg').classList.remove('fade-in')
-            document.getElementById('price-popup-bg').classList.add('fade-out')
+        hideFilter(event) {
+            var divId = event.target.id.split('-')[0]
+            document.getElementById(divId + '-popup').style.display = 'none'
             document.body.style.overflow = 'auto'
-            await new Promise(r => setTimeout(r, 200))
-            document.getElementById('price-popup').style.display = 'none'
-            document.getElementById('search-header').style.zIndex = '50'
-            document.getElementById('price-popup-content').classList.remove('swing-out-bottom-bck')
-            document.getElementById('price-popup-content').classList.add('swing-in-bottom-fwd')
-            document.getElementById('price-popup-bg').classList.remove('fade-out')
-            document.getElementById('price-popup-bg').classList.add('fade-in')
+        },
+        clearFilters() {
+            const self = this
+            self.selectedTags = []
+            self.filteredSpots = []
+            self.spotIds = []
+            var activeFilters = document.querySelectorAll('.filter-active-indicator')
+            for (var i = 0; i < activeFilters.length; i++) {
+                activeFilters[i].style.display = 'none'
+            }
         },
         filterSearch(event) {
             const self = this
@@ -371,9 +358,14 @@ export default {
     -ms-overflow-style: none;
 }
 
-
-#price-popup {
+.clear-btn {
+    width: 3.5rem;
+}
+.popup {
     display: none;
+}
+.popup-bg {
+    opacity: 0.6;
 }
 
 
@@ -387,133 +379,4 @@ export default {
     margin-bottom: -1.25rem;
     border-width: 3px;
 }
-
-/* 
-    ANIMATION CLASSES ----------------------------------------------------------------------------------------------------------
-*/
-
-.swing-in-bottom-fwd {
-	-webkit-animation: swing-in-bottom-fwd 400ms cubic-bezier(.17,.89,.2,1) both;
-	        animation: swing-in-bottom-fwd 400ms cubic-bezier(.17,.89,.2,1) both;
-}
-.swing-out-bottom-bck {
-	-webkit-animation: swing-out-bottom-bck 200ms cubic-bezier(0.80, 0.00, 0.83, 0.11) both;
-	        animation: swing-out-bottom-bck 200ms cubic-bezier(0.80, 0.00, 0.83, 0.11) both;
-}
-.fade-in {
-	-webkit-animation: fade-in 150ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: fade-in 150ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    -webkit-animation-delay: 25ms;
-            animation-delay: 25ms;
-}
-.fade-out {
-	-webkit-animation: fade-out 200ms ease-out both;
-	        animation: fade-out 200ms ease-out both;
-}
-
-/* 
-    ANIMATION DEFINITIONS -------------------------------------------------------------------------------------------------------
-*/
-
-/* SWING IN BOTTOM FWD ANIMATION ----------------------------- */
-@-webkit-keyframes swing-in-bottom-fwd {
-  0% {
-    -webkit-transform: rotate3d(1,0,0,100deg);
-            transform: rotate3d(1,0,0,100deg);
-    -webkit-transform-origin: bottom;
-            transform-origin: bottom;
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: rotate3d(1,0,0,0);
-            transform: rotate3d(1,0,0,0);
-    -webkit-transform-origin: bottom;
-            transform-origin: bottom;
-    opacity: 1;
-  }
-}
-@keyframes swing-in-bottom-fwd {
-  0% {
-    -webkit-transform: rotate3d(1,0,0,100deg);
-            transform: rotate3d(1,0,0,100deg);
-    -webkit-transform-origin: bottom;
-            transform-origin: bottom;
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: rotate3d(1,0,0,0);
-            transform: rotate3d(1,0,0,0);
-    -webkit-transform-origin: bottom;
-            transform-origin: bottom;
-    opacity: 1;
-  }
-}
-/* SWING OUT BOTTOM BACK ANIMATION ------------------------------ */
-@-webkit-keyframes swing-out-bottom-bck {
-  0% {
-    -webkit-transform: rotate3d(1,0,0,0);
-            transform: rotate3d(1,0,0,0);
-    -webkit-transform-origin: bottom;
-            transform-origin: bottom;
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: rotate3d(1,0,0,100deg);
-            transform: rotate3d(1,0,0,100deg);
-    -webkit-transform-origin: bottom;
-            transform-origin: bottom;
-    opacity: 0;
-  }
-}
-@keyframes swing-out-bottom-bck {
-  0% {
-    -webkit-transform: rotate3d(1,0,0,0);
-            transform: rotate3d(1,0,0,0);
-    -webkit-transform-origin: bottom;
-            transform-origin: bottom;
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: rotate3d(1,0,0,100deg);
-            transform: rotate3d(1,0,0,100deg);
-    -webkit-transform-origin: bottom;
-            transform-origin: bottom;
-    opacity: 0;
-  }
-}
-/* FADE IN ANIMATION ---------------------------------------- */
-@-webkit-keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.6;
-  }
-}
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.6;
-  }
-}
-/* FADE OUT ANIMATION ---------------------------------------- */
-@-webkit-keyframes fade-out {
-  0% {
-    opacity: 0.6;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes fade-out {
-  0% {
-    opacity: 0.6;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 </style>
